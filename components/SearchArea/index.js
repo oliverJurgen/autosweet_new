@@ -1,10 +1,10 @@
-import React from 'react';
-import style from './SearchArea.module.css';
-import closeIcon from '../../assets/img/icons/clean.png';
-import tagIcon from '../../assets/img/icons/SRP_02_Tag_Black.png';
-import searchIcon from '../../assets/img/icons/Landing_Page_02_Search_icon.png';
-import clsx from 'clsx';
-import SearchTags from '../SearchTags';
+import React from "react";
+import style from "./SearchArea.module.css";
+import closeIcon from "public/assets/img/icons/clean.png";
+import tagIcon from "public/assets/img/icons/SRP_02_Tag_Black.png";
+import searchIcon from "public/assets/img/icons/Landing_Page_02_Search_icon.png";
+import clsx from "clsx";
+import SearchTags from "../SearchTags";
 
 const MIN_SYMBOL_COUNT = 1;
 const TAGS_VISIBILITY_COUNT = 10;
@@ -31,7 +31,7 @@ class SearchArea extends React.Component {
   }
 
   handleKeyDown(event) {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       this.search();
     }
   }
@@ -44,7 +44,7 @@ class SearchArea extends React.Component {
   }
 
   cleanSearch() {
-    this.props.onSearchChange({ searchValue: '', page: 1 });
+    this.props.onSearchChange({ searchValue: "", page: 1 });
   }
 
   toggleTagsPanel() {
@@ -52,11 +52,14 @@ class SearchArea extends React.Component {
   }
 
   showMore() {
-    this.setState((state) => ({ visibleTagsCount: state.visibleTagsCount + TAGS_VISIBILITY_COUNT }));
+    this.setState((state) => ({
+      visibleTagsCount: state.visibleTagsCount + TAGS_VISIBILITY_COUNT,
+    }));
   }
 
   render() {
-    const { tags, dark, searchValue, selectedTags, onToggleTag, onRemoveTag } = this.props;
+    const { tags, dark, searchValue, selectedTags, onToggleTag, onRemoveTag } =
+      this.props;
     const { visibleTagsCount, showTagsPanel } = this.state;
     return (
       <div className={clsx([style.searcharea, dark && style.dark])}>
@@ -87,7 +90,7 @@ class SearchArea extends React.Component {
             <SearchTags
               tags={selectedTags}
               selected={true}
-              onSelectTag={() => { }}
+              onSelectTag={() => {}}
               onRemoveTag={(tag) => onRemoveTag.call(null, tag, true)}
             ></SearchTags>
             <SearchTags

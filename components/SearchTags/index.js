@@ -1,8 +1,8 @@
-import React from 'react';
-import style from '../SearchArea/SearchArea.module.css';
-import clsx from 'clsx';
-import selectedCloseIconSrc from '../../assets/img/icons/close-white.png';
-import closeIcon from '../../assets/img/icons/clean.png';
+import React from "react";
+import style from "../SearchArea/SearchArea.module.css";
+import clsx from "clsx";
+import selectedCloseIconSrc from "public/assets/img/icons/close-white.png";
+import closeIcon from "public/assets/img/icons/clean.png";
 
 export default class SearchTags extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ export default class SearchTags extends React.Component {
       <>
         {tags.map((tag, i) => (
           <div
-            key={`tag_${i}${selected && 's'}`}
+            key={`tag_${i}${selected && "s"}`}
             className={clsx([style.tag, selected && style.selectedTag])}
             onClick={() => this.addTag(tag)}
           >

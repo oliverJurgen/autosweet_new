@@ -1,22 +1,21 @@
-import React from 'react';
-import 'react-image-gallery/styles/css/image-gallery.css';
-import style from '../../pages/styles/VehicleDetailsPage.module.css';
-import { connect } from 'react-redux';
-import { faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Social from './../Social/Social';
-import { Input, Radio } from 'antd';
-import Condition from '../../assets/img/icons/VDP_02_Vehicle_Info_Condition.png';
-import Trim from '../../assets/img/icons/VDP_02_Vehicle_Info_Trim.png';
-import Mileage from '../../assets/img/icons/VDP_02_Vehicle_Info_Mileage.png';
-import StockNumber from '../../assets/img/icons/VDP_02_Vehicle_Info_Stock.png';
-import EngineDescription from '../../assets/img/icons/VDP_02_Vehicle_Info_Engine.png';
-import TrasmissionIcon from '../../assets/img/icons/VDP_02_Vehicle_Info_Transmission.png';
-import Drivetrain from '../../assets/img/icons/VDP_02_Vehicle_Info_Drive.png';
-import ExtColor from '../../assets/img/icons/VDP_02_Vehicle_Info_Exterior.png';
-import IntColor from '../../assets/img/icons/VDP_02_Vehicle_Info_Interior.png';
-import FuelType from '../../assets/img/icons/VDP_02_Vehicle_Info_Fuel.png';
-
+import React from "react";
+import "react-image-gallery/styles/css/image-gallery.css";
+import style from "../../pages/styles/VehicleDetailsPage.module.css";
+import { connect } from "react-redux";
+import { faArrowAltCircleUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Social from "./../Social/Social";
+import { Input, Radio } from "antd";
+import Condition from "public/assets/img/icons/VDP_02_Vehicle_Info_Condition.png";
+import Trim from "public/assets/img/icons/VDP_02_Vehicle_Info_Trim.png";
+import Mileage from "public/assets/img/icons/VDP_02_Vehicle_Info_Mileage.png";
+import StockNumber from "public/assets/img/icons/VDP_02_Vehicle_Info_Stock.png";
+import EngineDescription from "public/assets/img/icons/VDP_02_Vehicle_Info_Engine.png";
+import TrasmissionIcon from "public/assets/img/icons/VDP_02_Vehicle_Info_Transmission.png";
+import Drivetrain from "public/assets/img/icons/VDP_02_Vehicle_Info_Drive.png";
+import ExtColor from "public/assets/img/icons/VDP_02_Vehicle_Info_Exterior.png";
+import IntColor from "public/assets/img/icons/VDP_02_Vehicle_Info_Interior.png";
+import FuelType from "public/assets/img/icons/VDP_02_Vehicle_Info_Fuel.png";
 
 class VehicleInformationIconBlock extends React.Component {
   render() {
@@ -71,8 +70,8 @@ class VehicleInformationIconBlock extends React.Component {
                 <br />
                 <span className={style.gray}>
                   {vehicleModel.mileage
-                    ? vehicleModel.mileage.toLocaleString('en-us')
-                    : '-'}
+                    ? vehicleModel.mileage.toLocaleString("en-us")
+                    : "-"}
                 </span>
               </p>
             </div>

@@ -1,20 +1,20 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import 'react-image-gallery/styles/css/image-gallery.css';
-import style from '../../pages/styles/VehicleDetailsPage.module.css';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { connect } from "react-redux";
+import "react-image-gallery/styles/css/image-gallery.css";
+import style from "../../pages/styles/VehicleDetailsPage.module.css";
+import { Link } from "react-router-dom";
 
-import DirectionIcon from '../../assets/img/icons/VDP_02_Seller_Info_Direction_icon.png';
-import WebIcon from '../../assets/img/icons/VDP_02_Seller_Info_Website_icon.png';
+import DirectionIcon from "public/assets/img/icons/VDP_02_Seller_Info_Direction_icon.png";
+import WebIcon from "public/assets/img/icons/VDP_02_Seller_Info_Website_icon.png";
 
 class VehicleInformationIconBlock extends React.Component {
   render() {
     let { vehicleModel } = this.props;
 
-    let options = { weekday: 'long' };
+    let options = { weekday: "long" };
     let D = new Date(),
       day = D.getUTCDay();
-    let dayText = new Intl.DateTimeFormat('en-US', options).format(day);
+    let dayText = new Intl.DateTimeFormat("en-US", options).format(day);
     let today = vehicleModel.dealer?.salesHours
       ? vehicleModel.dealer?.salesHours?.filter((day) => day.day === dayText)[0]
       : [];
@@ -32,7 +32,7 @@ class VehicleInformationIconBlock extends React.Component {
         </a>
         <span />
         <section className={style.hours}>
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: "flex" }}>
             <div className={style.clock} />
             <div>Hours of Operation:</div>
           </div>
@@ -40,15 +40,15 @@ class VehicleInformationIconBlock extends React.Component {
             <div>
               {vehicleModel.dealer?.salesHours && (
                 <div className={style.dropdown}>
-                  <div>{today && today.open + '-' + today.close}</div>
+                  <div>{today && today.open + "-" + today.close}</div>
                   <div className={`${style.dropbtn} ${style.arrowDowm}`}></div>
                   <div className={style.weekHours}>
                     {vehicleModel.dealer?.salesHours.map((item) => (
                       <div className={style.weekday}>
                         <div> {item.day}</div>
                         <div>
-                          {' '}
-                          {item.open} - {item.close}{' '}
+                          {" "}
+                          {item.open} - {item.close}{" "}
                         </div>
                       </div>
                     ))}
@@ -117,8 +117,8 @@ class VehicleInformationIconBlock extends React.Component {
           <p className={style.adress}>
             {vehicleModel.dealer?.dealerStreet1}
             <br />
-            {vehicleModel.dealer?.dealerCity},{' '}
-            {vehicleModel.dealer?.dealerState}{' '}
+            {vehicleModel.dealer?.dealerCity},{" "}
+            {vehicleModel.dealer?.dealerState}{" "}
             {vehicleModel.dealer?.dealerZipCode}
           </p>
           <p className={style.direction}>

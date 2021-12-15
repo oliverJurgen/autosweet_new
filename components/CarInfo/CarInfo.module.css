@@ -8,8 +8,8 @@
   /* max-height: 30vh; */
   align-items: center;
 }
-figure{
-  margin:0!important;
+figure {
+  margin: 0 !important;
 }
 .itemInfo {
   padding: 5px;
@@ -59,13 +59,13 @@ figure{
   color: white;
   border-radius: 15px;
 }
-.price { 
+.price {
   padding: 0 10px;
   font-weight: 500;
-  color:red;
-  display:flex;
+  color: red;
+  display: flex;
 }
-.price span { 
+.price span {
   margin-right: 10px;
 }
 .google {
@@ -79,7 +79,7 @@ figure{
   cursor: pointer;
 }
 .message_ico {
-  background-image: url("../../assets/img/icons/VDP_02_Seller_Info_Text_icon.png");
+  background-image: url("../../public/assets/img/icons/VDP_02_Seller_Info_Text_icon.png");
 }
 .social {
   display: flex;

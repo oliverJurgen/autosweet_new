@@ -1,10 +1,10 @@
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import React from 'react';
-import GoogleIcon from '../../assets/img/icons/google.png';
-import FacebookIcon from '../../assets/img/icons/facebook.png';
-import MessageIcon from '../../assets/img/icons/VDP_02_Seller_Info_Text_icon.png';
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import GoogleIcon from "public/assets/img/icons/google.png";
+import FacebookIcon from "public/assets/img/icons/facebook.png";
+import MessageIcon from "public/assets/img/icons/VDP_02_Seller_Info_Text_icon.png";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Social extends React.Component {
   render() {
@@ -19,7 +19,7 @@ class Social extends React.Component {
             </picture>
           </a>
           <figure>
-            <FontAwesomeIcon icon={faStar} style={{ color: 'orange' }} />
+            <FontAwesomeIcon icon={faStar} style={{ color: "orange" }} />
           </figure>
           <span>{googleScore}</span>
         </div>
@@ -27,7 +27,7 @@ class Social extends React.Component {
           <picture>
             <img alt="MessageIcon" src={MessageIcon} />
           </picture>
-          <span>{reviewsGoogle ? reviewsGoogle : '-'}</span>
+          <span>{reviewsGoogle ? reviewsGoogle : "-"}</span>
         </div>
         <div>
           <a href="#dealerReview">
@@ -36,7 +36,7 @@ class Social extends React.Component {
             </picture>
           </a>
           <figure>
-            <FontAwesomeIcon icon={faStar} style={{ color: 'orange' }} />
+            <FontAwesomeIcon icon={faStar} style={{ color: "orange" }} />
           </figure>
           <span>{facebookScore}</span>
         </div>
@@ -44,7 +44,7 @@ class Social extends React.Component {
           <picture>
             <img alt="MessageIcon" src={MessageIcon} />
           </picture>
-          <span>{reviewsGoogle ? reviewsGoogle : '-'}</span>
+          <span>{reviewsGoogle ? reviewsGoogle : "-"}</span>
         </div>
       </>
     );

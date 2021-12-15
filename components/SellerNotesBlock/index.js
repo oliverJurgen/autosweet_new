@@ -6,8 +6,8 @@ import { Rate } from "antd";
 import { getAnchor } from "../../redux/selectors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import GoogleIcon from "../../assets/img/icons/google.png";
-import FacebookIcon from "../../assets/img/icons/facebook.png";
+import GoogleIcon from "public/assets/img/icons/google.png";
+import FacebookIcon from "public/assets/img/icons/facebook.png";
 import { Link } from "react-router-dom";
 import { Row, Col } from "antd";
 
@@ -17,9 +17,9 @@ class SellerNotes extends React.Component {
     this.scrollRef = React.createRef();
   }
 
-  componentDidMount(){
-    if(this.props.scrollAnchor){
-      this.scrollRef.current.scrollIntoView()
+  componentDidMount() {
+    if (this.props.scrollAnchor) {
+      this.scrollRef.current.scrollIntoView();
     }
   }
 
@@ -36,7 +36,11 @@ class SellerNotes extends React.Component {
           </article>
         </Col>
         <Col xs={24} md={12}>
-          <article className={style.dealerRev} id="dealerReview" ref={this.scrollRef}>
+          <article
+            className={style.dealerRev}
+            id="dealerReview"
+            ref={this.scrollRef}
+          >
             <div className={style.ratingRow}>
               <div className={`${style.fw600} ${style.ml10}`}>
                 Dealer Reviews:
