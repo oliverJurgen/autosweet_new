@@ -1,0 +1,42 @@
+.ReviewItem {
+  padding: 20px;
+  width: 100%;
+  margin-top: 20px;
+}
+.separator{
+    border-top: 1px solid black;
+}
+.border {
+  border-radius: 12px;
+  border: 1px solid black;
+}
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+.description {
+  margin: 5px 0;
+}
+.userInfo {
+  display: flex;
+  align-items: flex-start;
+}
+.fs12 {
+  font-size: 12px;
+}
+.greyText {
+  color: grey;
+}
+.bold {
+  font-weight: bold;
+}
+.avatar {
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

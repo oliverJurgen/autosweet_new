@@ -1,0 +1,85 @@
+.searcharea{  
+  grid-area: search;
+  margin: 10px 0;
+  border: 1px solid #161414;
+  padding: 10px;
+  border-radius: 10px;
+  height: max-content;
+}
+.search {
+  width: 100%;
+  display: flex;
+}
+
+.searchTerm {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  flex: 1;
+  font-weight: 500;
+  background: none;
+}
+.icon {
+  margin: 0 4px;
+  min-width: 24px;
+  width: 24px;
+  cursor: pointer;
+}
+.icon img {
+  width: 100%;
+}
+.clean{
+  display: none;
+}
+.divider {
+  display: none;
+  width: 1px;
+  background-color: #ccc;
+}
+
+.tagBox {
+  border-top: 1px solid #b7b7b7;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.tag {
+  display: inline-flex;
+  padding: 0 5px;
+  margin: 5px;
+  border: 1px solid #303030;
+  border-radius: 20px;
+  line-height: 0;
+  padding-right: 8px;
+  cursor: pointer;
+}
+
+.selectedTag {
+  background-color: #2392d0;
+  color: #fff;
+  border: 1px solid #2392d0;
+}
+
+.seeMore {
+  text-align: center;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.delete {
+  display: inline-block;
+  width: 14px;
+  min-width: 14px;
+}
+
+.delete img {
+  margin-top: 5px;
+}
+
+.dark {
+  background: #ffffffd2;
+  border: none;
+}
+
+.tagText {
+  line-height: 1.6;
+}
