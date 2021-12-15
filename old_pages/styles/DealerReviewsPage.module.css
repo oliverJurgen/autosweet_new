@@ -1,0 +1,140 @@
+.DealerReviewsPage {
+  min-height: 100%;
+}
+
+.Header {
+  background-color: #303030;
+  display: flex;
+  min-width: 100vw;
+  justify-content: space-between;
+  min-height: 7vh;
+}
+
+.content {
+  margin-top: 40px;
+}
+.center {
+  display: flex;
+  justify-content: center;
+}
+.logo {
+  margin: 10px;
+  background-image: url("../../assets/img/icons/AutosweetAUTOS_Final-1png-03.png");
+  width: 185px;
+  height: 85px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.direction {
+  align-self: start;
+  display: flex;
+  flex-wrap: wrap;
+}
+.btn {
+  margin-top: 20px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 15px;
+  border-style: hidden;
+  color: white;
+  font-weight: 500;
+  height: 25px;
+  padding: 0 20px;
+}
+.gbtn {
+  background-color: #6dbd46;
+}
+.bold {
+  font-weight: 800;
+}
+.dealerTitle {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 35px;
+}
+.dealerName {
+  font-size: 28px;
+  font-weight: bold;
+}
+.reviews {
+  display: flex;
+  height: 100%;
+  align-items: flex-start;
+  margin-top: 5px;
+}
+.reviews > div {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+.faStar {
+  color: orange;
+  margin: 0 5px;
+}
+.social_icons {
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.google_ico {
+  background-image: url("../../assets/img/icons/google.png");
+}
+.facebook_ico {
+  background-image: url("../../assets/img/icons/facebook.png");
+}
+.mapsText {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-self: start;
+  width: 100%;
+}
+.dealerInfo {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 15px 20px 15px 15px;
+}
+.dealerInfo > div {
+  margin-bottom: 10px;
+}
+.filter {
+  margin-top: 10px;
+}
+.hours {
+  align-self: start;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-size: 14px;
+}
+.map {
+  border: 0;
+}
+.time {
+  display: flex;
+}
+
+.time > div:last-of-type {
+  flex-grow: 1;
+}
+.days {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px;
+}
+.paginationButtons {
+  color: black;
+  border: 1px solid #1890ff;
+  border-radius: 5px;
+  padding: 6px 10px;
+}
+.link {
+  text-decoration: underline;
+}

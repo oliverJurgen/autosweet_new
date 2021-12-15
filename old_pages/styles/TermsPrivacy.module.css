@@ -1,0 +1,51 @@
+.Header {
+  background-color: #303030;
+  display: flex;
+  min-width: 100vw;
+  justify-content: space-between;
+  min-height: 7vh;
+  margin-bottom: 20px ;
+}
+.logo {
+  margin: 10px;
+  background-image: url("../../assets/img/icons/AutosweetAUTOS_Final-1png-03.png");
+  width: 185px;
+  height: 85px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.table {
+  width: 100%;
+}
+.table thead {
+  background-color: #efefef;
+}
+.grey{
+    color:#E1E1E1;
+}
+.tableRow {
+  border-bottom: 1px solid grey;
+}
+.tableRow td {
+  vertical-align: middle;
+  padding: 10px 0;
+}
+.tableRow td:first-of-type {
+  padding-right: 40px;
+}
+.tableRow ul {
+  margin: 0;
+}
+.bold {
+  font-weight: bold;
+}
+.blue {
+  color: #0071ce;
+}
+.textCenter {
+  text-align: center;
+}
+.textLeft {
+  text-align: left;
+}
