@@ -1,8 +1,9 @@
-import React from 'react';
-import { compose } from 'redux';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import SearchArea from '../../components/SearchArea';
+import React from "react";
+import { compose } from "redux";
+// import { withRouter } from 'react-router-dom';
+import { withRouter } from "next/router";
+import { connect } from "react-redux";
+import SearchArea from "../../components/SearchArea";
 import {
   getTags,
   performSearchAction,
@@ -12,9 +13,9 @@ import {
   setLat,
   removeTag,
   addTag,
-} from '../../redux/actions';
-import { getSearchValue, getSelectedTags } from '../../redux/selectors';
-import Navigation from '../../components/Navigation';
+} from "../../redux/actions";
+import { getSearchValue, getSelectedTags } from "../../redux/selectors";
+import Navigation from "../../components/Navigation";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -41,14 +42,14 @@ class HomePage extends React.Component {
 
   runSearch(value) {
     this.props.changeResultPageAction(1);
-    this.props.history.push(
-      '/search-result?q=' +
+    this.props.router.push(
+      "/search-result?q=" +
         value +
-        '&page=1' +
-        '&tags=' +
-        '&lat=' +
+        "&page=1" +
+        "&tags=" +
+        "&lat=" +
         this.props.lat +
-        '&lon=' +
+        "&lon=" +
         this.props.lon
     );
   }

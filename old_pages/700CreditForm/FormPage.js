@@ -1,35 +1,37 @@
-import React, { Component } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { Row, Col, Input, Select } from 'antd';
-import Navigation from '../../components/Navigation';
-import style from '../styles/FormPage.module.css';
-import { NavLink, withRouter } from 'react-router-dom';
-import { selectStatesAction, selectCitiesAction } from '../../redux/actions';
-import { welcomeEn, welcomeSp } from '../../assets/videos';
+import React, { Component } from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { Row, Col, Input, Select } from "antd";
+import Navigation from "../../components/Navigation";
+import style from "../styles/FormPage.module.css";
+// import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from "next/router";
+import Link from "next/link";
+import { selectStatesAction, selectCitiesAction } from "../../redux/actions";
+import { welcomeEn, welcomeSp } from "../../assets/videos";
 import {
   getCities,
   getSelectedVehicleItem,
   getStates,
-} from '../../redux/selectors';
-import { Poster, Poster2, Poster3, Poster4 } from '../../assets/img/posters';
-import http from '../../services/api';
+} from "../../redux/selectors";
+import { Poster, Poster2, Poster3, Poster4 } from "../../assets/img/posters";
+import http from "../../services/api";
 class FormPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      suffix: '',
-      address: '',
-      zip: '',
+      firstName: "",
+      middleName: "",
+      lastName: "",
+      suffix: "",
+      address: "",
+      zip: "",
       cityId: null,
       stateId: null,
-      homePhone: '',
-      cellPhone: '',
-      email: '',
-      comments: '',
+      homePhone: "",
+      cellPhone: "",
+      email: "",
+      comments: "",
       agreeWithPolicies: true,
       autoSweetDealerId:
         this.props.selectedVehicleItem.dealer.autoSweetDealerID,
@@ -40,7 +42,7 @@ class FormPage extends Component {
     this.props.selectStatesAction();
     this.props.selectCitiesAction(1);
     let language = window.navigator.userLanguage || window.navigator.language;
-    if (language.includes('es')) {
+    if (language.includes("es")) {
       this.setState({ spain: true });
     }
     if (!this.state.autoSweetDealerId) {
@@ -56,13 +58,13 @@ class FormPage extends Component {
     e.preventDefault();
 
     try {
-      await http.post('/api/credit', {
+      await http.post("/api/credit", {
         ...this.state,
         spain: undefined,
         posterId: undefined,
       });
-      let language = this.state.spain ? 'spanish' : 'english';
-      this.props.history.push('/thank-you/' + language);
+      let language = this.state.spain ? "spanish" : "english";
+      this.props.router.push("/thank-you/" + language);
     } catch (e) {
       console.log(e);
     }
@@ -71,7 +73,7 @@ class FormPage extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   handleChange = (e) => {
-    if (e.target.value !== '0') {
+    if (e.target.value !== "0") {
       this.setState({ [e.target.name]: parseInt(e.target.value) });
     } else {
       this.setState({ [e.target.name]: null });
@@ -83,7 +85,7 @@ class FormPage extends Component {
     return (
       <>
         <header className={style.Header}>
-          <NavLink className={style.logo} to="/"></NavLink>
+          <Link className={style.logo} href="/"></Link>
           <Navigation />
         </header>
         <main className={style.FormPage}>
@@ -92,7 +94,7 @@ class FormPage extends Component {
               <Row>
                 <Input.Group compact>
                   <Select
-                    value={this.state.spain ? 'Spain' : 'English'}
+                    value={this.state.spain ? "Spain" : "English"}
                     onChange={() => {
                       this.setState({ spain: !this.state.spain });
                     }}
@@ -354,14 +356,14 @@ class FormPage extends Component {
                     By clicking the I Agree checkbox and Submit, I consent to
                     have my credit file accessed for purposes of prequalifying
                     for a vehicle loan. This is a soft inquiry and will not
-                    impact my credit score. I agree to the{' '}
+                    impact my credit score. I agree to the{" "}
                     <a href="/privacypolicy" target="_blank">
                       Privacy Notice
                     </a>
-                    ,{' '}
+                    ,{" "}
                     <a href="/termsandconditions" target="_blank">
                       Terms and Conditions
-                    </a>{' '}
+                    </a>{" "}
                     and I acknowledge I may be contacted by 700 XML Test
                     Account. I understand that I might not prequalify depending
                     on the prequalification criteria.

@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./SearchArea.module.css";
 import closeIcon from "public/assets/img/icons/clean.png";
+// import closeIcon from '../pub'
 import tagIcon from "public/assets/img/icons/SRP_02_Tag_Black.png";
 import searchIcon from "public/assets/img/icons/Landing_Page_02_Search_icon.png";
 import clsx from "clsx";

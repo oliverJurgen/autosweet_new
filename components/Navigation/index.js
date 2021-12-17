@@ -1,8 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
-import MyVehiclesMenu from './Menu';
+import React from "react";
+// import { Link } from 'react-router-dom';
+import Link from "next/link";
+import { Dropdown } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import MyVehiclesMenu from "./Menu";
 
 class Navigation extends React.Component {
   render() {
@@ -21,10 +22,10 @@ class Navigation extends React.Component {
             </Dropdown>
           </li>
           <li>
-            <Link to="/tradein-form">TRADE IN VALUE</Link>
+            <Link href="/tradein-form">TRADE IN VALUE</Link>
           </li>
           <li>
-            <Link to="/credit-form">GET PRE-QUALIFIED NOW</Link>
+            <Link href="/credit-form">GET PRE-QUALIFIED NOW</Link>
           </li>
           <li>
             <a

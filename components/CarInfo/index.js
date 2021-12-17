@@ -2,7 +2,7 @@ import React from "react";
 import style from "./CarInfo.module.css";
 import { faArrowAltCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { withRouter } from "react-router-dom";
+import { withRouter } from "next/router";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { selectVehicleAction, setAnchor } from "../../redux/actions";
@@ -17,7 +17,7 @@ class CarItem extends React.Component {
 
   formPage = () => {
     this.props.selectVehicleAction(this.props.id);
-    this.props.history.push("/credit-form");
+    this.props.router.push("/credit-form");
   };
 
   vehicleDetails(anchor) {
@@ -28,7 +28,7 @@ class CarItem extends React.Component {
     }
     const { dealer, vin, id, model, make, stockNumber, trim } = this.props;
     this.props.selectVehicleAction(id);
-    this.props.history.push(
+    this.props.router.push(
       `/vehicledetails/${id}/${vin}/${stockNumber}/${dealer.dealerCity}/${dealer.dealerState}/${make}/${model}/${trim}`
     );
     window.scrollTo(0, 0);
