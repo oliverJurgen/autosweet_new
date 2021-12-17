@@ -35,9 +35,9 @@ const ITEMS_PER_PAGE = 8;
 export const performSearchAction = (payload) => {
   return async (dispatch) => {
     const startTimeInMs = Date.now();
-    const { value, page, history, tags, get_lat, get_lon } = payload;
+    const { value, page, router, tags, get_lat, get_lon } = payload;
 
-    if (history) {
+    if (router) {
       const link =
         "/search-result?q=" +
         value.trim() +
@@ -50,7 +50,7 @@ export const performSearchAction = (payload) => {
         "&lon=" +
         (get_lon || "");
       `${window.location.pathname}${window.location.search}` !== link &&
-        history.push(link);
+        router.push(link);
     }
     dispatch(showLoader());
     try {
@@ -198,7 +198,6 @@ export const setAnchor = (payload) => ({
   type: SET_ANCHOR,
   payload,
 });
-
 
 export const removeTag = (payload) => ({
   type: REMOVE_TAG,
@@ -358,7 +357,7 @@ export const selectReviews = (locationId, type, page, filter) => {
         params: {
           locationId,
           page,
-          filter
+          filter,
         },
       });
       dispatch(hideLoader());

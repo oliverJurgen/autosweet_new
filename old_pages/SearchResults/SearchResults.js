@@ -1,10 +1,10 @@
-import React from 'react';
-import CarInfo from '../../components/CarInfo';
-import Navigation from '../../components/Navigation';
-import SearchArea from '../../components/SearchArea';
-import style from '../styles/SearchResults.module.css';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import React from "react";
+import CarInfo from "../../components/CarInfo";
+import Navigation from "../../components/Navigation";
+import SearchArea from "../../components/SearchArea";
+import style from "../styles/SearchResults.module.css";
+import { connect } from "react-redux";
+import { compose } from "redux";
 import {
   getVehicles,
   getSearchValue,
@@ -12,8 +12,11 @@ import {
   getCurrentPage,
   getTags,
   getSelectedTags,
-} from '../../redux/selectors';
-import { NavLink, withRouter } from 'react-router-dom';
+} from "../../redux/selectors";
+// import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from "next/router";
+import Link from "next/link";
+import Image from "next/image";
 import {
   performSearchAction,
   changeResultPageAction,
@@ -26,11 +29,11 @@ import {
   setLon,
   validateTags,
   setAnchor,
-} from '../../redux/actions';
-import Footer from '../../components/Footer';
-import { Pagination } from 'antd';
-import FullPageLoader from '../../components/Preloader/Preloader';
-import Logo from '../../assets/img/icons/AutosweetAUTOS_Final-1png-03.png';
+} from "../../redux/actions";
+import Footer from "../../components/Footer";
+import { Pagination } from "antd";
+import FullPageLoader from "../../components/Preloader/Preloader";
+import Logo from "../../assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
 
 class SearchResults extends React.Component {
   constructor(props) {
@@ -46,13 +49,13 @@ class SearchResults extends React.Component {
     this.props.addTag(tag);
   }
   runSearch(value) {
-    const { history, get_lat, get_lon, selectedTags } = this.props;
+    const { router, get_lat, get_lon, selectedTags } = this.props;
     changeResultPageAction(1);
     let tags = selectedTags;
     this.props.runSearchAction({
       value,
       page: 1,
-      history,
+      router,
       tags,
       get_lat,
       get_lon,
@@ -68,7 +71,7 @@ class SearchResults extends React.Component {
 
   onChange = (page) => {
     const {
-      history,
+      router,
       searchValue,
       changeResultPageAction,
       runSearchAction,
@@ -81,7 +84,7 @@ class SearchResults extends React.Component {
     runSearchAction({
       value: searchValue,
       page,
-      history,
+      router,
       tags,
       get_lat,
       get_lon,
@@ -99,15 +102,15 @@ class SearchResults extends React.Component {
   componentDidMount() {
     const {
       location,
-      history,
+      router,
       performSearchAction,
       setLat,
       setLon,
       selectedTags,
     } = this.props;
     const params = new URLSearchParams(location.search);
-    const value = params.get('q') || '';
-    const page = params.get('page') || 1;
+    const value = params.get("q") || "";
+    const page = params.get("page") || 1;
 
     let get_lat = this.props.get_lat;
     let get_lon = this.props.get_lon;
@@ -123,7 +126,7 @@ class SearchResults extends React.Component {
             performSearchAction({
               value,
               page,
-              history,
+              router,
               tags,
               get_lat: lat,
               get_lon: lon,
@@ -132,7 +135,7 @@ class SearchResults extends React.Component {
         });
       }
     } else {
-      performSearchAction({ value, page, history, tags, get_lat, get_lon });
+      performSearchAction({ value, page, router, tags, get_lat, get_lon });
     }
   }
 
@@ -140,7 +143,7 @@ class SearchResults extends React.Component {
     const {
       searchValue,
       page,
-      history,
+      router,
       runSearchAction,
       selectedTags,
       validateTags,
@@ -154,7 +157,7 @@ class SearchResults extends React.Component {
         runSearchAction({
           value: searchValue,
           page,
-          history,
+          router,
           tags,
           get_lat,
           get_lon,
@@ -171,9 +174,9 @@ class SearchResults extends React.Component {
     return (
       <>
         <header className={style.Header}>
-          <NavLink to="/">
-            <img src={Logo} alt="logo" className={style.logo} />
-          </NavLink>
+          <Link href="/">
+            <Image src={Logo} alt="logo" className={style.logo} />
+          </Link>
           <Navigation />
         </header>
         <section className={style.SearchResults}>
