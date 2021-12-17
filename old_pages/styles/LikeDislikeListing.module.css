@@ -1,37 +1,40 @@
 .LikeDislikeContainer {
-    max-height: 100%;
+  max-height: 100%;
 }
 .Header {
-    background-color: #303030;
-    display: flex;
-    min-width: 100vw;
-    justify-content: space-between;
-    min-height: 7vh;
+  background-color: #303030;
+  display: flex;
+  min-width: 100vw;
+  justify-content: space-between;
+  min-height: 7vh;
 }
 .logo {
-    margin: 10px;
-    background-image: url("../../assets/img/icons/AutosweetAUTOS_Final-1png-03.png");
-    width: 185px;
-    height: 85px;
-    background-size: contain;
-    background-repeat: no-repeat;
+  margin: 10px;
+  background-image: url("../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png");
+  width: 185px;
+  height: 85px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .LikeDislikeBody {
-    max-width: 80%;
-    width: 100%;
-    min-height: 100%;
-    height: 80%;
-    margin: 0 auto;
-    padding-bottom: 210px;
+  max-width: 80%;
+  width: 100%;
+  min-height: 100%;
+  height: 80%;
+  margin: 0 auto;
+  padding-bottom: 210px;
 }
 .resultList {
-    grid-area: resList;
+  grid-area: resList;
 }
 .pagination {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
-::-webkit-scrollbar {
+
+/* GIVING ERROR: https://stackoverflow.com/questions/65985543/selector-global-class-is-not-pure-pure-selectors-must-contain-at-least-one */
+
+/* ::-webkit-scrollbar {
     width: 12px;
 }
 ::-webkit-scrollbar-thumb {
@@ -50,83 +53,83 @@
 ::-webkit-scrollbar-track:hover {
     border-left: solid 1px #aaa;
     background-color: #eee;
-}
+} */
 .recomendedItem {
-    grid-area: recomended;
-    margin: 10px;
+  grid-area: recomended;
+  margin: 10px;
 }
 
 @media (max-width: 900px) {
-    .logo{
-        width: 185px;
-        height: 85px;
-    }
-    .results {
-        width: 100%;
-        height: 100%;
-        display: grid;
-        grid-template-areas:
+  .logo {
+    width: 185px;
+    height: 85px;
+  }
+  .results {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas:
       "search recomended"
       "resList recomended"
       "resList recomended"
       "footer footer";
-        grid-template-columns: 5fr 2fr;
-        grid-gap: 5px;
-        align-self: center;
-        justify-content: center;
-    }
-    .wrap {
-        max-width: 95%;
-        width: 100%;
-        min-height: 100%;
-        height: 80%;
-        margin: 0 auto;
-        padding-bottom: 210px;
-    }
-    .resultList {
-        grid-area: resList;
-        width: 100%;
-    }
-    .carInfo {
-        line-height: 21;
-    }
+    grid-template-columns: 5fr 2fr;
+    grid-gap: 5px;
+    align-self: center;
+    justify-content: center;
+  }
+  .wrap {
+    max-width: 95%;
+    width: 100%;
+    min-height: 100%;
+    height: 80%;
+    margin: 0 auto;
+    padding-bottom: 210px;
+  }
+  .resultList {
+    grid-area: resList;
+    width: 100%;
+  }
+  .carInfo {
+    line-height: 21;
+  }
 }
 @media (max-width: 600px) {
-    .logo{
-        width: 185px;
-        height: 85px;
-    }
-    .results {
-        width: 100%;
-        height: 100%;
-        display: grid;
-        grid-template-areas:
+  .logo {
+    width: 185px;
+    height: 85px;
+  }
+  .results {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas:
       "search"
       "resList "
       "footer";
-        grid-template-columns: 5fr;
-        grid-gap: 5px;
-        align-self: center;
-        justify-content: center;
-    }
-    .recomendedItem {
-        display: none;
-        grid-area: recomended;
-        margin: 10px;
-    }
-    .resultList {
-        grid-area: resList;
-    }
-    .ResultItem {
-        line-height: 20px;
-        font-weight: 500;
-        min-height: 200px;
-        min-width: 95%;
-        display: flex;
-        flex-direction: column;
-    }
-    .itemInfo {
-        font-size: 10px;
-        padding: 0 5px;
-    }
+    grid-template-columns: 5fr;
+    grid-gap: 5px;
+    align-self: center;
+    justify-content: center;
+  }
+  .recomendedItem {
+    display: none;
+    grid-area: recomended;
+    margin: 10px;
+  }
+  .resultList {
+    grid-area: resList;
+  }
+  .ResultItem {
+    line-height: 20px;
+    font-weight: 500;
+    min-height: 200px;
+    min-width: 95%;
+    display: flex;
+    flex-direction: column;
+  }
+  .itemInfo {
+    font-size: 10px;
+    padding: 0 5px;
+  }
 }
