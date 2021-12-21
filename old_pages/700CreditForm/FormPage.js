@@ -46,6 +46,7 @@ class FormPage extends Component {
   componentDidMount() {
     this.props.selectStatesAction();
     this.props.selectCitiesAction(1);
+    // ** refactor
     let language = window.navigator.userLanguage || window.navigator.language;
     if (language.includes("es")) {
       this.setState({ spain: true });

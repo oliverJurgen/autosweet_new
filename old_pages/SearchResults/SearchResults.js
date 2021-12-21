@@ -89,6 +89,7 @@ class SearchResults extends React.Component {
       get_lat,
       get_lon,
     });
+    // ** refactor
     window.scrollTo(0, 0);
   };
 

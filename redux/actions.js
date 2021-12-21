@@ -49,6 +49,8 @@ export const performSearchAction = (payload) => {
         (get_lat || "") +
         "&lon=" +
         (get_lon || "");
+
+      // must refactor this
       `${window.location.pathname}${window.location.search}` !== link &&
         router.push(link);
     }

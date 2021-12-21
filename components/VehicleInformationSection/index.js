@@ -21,6 +21,7 @@ class VehicleInformationSection extends React.Component {
   onClickHandler = (e) => {
     e.preventDefault();
     if (this.props.vehicleModel.dealer.vehicleURL) {
+      // ** refactor
       window.open(this.props.vehicleModel.dealer.vehicleURL, "_blank");
     }
   };

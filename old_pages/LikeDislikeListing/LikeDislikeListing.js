@@ -26,6 +26,7 @@ class LikeDislikeListing extends React.Component {
     } else {
       this.props.getDislikedVehiclesAction(page, pageSize);
     }
+    // ** refactor
     window.scrollTo(0, 0);
   };
 

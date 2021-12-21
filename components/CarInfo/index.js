@@ -31,6 +31,7 @@ class CarItem extends React.Component {
     this.props.router.push(
       `/vehicledetails/${id}/${vin}/${stockNumber}/${dealer.dealerCity}/${dealer.dealerState}/${make}/${model}/${trim}`
     );
+    // ** refactor
     window.scrollTo(0, 0);
   }
 
