@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import SearchResultsPage from "../old_pages/SearchResults";
 
 const SearchResults: NextPage = () => {
-  return SearchResultsPage;
+  return <SearchResultsPage />;
 };
 
 export default SearchResults;

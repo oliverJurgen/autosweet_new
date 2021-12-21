@@ -103,39 +103,57 @@ class SearchResults extends React.Component {
     const {
       location,
       router,
+      query,
       performSearchAction,
       setLat,
       setLon,
       selectedTags,
     } = this.props;
-    const params = new URLSearchParams(location.search);
-    const value = params.get("q") || "";
-    const page = params.get("page") || 1;
 
     let get_lat = this.props.get_lat;
     let get_lon = this.props.get_lon;
     let tags = selectedTags;
-    if (!this.props.get_lat) {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          if (position.coords.latitude) {
-            const lat = position.coords.latitude.toString().slice(0, 11);
-            const lon = position.coords.longitude.toString().slice(0, 11);
-            setLat(lat);
-            setLon(lon);
-            performSearchAction({
-              value,
-              page,
-              router,
-              tags,
-              get_lat: lat,
-              get_lon: lon,
-            });
-          }
+
+    if (router.isReady) {
+      console.log({ routerQuery: router.query, query, router });
+      const value = router.query.q;
+      const page = router.query.page;
+
+      // const params = new URLSearchParams(location.search);
+      // const value = params.get("q") || "";
+      // const page = params.get("page") || 1;
+
+      if (!this.props.get_lat) {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (position) {
+            if (position.coords.latitude) {
+              // const lat = position.coords.latitude.toString().slice(0, 11);
+              // const lon = position.coords.longitude.toString().slice(0, 11);
+              const lat = router.query.lat;
+              const lon = router.query.lon;
+              setLat(lat);
+              setLon(lon);
+              performSearchAction({
+                value,
+                page,
+                router,
+                tags,
+                get_lat: lat,
+                get_lon: lon,
+              });
+            }
+          });
+        }
+      } else {
+        performSearchAction({
+          value,
+          page,
+          router,
+          tags,
+          get_lat,
+          get_lon,
         });
       }
-    } else {
-      performSearchAction({ value, page, router, tags, get_lat, get_lon });
     }
   }
 
