@@ -51,8 +51,9 @@ export const performSearchAction = (payload) => {
         (get_lon || "");
 
       // must refactor this
-      `${window.location.pathname}${window.location.search}` !== link &&
-        router.push(link);
+      // `${window.location.pathname}${window.location.search}` !== link &&
+      //   router.push(link);
+      router.push(link);
     }
     dispatch(showLoader());
     try {
@@ -67,6 +68,7 @@ export const performSearchAction = (payload) => {
           },
         }),
       ];
+
       const [searchResults] = await Promise.all(promises);
       const responseTime = Date.now() - startTimeInMs;
       Analytics.logResponseTime({
