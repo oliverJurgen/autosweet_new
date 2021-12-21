@@ -1,9 +1,12 @@
-import React from 'react';
-import Navigation from '../../components/Navigation';
-import style from '../styles/VehicleDetailsPage.module.css';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import React from "react";
+import Navigation from "../../components/Navigation";
+import style from "../styles/VehicleDetailsPage.module.css";
+import { connect } from "react-redux";
+import { compose } from "redux";
+// import { NavLink, withRouter } from "react-router-dom";
+import { withRouter } from "next/router";
+import Link from "next/link";
+
 import {
   performSearchAction,
   changeResultPageAction,
@@ -16,29 +19,29 @@ import {
   likeAction,
   disLikeAction,
   selectReviews,
-} from '../../redux/actions';
+} from "../../redux/actions";
 import {
   getSearchValue,
   getTotal,
   getCurrentPage,
   getTags,
   getSelectedTags,
-} from '../../redux/selectors';
-import Footer from '../../components/Footer';
-import ImagesGallerySection from '../../components/ImagesGallerySection';
-import VehicleInformationSection from '../../components/VehicleInformationSection';
-import VehicleInformationIconBlock from '../../components/VehicleInformationIconBlock';
-import SellerInfo from '../../components/SellerInfo';
-import OptionsBlock from '../../components/OptionsBlock';
-import SellerNotesBlock from '../../components/SellerNotesBlock';
-import SearchArea from '../../components/SearchArea';
-import Logo from '../../assets/img/icons/AutosweetAUTOS_Final-1png-03.png';
-import FuelEconomyIcon from '../../assets/img/icons/VDP_02_Vehicle_Info_Fuel_Economy.png';
-import CarFaxIcon from '../../assets/img/icons/carfax-certified-pre-owned-used-car-vehicle-ryan-gosling.jpg';
-import Like from '../../assets/img/icons/VDP_01_Save_Toggle_Grey.png';
-import LikeActive from '../../assets/img/icons/VDP_01_Save_Toggle.png';
-import Dislike from '../../assets/img/icons/VDP_01_Ignore_Toggle_Grey.png';
-import DislikeActive from '../../assets/img/icons/VDP_01_Ignore_Toggle.png';
+} from "../../redux/selectors";
+import Footer from "../../components/Footer";
+import ImagesGallerySection from "../../components/ImagesGallerySection";
+import VehicleInformationSection from "../../components/VehicleInformationSection";
+import VehicleInformationIconBlock from "../../components/VehicleInformationIconBlock";
+import SellerInfo from "../../components/SellerInfo";
+import OptionsBlock from "../../components/OptionsBlock";
+import SellerNotesBlock from "../../components/SellerNotesBlock";
+import SearchArea from "../../components/SearchArea";
+import Logo from "../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
+import FuelEconomyIcon from "../../public/assets/img/icons/VDP_02_Vehicle_Info_Fuel_Economy.png";
+import CarFaxIcon from "../../public/assets/img/icons/carfax-certified-pre-owned-used-car-vehicle-ryan-gosling.jpg";
+import Like from "../../public/assets/img/icons/VDP_01_Save_Toggle_Grey.png";
+import LikeActive from "../../public/assets/img/icons/VDP_01_Save_Toggle.png";
+import Dislike from "../../public/assets/img/icons/VDP_01_Ignore_Toggle_Grey.png";
+import DislikeActive from "../../public/assets/img/icons/VDP_01_Ignore_Toggle.png";
 
 class VehicleDetailsPage extends React.Component {
   constructor(props) {
@@ -57,9 +60,9 @@ class VehicleDetailsPage extends React.Component {
     this.props.addTag(tag);
   }
   runSearch(value) {
-    const { history } = this.props;
+    const { router } = this.props;
     changeResultPageAction(1);
-    this.props.runSearchAction({ value, page: 1, history });
+    this.props.runSearchAction({ value, page: 1, router });
   }
 
   removeTag(tag, isSelected) {
@@ -78,10 +81,10 @@ class VehicleDetailsPage extends React.Component {
   };
 
   onChange = (page) => {
-    const { history, searchValue, changeResultPageAction, runSearchAction } =
+    const { router, searchValue, changeResultPageAction, runSearchAction } =
       this.props;
     changeResultPageAction(page);
-    runSearchAction({ value: searchValue, page, history });
+    runSearchAction({ value: searchValue, page, router });
   };
 
   searchTermChange({ searchValue }) {
@@ -99,7 +102,7 @@ class VehicleDetailsPage extends React.Component {
     const {
       searchValue,
       page,
-      history,
+      router,
       runSearchAction,
       selectedTags,
       vehicleModel,
@@ -108,21 +111,21 @@ class VehicleDetailsPage extends React.Component {
     if (
       prevProps.searchValue &&
       prevProps.searchValue !== searchValue &&
-      prevProps.selectedTags + '' !== selectedTags + ''
+      prevProps.selectedTags + "" !== selectedTags + ""
     ) {
       let get_lat = this.props.get_lat;
       let get_lon = this.props.get_lon;
       runSearchAction({
         value: searchValue,
         page,
-        history,
+        router,
         tags: selectedTags,
         get_lat,
         get_lon,
       });
     }
     if (prevProps.vehicleModel !== vehicleModel) {
-      selectReviews(vehicleModel.dealer.chatMeterLocationId, 'topReviews').then(
+      selectReviews(vehicleModel.dealer.chatMeterLocationId, "topReviews").then(
         (reviews) => this.setState({ reviews: reviews })
       );
     }
@@ -134,9 +137,9 @@ class VehicleDetailsPage extends React.Component {
     return (
       <>
         <header className={style.Header}>
-          <NavLink to="/">
+          <Link href="/">
             <img src={Logo} alt="logo" className={style.logo} />
-          </NavLink>
+          </Link>
           <Navigation />
         </header>
         <main className={style.wrap}>
@@ -154,13 +157,13 @@ class VehicleDetailsPage extends React.Component {
               <div className={style.info_actions}>
                 <div className={style.info_actions_info}>
                   <div>
-                    {vehicleModel.conditionDescription} {vehicleModel.year}{' '}
+                    {vehicleModel.conditionDescription} {vehicleModel.year}{" "}
                     {vehicleModel.make} {vehicleModel.model}
                   </div>
                   <div className={style.gray}>
                     {vehicleModel.mileage
-                      ? vehicleModel.mileage.toLocaleString('en-us')
-                      : '-'}{' '}
+                      ? vehicleModel.mileage.toLocaleString("en-us")
+                      : "-"}{" "}
                     Miles
                   </div>
                 </div>
@@ -215,7 +218,7 @@ class VehicleDetailsPage extends React.Component {
                   className={style.carFaxIco}
                 />
               </picture>
-              <p>Get the CarFax vehicle history report</p>
+              <p>Get the CarFax vehicle router report</p>
             </article>
             <OptionsBlock />
             <SellerNotesBlock reviews={this.state.reviews} />

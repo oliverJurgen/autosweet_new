@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Select, Input, Button } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import style from "../styles/FormPage.module.css";
-import { thankEn, thankSp } from "../../assets/videos";
+import { thankEn, thankSp } from "../../public/assets/videos";
 import Navigation from "../../components/Navigation";
 import { NavLink, withRouter } from "react-router-dom";
 import { getSelectedVehicleItem } from "../../redux/selectors";

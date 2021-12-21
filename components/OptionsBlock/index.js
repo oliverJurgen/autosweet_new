@@ -1,7 +1,7 @@
-import React from 'react';
-import 'react-image-gallery/styles/css/image-gallery.css';
-import style from '../../pages/styles/VehicleDetailsPage.module.css';
-import { connect } from 'react-redux';
+import React from "react";
+import "react-image-gallery/styles/css/image-gallery.css";
+import style from "../../old_pages/styles/VehicleDetailsPage.module.css";
+import { connect } from "react-redux";
 
 class VehicleInformationIconBlock extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class VehicleInformationIconBlock extends React.Component {
               <div className="tab">
                 <h3 className={style.featureHeader}>
                   {vehicleModel.options.length === 1
-                    ? 'Features'
+                    ? "Features"
                     : item.category}
                 </h3>
                 <div>

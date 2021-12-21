@@ -8,13 +8,18 @@ import style from "../styles/FormPage.module.css";
 import { withRouter } from "next/router";
 import Link from "next/link";
 import { selectStatesAction, selectCitiesAction } from "../../redux/actions";
-import { welcomeEn, welcomeSp } from "../../assets/videos";
+import { welcomeEn, welcomeSp } from "../../public/assets/videos";
 import {
   getCities,
   getSelectedVehicleItem,
   getStates,
 } from "../../redux/selectors";
-import { Poster, Poster2, Poster3, Poster4 } from "../../assets/img/posters";
+import {
+  Poster,
+  Poster2,
+  Poster3,
+  Poster4,
+} from "../../public/assets/img/posters";
 import http from "../../services/api";
 class FormPage extends Component {
   constructor(props) {

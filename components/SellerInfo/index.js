@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import "react-image-gallery/styles/css/image-gallery.css";
-import style from "../../pages/styles/VehicleDetailsPage.module.css";
+import style from "../../old_pages/styles/VehicleDetailsPage.module.css";
 import { Link } from "react-router-dom";
 
 import DirectionIcon from "public/assets/img/icons/VDP_02_Seller_Info_Direction_icon.png";

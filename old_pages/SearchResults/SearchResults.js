@@ -33,7 +33,7 @@ import {
 import Footer from "../../components/Footer";
 import { Pagination } from "antd";
 import FullPageLoader from "../../components/Preloader/Preloader";
-import Logo from "../../assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
+import Logo from "../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
 
 class SearchResults extends React.Component {
   constructor(props) {

@@ -19,7 +19,7 @@
 }
 .logo {
   margin: 10px;
-  background-image: url("../../assets/img/icons/AutosweetAUTOS_Final-1png-03.png");
+  background-image: url("../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png");
   width: 185px;
   height: 85px;
   background-size: contain;
@@ -78,10 +78,10 @@
   background-size: contain;
 }
 .google_ico {
-  background-image: url("../../assets/img/icons/google.png");
+  background-image: url("../../public/assets/img/icons/google.png");
 }
 .facebook_ico {
-  background-image: url("../../assets/img/icons/facebook.png");
+  background-image: url("../../public/assets/img/icons/facebook.png");
 }
 .mapsText {
   display: flex;

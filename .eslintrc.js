@@ -3,7 +3,13 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["plugin:react/recommended", "standard", "prettier"],
+  extends: [
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
@@ -12,7 +18,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["react", "react-hooks", "prettier"],
   rules: {
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
@@ -20,21 +26,9 @@ module.exports = {
     "no-use-before-define": "off",
     quotes: [2, "double", { avoidEscape: true, allowTemplateLiterals: true }],
     "no-unused-vars": "warn",
-
-    // "@typescript-eslint/quotes": [
-    //   "error",
-    //   "single",
-    //   {
-    //     allowTemplateLiterals: true,
-    //   },
-    // ],
-    // "prettier/prettier": [
-    //   "warn",
-    //   {
-    //     singleQuote: true,
-    //     semi: true,
-    //   },
-    // ],
-    // quotes: "off",
+    //
+    "prettier/prettier": "error",
+    "react-hooks/rules-of-hooks": "warn",
+    "react-hooks/exhaustive-deps": "warn",
   },
 };

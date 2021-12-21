@@ -1,26 +1,27 @@
-import React from 'react';
-import 'react-image-gallery/styles/css/image-gallery.css';
-import style from '../../pages/styles/VehicleDetailsPage.module.css';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Social from './../Social/Social';
-import { Form, Input, Button, Row, Col } from 'antd';
+import React from "react";
+import "react-image-gallery/styles/css/image-gallery.css";
+import style from "../../old_pages/styles/VehicleDetailsPage.module.css";
+import { connect } from "react-redux";
+// import { Link } from "react-router-dom";
+import Link from "next/link";
+import { faArrowAltCircleDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Social from "./../Social/Social";
+import { Form, Input, Button, Row, Col } from "antd";
 
 class VehicleInformationSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      hidePlaceholder: '',
+      value: "",
+      hidePlaceholder: "",
     };
   }
 
   onClickHandler = (e) => {
     e.preventDefault();
     if (this.props.vehicleModel.dealer.vehicleURL) {
-      window.open(this.props.vehicleModel.dealer.vehicleURL, '_blank');
+      window.open(this.props.vehicleModel.dealer.vehicleURL, "_blank");
     }
   };
 
@@ -35,8 +36,8 @@ class VehicleInformationSection extends React.Component {
   render() {
     const { vehicleModel } = this.props;
     const currentTime = new Date();
-    const currentDayName = new Intl.DateTimeFormat('en-US', {
-      weekday: 'long',
+    const currentDayName = new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
     }).format(currentTime);
     const currentSchedule = vehicleModel.dealer.salesHours
       ? vehicleModel.dealer.salesHours.filter(
@@ -47,10 +48,10 @@ class VehicleInformationSection extends React.Component {
     if (currentSchedule) {
       const startDate =
         Number.parseInt(currentSchedule.open) +
-        (currentSchedule.open.includes('PM') ? 12 : 0);
+        (currentSchedule.open.includes("PM") ? 12 : 0);
       const endDate =
         Number.parseInt(currentSchedule.close) +
-        (currentSchedule.close.includes('PM') ? 12 : 0);
+        (currentSchedule.close.includes("PM") ? 12 : 0);
       isOpened =
         startDate &&
         endDate &&
@@ -74,8 +75,8 @@ class VehicleInformationSection extends React.Component {
                 vehicleModel.listPrice ||
                 vehicleModel.internetPrice ||
                 vehicleModel.cost ||
-                '-'
-              ).toLocaleString('en-us')}
+                "-"
+              ).toLocaleString("en-us")}
             </span>
           </p>
           <FontAwesomeIcon icon={faArrowAltCircleDown} />
@@ -91,17 +92,17 @@ class VehicleInformationSection extends React.Component {
             reviewsGoogle={vehicleModel.dealer.numberOfGoogleReviews}
           />
         </section>
-        <Link to="/credit-form">
+        <Link href="/credit-form">
           <button className={`${style.btn} ${style.gbtn}`}>
             Get Pre-Qualified Now
           </button>
         </Link>
         <section className={style.feedback}>
-          <p style={{ marginBottom: '16px' }}>
+          <p style={{ marginBottom: "16px" }}>
             <span className={style.bold}>{vehicleModel.dealer.dealerName}</span>
             <br />
             <span className={style.feedbackWork}>
-              {isOpened ? 'OPEN NOW' : 'CLOSED'}
+              {isOpened ? "OPEN NOW" : "CLOSED"}
             </span>
             <br />
             <span className={style.numberS}>
@@ -131,7 +132,7 @@ class VehicleInformationSection extends React.Component {
               <Col xs={24} md={12}>
                 <Form.Item
                   name="firstName"
-                  rules={[this.requiredField('First Name')]}
+                  rules={[this.requiredField("First Name")]}
                   noStyle
                 >
                   <Input
@@ -144,7 +145,7 @@ class VehicleInformationSection extends React.Component {
               <Col xs={24} md={12}>
                 <Form.Item
                   name="lastName"
-                  rules={[this.requiredField('Last Name')]}
+                  rules={[this.requiredField("Last Name")]}
                   noStyle
                 >
                   <Input
@@ -157,7 +158,7 @@ class VehicleInformationSection extends React.Component {
               <Col xs={24} md={12}>
                 <Form.Item
                   name="phone"
-                  rules={[this.requiredField('Phone Number')]}
+                  rules={[this.requiredField("Phone Number")]}
                   noStyle
                 >
                   <Input
@@ -172,7 +173,7 @@ class VehicleInformationSection extends React.Component {
               <Col xs={24} md={12}>
                 <Form.Item
                   name="email"
-                  rules={[this.requiredField('Email Address')]}
+                  rules={[this.requiredField("Email Address")]}
                   noStyle
                 >
                   <Input

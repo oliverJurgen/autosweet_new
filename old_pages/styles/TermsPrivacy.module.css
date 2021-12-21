@@ -4,11 +4,11 @@
   min-width: 100vw;
   justify-content: space-between;
   min-height: 7vh;
-  margin-bottom: 20px ;
+  margin-bottom: 20px;
 }
 .logo {
   margin: 10px;
-  background-image: url("../../assets/img/icons/AutosweetAUTOS_Final-1png-03.png");
+  background-image: url("../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png");
   width: 185px;
   height: 85px;
   background-size: contain;
@@ -21,8 +21,8 @@
 .table thead {
   background-color: #efefef;
 }
-.grey{
-    color:#E1E1E1;
+.grey {
+  color: #e1e1e1;
 }
 .tableRow {
   border-bottom: 1px solid grey;

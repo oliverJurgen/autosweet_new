@@ -23,7 +23,7 @@
   justify-content: center;
   width: 70%;
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 12px;
 }
 ::-webkit-scrollbar-thumb {
@@ -42,28 +42,28 @@
 ::-webkit-scrollbar-track:hover {
   border-left: solid 1px #aaa;
   background-color: #eee;
-}
+} */
 .recomendedItem {
   margin: 10px;
 }
 @media (max-width: 900px) {
-  .SearchResults{
+  .SearchResults {
     width: 95vw;
   }
 }
 @media (max-width: 600px) {
-  .SearchResults { 
+  .SearchResults {
     flex-direction: column;
   }
-  .logo{
+  .logo {
     width: 185px;
     height: 85px;
   }
-  .pagination{
+  .pagination {
     width: 100%;
   }
   .results {
-    order:2;
+    order: 2;
     width: 100%;
   }
   .recomendedItem {

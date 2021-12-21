@@ -1,6 +1,6 @@
 import React from "react";
 import "react-image-gallery/styles/css/image-gallery.css";
-import style from "../../pages/styles/VehicleDetailsPage.module.css";
+import style from "../../old_pages/styles/VehicleDetailsPage.module.css";
 import { connect } from "react-redux";
 import { faArrowAltCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

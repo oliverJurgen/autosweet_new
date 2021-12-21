@@ -1,23 +1,22 @@
-import React from 'react';
-import ImageGallery from 'react-image-gallery';
-import 'react-image-gallery/styles/css/image-gallery.css';
-import style from '../../pages/styles/VehicleDetailsPage.module.css';
-import { connect } from 'react-redux';
+import React from "react";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
+import style from "../../old_pages/styles/VehicleDetailsPage.module.css";
+import { connect } from "react-redux";
 
 class ImagesGallery extends React.Component {
   render() {
-
     let { vehicleModel } = this.props;
     let images = [];
 
-    if (vehicleModel && typeof vehicleModel.imageURLs === 'string') {
+    if (vehicleModel && typeof vehicleModel.imageURLs === "string") {
       images = vehicleModel.imageURLs
-        .split('|')
+        .split("|")
         .filter((v) => !!v)
         .map((url) => ({
           original: url,
           thumbnail: url,
-          originalClass: 'featured-slide'
+          originalClass: "featured-slide",
         }));
     }
     return (

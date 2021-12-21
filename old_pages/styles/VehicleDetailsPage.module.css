@@ -1,6 +1,7 @@
-p{
-  margin: 0!important;
-}
+/* p {
+  margin: 0 !important;
+} */
+
 .logo {
   margin: 10px;
   height: 85px;
@@ -27,7 +28,7 @@ p{
   border-radius: 5px;
 }
 .tag > tab > .featureShow {
-  border:none
+  border: none;
 }
 .tag:target {
   transition: all 0.5s ease-in-out;
@@ -66,7 +67,8 @@ p{
   columns: 2;
   -webkit-columns: 2;
   -moz-columns: 2;
-  list-style-image: url(../../assets/img/icons/blueArrow.svg);
+  list-style-image: url("../../public/assets/img/icons/blueArrow.svg");
+  /* ../../public/assets/img/icons/blueArrow.svg */
 }
 .options > li {
   margin-left: 10px;
@@ -127,9 +129,9 @@ p{
   justify-content: space-between;
   align-items: flex-end;
 }
-.info_actions picture{
+.info_actions picture {
   margin-right: 30px;
-} 
+}
 .info_actions_info {
   font-size: x-large;
 }
@@ -138,13 +140,13 @@ p{
   height: 40px;
 }
 .google_ico {
-  background-image: url("../../assets/img/icons/google.png");
+  background-image: url("../../public/assets/img/icons/google.png");
 }
 .facebook_ico {
-  background-image: url("../../assets/img/icons/facebook.png");
+  background-image: url("../../public/assets/img/icons/facebook.png");
 }
 .alert {
-  background-image: url("../../assets/img/icons/VDP_01_Alert_grey_icon.png");
+  background-image: url("../../public/assets/img/icons/VDP_01_Alert_grey_icon.png");
   width: 30px;
   height: 30px;
   background-size: contain;
@@ -182,12 +184,12 @@ p{
   display: flex;
   align-items: center;
 }
-.vehicalInfoBlock > div{
+.vehicalInfoBlock > div {
   display: flex;
   flex-wrap: wrap;
   height: 35em;
 }
-.vehicalInfoBlock > div > div{
+.vehicalInfoBlock > div > div {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -240,7 +242,7 @@ p{
   font-weight: 600;
   text-decoration: underline;
 }
-.carFax > p { 
+.carFax > p {
   margin: 0;
 }
 .carFaxIco {
@@ -278,7 +280,7 @@ p{
   font-size: 26px;
   display: flex;
   align-items: center;
-  color:red;
+  color: red;
 }
 .priceHeader > p {
   display: flex;
@@ -347,7 +349,7 @@ p{
   display: flex;
   align-items: center;
 }
-.priceSocial > div img{
+.priceSocial > div img {
   width: 40px;
   height: 40px;
 }
@@ -415,7 +417,7 @@ p{
   height: 25px;
   background-size: contain;
   background-repeat: no-repeat;
-  background-image: url("../../assets/img/icons/VDP_02_Seller_Info_Hours_icon.png");
+  background-image: url("../../public/assets/img/icons/VDP_02_Seller_Info_Hours_icon.png");
 }
 .time {
   display: flex;
@@ -499,7 +501,7 @@ p{
   height: 25px;
   background-size: contain;
   background-repeat: no-repeat;
-  background-image: url("../../assets/img/icons/VDP_02_Seller_Info_Text_icon.png");
+  background-image: url("../../public/assets/img/icons/VDP_02_Seller_Info_Text_icon.png");
 }
 .dealerWebSite {
   margin-left: 8px;
@@ -541,7 +543,7 @@ p{
   border-radius: 5px;
 }
 .featureHeader ~ .featureShow {
-  border:none;
+  border: none;
 }
 .premiumF {
   padding-right: 36%;
@@ -650,7 +652,7 @@ p{
   justify-content: center;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 12px;
 }
 ::-webkit-scrollbar-thumb {
@@ -669,7 +671,7 @@ p{
 ::-webkit-scrollbar-track:hover {
   border-left: solid 1px #aaa;
   background-color: #eee;
-}
+} */
 @media (max-width: 900px) {
   .results {
     width: 100%;
