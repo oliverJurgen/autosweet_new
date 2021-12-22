@@ -124,7 +124,7 @@ class VehicleDetailsPage extends React.Component {
     const prevVehicleId = prevProps.router?.query?.id;
     const currId = router.query.id;
 
-    if (prevVehicleId !== currId) {
+    if (prevVehicleId === undefined) {
       this.props.selectVehicleAction(currId);
     }
 

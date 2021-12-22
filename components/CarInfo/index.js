@@ -8,11 +8,12 @@ import { compose } from "redux";
 import { selectVehicleAction, setAnchor } from "../../redux/actions";
 import GoogleIcon from "public/assets/img/icons/google.png";
 import FacebookIcon from "public/assets/img/icons/facebook.png";
+import Link from "next/link";
 
 class CarItem extends React.Component {
   constructor(props) {
     super(props);
-    this.vehicleDetails = this.vehicleDetails.bind(this);
+    // this.vehicleDetails = this.vehicleDetails.bind(this);
   }
 
   formPage = () => {
@@ -20,33 +21,33 @@ class CarItem extends React.Component {
     this.props.router.push("/credit-form");
   };
 
-  vehicleDetails(anchor) {
-    if (anchor) {
-      this.props.setAnchor(true);
-    } else {
-      this.props.setAnchor(false);
-    }
-    const { dealer, vin, id, model, make, stockNumber, trim } = this.props;
-    this.props.selectVehicleAction(id);
-    this.props.router.push(`/vehicledetails/${id}`);
-    // this.props.router.push(
-    //   `/vehicledetails/${id}/${vin}/${stockNumber}/${dealer.dealerCity}/${dealer.dealerState}/${make}/${model}/${trim}`
-    // );
-    // ** refactor
-    // window.scrollTo(0, 0);
+  // vehicleDetails(anchor) {
+  //   if (anchor) {
+  //     this.props.setAnchor(true);
+  //   } else {
+  //     this.props.setAnchor(false);
+  //   }
+  //   const { dealer, vin, id, model, make, stockNumber, trim } = this.props;
+  //   this.props.selectVehicleAction(id);
+  //   this.props.router.push(`/vehicledetails/${id}`);
+  //   this.props.router.push(
+  //     `/vehicledetails/${id}/${vin}/${stockNumber}/${dealer.dealerCity}/${dealer.dealerState}/${make}/${model}/${trim}`
+  //   );
+  //   // ** refactor
+  //   // window.scrollTo(0, 0);
 
-    if (typeof window !== "undefined") {
-      window.scrollTo(0, 0);
-    }
-  }
+  //   if (typeof window !== "undefined") {
+  //     window.scrollTo(0, 0);
+  //   }
+  // }
 
   render() {
     let {
-      dealer,
+      // dealer,
       year,
       imageURLs,
-      make,
-      model,
+      // make,
+      // model,
       series,
       extColor,
       intColor,
@@ -60,6 +61,8 @@ class CarItem extends React.Component {
       listPrice,
       cost,
     } = this.props;
+    const { dealer, vin, id, model, make, stockNumber, trim } = this.props;
+    const vehicleModelUrl = `/vehicledetails/${id}?vin=${vin}&stockNum=${stockNumber}&dCity=${dealer.city}&dState=${dealer.state}&make=${make}&model=${model}&trim=${trim}`;
 
     const image = imageURLs && imageURLs.split("|")[0];
 
@@ -71,24 +74,44 @@ class CarItem extends React.Component {
 
     return (
       <section className={style.ResultItem}>
-        <figure
-          className={style.itemImg}
-          onClick={() => this.vehicleDetails(false)}
+        <Link
+          onClick={() => {
+            this.props.selectVehicleAction(id);
+          }}
+          href={vehicleModelUrl}
         >
-          <img src={image} alt="VehiclePhoto" />
-        </figure>
+          <figure className={style.itemImg}>
+            <img src={image} alt="VehiclePhoto" />
+          </figure>
+        </Link>
         <section className={style.itemInfo}>
           <span className={style.ad}>{dealer.dealerWebsite}</span>
-          <h3 onClick={() => this.vehicleDetails(false)}>
-            {dealer.dealerName} | {year} {make} {model} {series}
-          </h3>
-          <p className={style.textDecoration}>
-            Come see this {year} {make} today! - Exterior: {extColor}- Interior:{" "}
-            {intColor}-<br />
-            {engineDescription}- {transmissionType}-{cityMPG} MPG City -{" "}
-            {highwayMPG} MPG <br />
-            Highway - OVER ${internetPrice.toLocaleString("en-us")} is saving!
-          </p>
+          <Link
+            href={vehicleModelUrl}
+            // onClick={() => {
+            //   this.props.selectVehicleAction(id);
+            // }}
+          >
+            <h3
+            // onClick={() => this.vehicleDetails(false)}
+            >
+              {dealer.dealerName} | {year} {make} {model} {series}
+            </h3>
+          </Link>
+          <Link
+            href={vehicleModelUrl}
+            // onClick={() => {
+            //   this.props.selectVehicleAction(id);
+            // }}
+          >
+            <p className={style.textDecoration}>
+              Come see this {year} {make} today! - Exterior: {extColor}-
+              Interior: {intColor}-<br />
+              {engineDescription}- {transmissionType}-{cityMPG} MPG City -{" "}
+              {highwayMPG} MPG <br />
+              Highway - OVER ${internetPrice.toLocaleString("en-us")} is saving!
+            </p>
+          </Link>
           <footer className={style.cardfooter}>
             <span style={{ fontWeight: "600" }}>
               {mileage ? mileage.toLocaleString("en-us") : "-"} Miles
@@ -105,13 +128,15 @@ class CarItem extends React.Component {
               </figure>
             </div>
             <div className={style.google}>
-              <figure onClick={() => this.vehicleDetails(true)}>
-                <img
-                  className={style.social_icons}
-                  src={GoogleIcon}
-                  alt="GoogleIcon"
-                />
-              </figure>
+              <Link href={vehicleModelUrl}>
+                <figure onClick={() => this.vehicleDetails(true)}>
+                  <img
+                    className={style.social_icons}
+                    src={GoogleIcon}
+                    alt="GoogleIcon"
+                  />
+                </figure>
+              </Link>
               <span>
                 {dealer.googleScore} (
                 {dealer.numberOfGoogleReviews
@@ -121,13 +146,17 @@ class CarItem extends React.Component {
               </span>
             </div>
             <div className={style.google}>
-              <figure onClick={() => this.vehicleDetails(true)}>
-                <img
-                  className={style.social_icons}
-                  src={FacebookIcon}
-                  alt="GoogleIcon"
-                />
-              </figure>
+              <Link href={vehicleModelUrl}>
+                <figure
+                // onClick={() => this.vehicleDetails(true)}
+                >
+                  <img
+                    className={style.social_icons}
+                    src={FacebookIcon}
+                    alt="GoogleIcon"
+                  />
+                </figure>
+              </Link>
               <span>
                 {dealer.facebookScore} (
                 {dealer.numberOfFacebookReviews

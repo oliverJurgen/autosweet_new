@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LoaderGif from "../../public/assets/img/icons/loading3.gif";
+import Image from "next/image";
 
 class FullPageLoader extends Component {
   state = {};
@@ -11,7 +12,7 @@ class FullPageLoader extends Component {
     return (
       <div className="loader-container">
         <div className="loader">
-          <img alt="loader" src={LoaderGif} />
+          <Image width="200px" height="200px" alt="loader" src={LoaderGif} />
         </div>
       </div>
     );
