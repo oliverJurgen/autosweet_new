@@ -110,7 +110,7 @@ class SearchResults extends React.Component {
       setLon,
       selectedTags,
     } = this.props;
-    console.log("MOUNT", router.isReady);
+    // console.log("MOUNT", router.isReady);
 
     let get_lat = this.props.get_lat;
     let get_lon = this.props.get_lon;
@@ -120,21 +120,21 @@ class SearchResults extends React.Component {
       // console.log({ routerQuery: router.query, query, router });
       const value = router.query.q;
       const page = router.query.page;
+      const lat = router.query.lat;
+      const lon = router.query.lon;
 
       // const params = new URLSearchParams(location.search);
       // const value = params.get("q") || "";
       // const page = params.get("page") || 1;
 
+      // console.log({ get_lat: this.props.get_lat });
+
       if (!this.props.get_lat) {
         if (navigator.geolocation) {
-          console.log("FJSDKFJ");
-          navigator.geolocation.getCurrentPosition(function (position) {
-            console.log({ position });
+          window.navigator.geolocation.getCurrentPosition(function (position) {
             if (position.coords.latitude) {
               // const lat = position.coords.latitude.toString().slice(0, 11);
               // const lon = position.coords.longitude.toString().slice(0, 11);
-              const lat = router.query.lat;
-              const lon = router.query.lon;
               setLat(lat);
               setLon(lon);
               performSearchAction({
@@ -173,6 +173,26 @@ class SearchResults extends React.Component {
       get_lat,
       get_lon,
     } = this.props;
+
+    // on browser refresh **
+    if (router.isReady !== prevProps.router.isReady) {
+      const value = router.query.q;
+      const page = router.query.page;
+      const lat = router.query.lat;
+      const lon = router.query.lon;
+      const tags = router.query.tags;
+
+      runSearchAction({
+        value,
+        page,
+        router,
+        tags: tags,
+        get_lat: lat,
+        get_lon: lon,
+      });
+      return;
+    }
+
     if (prevProps.searchValue && prevProps.searchValue !== searchValue) {
       validateTags(searchValue);
       if (prevProps.selectedTags !== selectedTags) {

@@ -73,8 +73,6 @@ class CarItem extends React.Component {
       priceCompare = style.priceNormal;
     }
 
-    console.log({ router });
-
     return (
       <section className={style.ResultItem}>
         <Link
