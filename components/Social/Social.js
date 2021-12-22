@@ -3,6 +3,7 @@ import React from "react";
 import GoogleIcon from "public/assets/img/icons/google.png";
 import FacebookIcon from "public/assets/img/icons/facebook.png";
 import MessageIcon from "public/assets/img/icons/VDP_02_Seller_Info_Text_icon.png";
+import Image from "next/image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -15,7 +16,7 @@ class Social extends React.Component {
         <div>
           <a href="#dealerReview">
             <picture>
-              <img alt="GoogleIcon" src={GoogleIcon} />
+              <Image alt="GoogleIcon" src={GoogleIcon} />
             </picture>
           </a>
           <figure>
@@ -25,14 +26,14 @@ class Social extends React.Component {
         </div>
         <div>
           <picture>
-            <img alt="MessageIcon" src={MessageIcon} />
+            <Image alt="MessageIcon" src={MessageIcon} />
           </picture>
           <span>{reviewsGoogle ? reviewsGoogle : "-"}</span>
         </div>
         <div>
           <a href="#dealerReview">
             <picture>
-              <img alt="FacebookIcon" src={FacebookIcon} />
+              <Image alt="FacebookIcon" src={FacebookIcon} />
             </picture>
           </a>
           <figure>
@@ -42,7 +43,7 @@ class Social extends React.Component {
         </div>
         <div>
           <picture>
-            <img alt="MessageIcon" src={MessageIcon} />
+            <Image alt="MessageIcon" src={MessageIcon} />
           </picture>
           <span>{reviewsGoogle ? reviewsGoogle : "-"}</span>
         </div>

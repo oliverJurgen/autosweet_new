@@ -6,6 +6,8 @@ import { compose } from "redux";
 // import { NavLink, withRouter } from "react-router-dom";
 import { withRouter } from "next/router";
 import Link from "next/link";
+import Image from "next/image";
+import isBrowser from "utils/isBrowser";
 
 import {
   performSearchAction,
@@ -95,7 +97,17 @@ class VehicleDetailsPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.selectVehicleAction(this.props.match.params.id);
+    const router = this.props.router;
+
+    console.log({ isBrowser: isBrowser() });
+    if (router.isReady || isBrowser()) {
+      console.log({ query: router.query });
+
+      const id = router.query.id;
+      this.props.selectVehicleAction(id);
+    }
+
+    // this.props.selectVehicleAction(this.props.match.params.id);
   }
 
   componentDidUpdate(prevProps) {
@@ -108,6 +120,14 @@ class VehicleDetailsPage extends React.Component {
       vehicleModel,
       selectReviews,
     } = this.props;
+
+    const prevVehicleId = prevProps.router?.query?.id;
+    const currId = router.query.id;
+
+    if (prevVehicleId !== currId) {
+      this.props.selectVehicleAction(currId);
+    }
+
     if (
       prevProps.searchValue &&
       prevProps.searchValue !== searchValue &&
@@ -134,11 +154,14 @@ class VehicleDetailsPage extends React.Component {
   render() {
     let { vehicleModel, searchValue, tags, selectedTags } = this.props;
 
+    console.log("WELRJLWEKJ");
+
+    console.log({ vehicleModel });
     return (
       <>
         <header className={style.Header}>
           <Link href="/">
-            <img src={Logo} alt="logo" className={style.logo} />
+            <Image src={Logo} alt="logo" className={style.logo} />
           </Link>
           <Navigation />
         </header>
@@ -169,14 +192,14 @@ class VehicleDetailsPage extends React.Component {
                 </div>
                 <div>
                   <picture onClick={this.onLikeHandler}>
-                    <img
+                    <Image
                       src={vehicleModel.liked ? LikeActive : Like}
                       alt="Like"
                       className={style.likeActionIcon}
                     />
                   </picture>
                   <picture onClick={this.onDisLikeHandler}>
-                    <img
+                    <Image
                       src={vehicleModel.disliked ? DislikeActive : Dislike}
                       alt="Dislike"
                       className={style.likeActionIcon}
@@ -195,7 +218,7 @@ class VehicleDetailsPage extends React.Component {
             )}
             <article className={style.fuelEconomy}>
               <picture>
-                <img
+                <Image
                   alt="Fuelicon"
                   src={FuelEconomyIcon}
                   className={style.infoBlock}
@@ -211,7 +234,8 @@ class VehicleDetailsPage extends React.Component {
             </article>
             <article className={style.carFax}>
               <picture>
-                <img
+                <Image
+                  objectFit="contain"
                   width="160px"
                   alt="carFaxIcon"
                   src={CarFaxIcon}

@@ -6,6 +6,7 @@ import { faArrowAltCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Social from "./../Social/Social";
 import { Input, Radio } from "antd";
+import Image from "next/image";
 import Condition from "public/assets/img/icons/VDP_02_Vehicle_Info_Condition.png";
 import Trim from "public/assets/img/icons/VDP_02_Vehicle_Info_Trim.png";
 import Mileage from "public/assets/img/icons/VDP_02_Vehicle_Info_Mileage.png";
@@ -29,7 +30,7 @@ class VehicleInformationIconBlock extends React.Component {
           <div>
             <div className={style.InformationBlockItem}>
               <picture>
-                <img
+                <Image
                   src={Condition}
                   alt="sectionIcon"
                   className={style.infoBlock}
@@ -50,7 +51,11 @@ class VehicleInformationIconBlock extends React.Component {
             </div>
             <div className={style.InformationBlockItem}>
               <picture>
-                <img src={Trim} alt="sectionIcon" className={style.infoBlock} />
+                <Image
+                  src={Trim}
+                  alt="sectionIcon"
+                  className={style.infoBlock}
+                />
               </picture>
               <p>
                 Trim <br />
@@ -59,7 +64,7 @@ class VehicleInformationIconBlock extends React.Component {
             </div>
             <div className={style.InformationBlockItem}>
               <picture>
-                <img
+                <Image
                   src={Mileage}
                   alt="sectionIcon"
                   className={style.infoBlock}
@@ -77,7 +82,7 @@ class VehicleInformationIconBlock extends React.Component {
             </div>
             <div className={style.InformationBlockItem}>
               <picture>
-                <img
+                <Image
                   src={StockNumber}
                   alt="sectionIcon"
                   className={style.infoBlock}
@@ -90,7 +95,7 @@ class VehicleInformationIconBlock extends React.Component {
             </div>
             <div className={style.InformationBlockItem}>
               <picture>
-                <img
+                <Image
                   src={EngineDescription}
                   alt="sectionIcon"
                   className={style.infoBlock}
@@ -108,7 +113,7 @@ class VehicleInformationIconBlock extends React.Component {
           <div>
             <div className={style.InformationBlockItem}>
               <picture>
-                <img
+                <Image
                   src={TrasmissionIcon}
                   alt="sectionIcon"
                   className={style.infoBlock}
@@ -124,7 +129,7 @@ class VehicleInformationIconBlock extends React.Component {
             </div>
             <div className={style.InformationBlockItem}>
               <picture>
-                <img
+                <Image
                   src={Drivetrain}
                   alt="sectionIcon"
                   className={style.infoBlock}
@@ -138,7 +143,7 @@ class VehicleInformationIconBlock extends React.Component {
             </div>
             <div className={style.InformationBlockItem}>
               <picture>
-                <img
+                <Image
                   src={ExtColor}
                   alt="sectionIcon"
                   className={style.infoBlock}
@@ -152,7 +157,7 @@ class VehicleInformationIconBlock extends React.Component {
             </div>
             <div className={style.InformationBlockItem}>
               <picture>
-                <img
+                <Image
                   src={IntColor}
                   alt="sectionIcon"
                   className={style.infoBlock}
@@ -166,7 +171,7 @@ class VehicleInformationIconBlock extends React.Component {
             </div>
             <div className={style.InformationBlockItem}>
               <picture>
-                <img
+                <Image
                   src={FuelType}
                   alt="sectionIcon"
                   className={style.infoBlock}

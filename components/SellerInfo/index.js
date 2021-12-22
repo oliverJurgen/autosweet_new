@@ -2,7 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import "react-image-gallery/styles/css/image-gallery.css";
 import style from "../../old_pages/styles/VehicleDetailsPage.module.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Link from "next/link";
 
 import DirectionIcon from "public/assets/img/icons/VDP_02_Seller_Info_Direction_icon.png";
 import WebIcon from "public/assets/img/icons/VDP_02_Seller_Info_Website_icon.png";
@@ -133,7 +134,7 @@ class VehicleInformationIconBlock extends React.Component {
           </p>
         </section>
         <footer>
-          <Link to="/credit-form">
+          <Link href="/credit-form">
             <button className={`${style.btn} ${style.gbtn}`}>
               Get Pre-Qualified Now
             </button>

@@ -8,8 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import GoogleIcon from "public/assets/img/icons/google.png";
 import FacebookIcon from "public/assets/img/icons/facebook.png";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Row, Col } from "antd";
+import Image from "next/image";
 
 class SellerNotes extends React.Component {
   constructor(props) {
@@ -47,21 +49,25 @@ class SellerNotes extends React.Component {
               </div>
               <div className={style.reviews}>
                 <div>
-                  <img className={style.icon} src={GoogleIcon} alt="icon" />
+                  <Image
+                    className={style.icon}
+                    src={GoogleIcon}
+                    alt="googleicon"
+                  />
                   <FontAwesomeIcon icon={faStar} className={style.faStar} />
                   {vehicleModel.dealer.googleScore
                     ? vehicleModel.dealer.googleScore
                     : "-"}
                 </div>
                 <div>
-                  <img className={style.icon} src={FacebookIcon} alt="icon" />
+                  <Image className={style.icon} src={FacebookIcon} alt="icon" />
                   {vehicleModel.dealer.numberOfFacebookReviews
                     ? vehicleModel.dealer.numberOfFacebookReviews
                     : "-"}
                 </div>
               </div>
               {reviews.length > 0 && (
-                <Link to={`/dealer-reviews/${vehicleModel.id}`}>
+                <Link href={`/dealer-reviews/${vehicleModel.id}`}>
                   <button className={`${style.btn} ${style.gbtn}`}>
                     More dealer reviews
                   </button>
@@ -72,7 +78,7 @@ class SellerNotes extends React.Component {
               reviews.map((item, index) => (
                 <div key={index} className={style.review}>
                   <div className={style.avatar}>
-                    <img alt="avatar" src={item.reviewerPictureURL} />
+                    <Image alt="avatar" src={item.reviewerPictureURL} />
                   </div>
                   <div>
                     <div className={style.name}>{item.reviewerUserName}</div>

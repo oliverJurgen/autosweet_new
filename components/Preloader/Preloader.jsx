@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import LoaderGif from "public/assets/img/icons/loading3.gif";
+import LoaderGif from "../../public/assets/img/icons/loading3.gif";
 
 class FullPageLoader extends Component {
   state = {};

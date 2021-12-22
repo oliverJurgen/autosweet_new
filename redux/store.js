@@ -8,7 +8,7 @@ const middleware = [thunk];
 
 // In case of development mode add redux-logger middleware
 if (NODE_ENV === "development") {
-  middleware.push(logger);
+  // middleware.push(logger);
 }
 
 // const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

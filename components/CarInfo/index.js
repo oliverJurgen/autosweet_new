@@ -28,11 +28,16 @@ class CarItem extends React.Component {
     }
     const { dealer, vin, id, model, make, stockNumber, trim } = this.props;
     this.props.selectVehicleAction(id);
-    this.props.router.push(
-      `/vehicledetails/${id}/${vin}/${stockNumber}/${dealer.dealerCity}/${dealer.dealerState}/${make}/${model}/${trim}`
-    );
+    this.props.router.push(`/vehicledetails/${id}`);
+    // this.props.router.push(
+    //   `/vehicledetails/${id}/${vin}/${stockNumber}/${dealer.dealerCity}/${dealer.dealerState}/${make}/${model}/${trim}`
+    // );
     // ** refactor
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
+
+    if (typeof window !== "undefined") {
+      window.scrollTo(0, 0);
+    }
   }
 
   render() {
