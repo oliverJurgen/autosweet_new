@@ -110,13 +110,14 @@ class SearchResults extends React.Component {
       setLon,
       selectedTags,
     } = this.props;
+    console.log("MOUNT", router.isReady);
 
     let get_lat = this.props.get_lat;
     let get_lon = this.props.get_lon;
     let tags = selectedTags;
 
     if (router.isReady) {
-      console.log({ routerQuery: router.query, query, router });
+      // console.log({ routerQuery: router.query, query, router });
       const value = router.query.q;
       const page = router.query.page;
 
@@ -126,7 +127,9 @@ class SearchResults extends React.Component {
 
       if (!this.props.get_lat) {
         if (navigator.geolocation) {
+          console.log("FJSDKFJ");
           navigator.geolocation.getCurrentPosition(function (position) {
+            console.log({ position });
             if (position.coords.latitude) {
               // const lat = position.coords.latitude.toString().slice(0, 11);
               // const lon = position.coords.longitude.toString().slice(0, 11);
@@ -142,6 +145,7 @@ class SearchResults extends React.Component {
                 get_lat: lat,
                 get_lon: lon,
               });
+              return;
             }
           });
         }

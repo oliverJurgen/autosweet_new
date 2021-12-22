@@ -61,7 +61,8 @@ class CarItem extends React.Component {
       listPrice,
       cost,
     } = this.props;
-    const { dealer, vin, id, model, make, stockNumber, trim } = this.props;
+    const { dealer, vin, id, model, make, stockNumber, trim, router } =
+      this.props;
     const vehicleModelUrl = `/vehicledetails/${id}?vin=${vin}&stockNum=${stockNumber}&dCity=${dealer.city}&dState=${dealer.state}&make=${make}&model=${model}&trim=${trim}`;
 
     const image = imageURLs && imageURLs.split("|")[0];
@@ -72,6 +73,8 @@ class CarItem extends React.Component {
       priceCompare = style.priceNormal;
     }
 
+    console.log({ router });
+
     return (
       <section className={style.ResultItem}>
         <Link
@@ -79,10 +82,13 @@ class CarItem extends React.Component {
             this.props.selectVehicleAction(id);
           }}
           href={vehicleModelUrl}
+          passHref
         >
-          <figure className={style.itemImg}>
-            <img src={image} alt="VehiclePhoto" />
-          </figure>
+          <a>
+            <figure className={style.itemImg}>
+              <img src={image} alt="VehiclePhoto" />
+            </figure>
+          </a>
         </Link>
         <section className={style.itemInfo}>
           <span className={style.ad}>{dealer.dealerWebsite}</span>
@@ -92,11 +98,13 @@ class CarItem extends React.Component {
             //   this.props.selectVehicleAction(id);
             // }}
           >
-            <h3
-            // onClick={() => this.vehicleDetails(false)}
-            >
-              {dealer.dealerName} | {year} {make} {model} {series}
-            </h3>
+            <a>
+              <h3
+              // onClick={() => this.vehicleDetails(false)}
+              >
+                {dealer.dealerName} | {year} {make} {model} {series}
+              </h3>
+            </a>
           </Link>
           <Link
             href={vehicleModelUrl}
@@ -104,13 +112,16 @@ class CarItem extends React.Component {
             //   this.props.selectVehicleAction(id);
             // }}
           >
-            <p className={style.textDecoration}>
-              Come see this {year} {make} today! - Exterior: {extColor}-
-              Interior: {intColor}-<br />
-              {engineDescription}- {transmissionType}-{cityMPG} MPG City -{" "}
-              {highwayMPG} MPG <br />
-              Highway - OVER ${internetPrice.toLocaleString("en-us")} is saving!
-            </p>
+            <a>
+              <p className={style.textDecoration}>
+                Come see this {year} {make} today! - Exterior: {extColor}-
+                Interior: {intColor}-<br />
+                {engineDescription}- {transmissionType}-{cityMPG} MPG City -{" "}
+                {highwayMPG} MPG <br />
+                Highway - OVER ${internetPrice.toLocaleString("en-us")} is
+                saving!
+              </p>
+            </a>
           </Link>
           <footer className={style.cardfooter}>
             <span style={{ fontWeight: "600" }}>
@@ -129,13 +140,15 @@ class CarItem extends React.Component {
             </div>
             <div className={style.google}>
               <Link href={vehicleModelUrl}>
-                <figure onClick={() => this.vehicleDetails(true)}>
-                  <img
-                    className={style.social_icons}
-                    src={GoogleIcon}
-                    alt="GoogleIcon"
-                  />
-                </figure>
+                <a>
+                  <figure onClick={() => this.vehicleDetails(true)}>
+                    <img
+                      className={style.social_icons}
+                      src={GoogleIcon}
+                      alt="GoogleIcon"
+                    />
+                  </figure>
+                </a>
               </Link>
               <span>
                 {dealer.googleScore} (
@@ -147,15 +160,17 @@ class CarItem extends React.Component {
             </div>
             <div className={style.google}>
               <Link href={vehicleModelUrl}>
-                <figure
-                // onClick={() => this.vehicleDetails(true)}
-                >
-                  <img
-                    className={style.social_icons}
-                    src={FacebookIcon}
-                    alt="GoogleIcon"
-                  />
-                </figure>
+                <a>
+                  <figure
+                  // onClick={() => this.vehicleDetails(true)}
+                  >
+                    <img
+                      className={style.social_icons}
+                      src={FacebookIcon}
+                      alt="GoogleIcon"
+                    />
+                  </figure>
+                </a>
               </Link>
               <span>
                 {dealer.facebookScore} (
