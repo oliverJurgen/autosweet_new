@@ -40,6 +40,7 @@ class SearchArea extends React.Component {
   search() {
     const { searchValue, onSearch } = this.props;
     if (searchValue.length > MIN_SYMBOL_COUNT && onSearch) {
+      console.log({ searchValue });
       onSearch(searchValue);
     }
   }

@@ -34,6 +34,7 @@ import Footer from "../../components/Footer";
 import { Pagination } from "antd";
 import FullPageLoader from "../../components/Preloader/Preloader";
 import Logo from "../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
+import isBrowser from "utils/isBrowser";
 
 class SearchResults extends React.Component {
   constructor(props) {
@@ -100,7 +101,7 @@ class SearchResults extends React.Component {
     this.props.setSearchValueAction(searchValue);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const {
       location,
       router,
@@ -130,25 +131,41 @@ class SearchResults extends React.Component {
       // console.log({ get_lat: this.props.get_lat });
 
       if (!this.props.get_lat) {
-        if (navigator.geolocation) {
-          window.navigator.geolocation.getCurrentPosition(function (position) {
-            if (position.coords.latitude) {
-              // const lat = position.coords.latitude.toString().slice(0, 11);
-              // const lon = position.coords.longitude.toString().slice(0, 11);
-              setLat(lat);
-              setLon(lon);
-              performSearchAction({
-                value,
-                page,
-                router,
-                tags,
-                get_lat: lat,
-                get_lon: lon,
-              });
-              return;
-            }
-          });
-        }
+        performSearchAction({
+          value,
+          page,
+          router,
+          tags,
+          get_lat: lat,
+          get_lon: lon,
+        });
+
+        // **FIX geolocation logic - prevents search value on initial search**
+        // if (navigator.geolocation && isBrowser()) {
+        //   console.log("HHHH");
+        //   await window.navigator.geolocation.getCurrentPosition(
+        //     function (position) {
+        //       console.log({ pos: position });
+        //       if (position.coords.latitude) {
+        //         // const lat = position.coords.latitude.toString().slice(0, 11);
+        //         // const lon = position.coords.longitude.toString().slice(0, 11);
+        //         setLat(lat);
+        //         setLon(lon);
+        //         performSearchAction({
+        //           value,
+        //           page,
+        //           router,
+        //           tags,
+        //           get_lat: lat,
+        //           get_lon: lon,
+        //         });
+        //       }
+        //     },
+        //     (err) => console.log({ err })
+        //   );
+
+        //   return;
+        // }
       } else {
         performSearchAction({
           value,
