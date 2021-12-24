@@ -7,8 +7,11 @@ import style from "../styles/FormPage.module.css";
 // import { NavLink, withRouter } from 'react-router-dom';
 import { withRouter } from "next/router";
 import Link from "next/link";
+import Image from "next/image";
 import { selectStatesAction, selectCitiesAction } from "../../redux/actions";
-import { welcomeEn, welcomeSp } from "../../public/assets/videos";
+// import { welcomeEn, welcomeSp } from "../../public/assets/videos";
+import welcomeEn from "public/assets/videos/welcomeEN.mp4";
+import welcomeSp from "public/assets/videos/welcomeSP.mp4";
 import {
   getCities,
   getSelectedVehicleItem,
@@ -69,7 +72,7 @@ class FormPage extends Component {
         spain: undefined,
         posterId: undefined,
       });
-      let language = this.state.spain ? "spanish" : "english";
+      let language = this.state.spain ? "es" : "en";
       this.props.router.push("/thank-you/" + language);
     } catch (e) {
       console.log(e);
@@ -91,11 +94,17 @@ class FormPage extends Component {
     return (
       <>
         <header className={style.Header}>
-          <Link className={style.logo} href="/"></Link>
+          <Link href="/">
+            <span className={style.logo} />
+          </Link>
           <Navigation />
         </header>
         <main className={style.FormPage}>
-          <Row className={style.content} justify="center">
+          <Row
+            className={style.content}
+            justify="center"
+            style={{ paddingBottom: "50px" }}
+          >
             <Col span={12}>
               <Row>
                 <Input.Group compact>
@@ -380,12 +389,12 @@ class FormPage extends Component {
                       I have read and agree to the Terms and Conditions
                     </label>
                   </div>
-                  <input type="submit" value="Submit" />
+                  <button type="submit">Submit</button>
                 </form>
               </Row>
             </Col>
             <Col span={5}>
-              <img src={posters[this.state.posterId]} alt="poster" />
+              <Image src={posters[this.state.posterId]} alt="poster" />
             </Col>
           </Row>
         </main>
