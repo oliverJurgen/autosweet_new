@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Select, Input, Button } from "antd";
-import thanksEn from "public/assets/videos/thankyouEn.mp4";
+import thanksEn from "public/assets/videos/thankyouEN.mp4";
 import thankSp from "public/assets/videos/thankyouSP.mp4";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
