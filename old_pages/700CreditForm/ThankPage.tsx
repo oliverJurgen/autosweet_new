@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Select, Input, Button } from "antd";
-import thanksEn from "public/assets/videos/thankyouEN.mp4";
-import thankSp from "public/assets/videos/thankyouSP.mp4";
+// import thanksEn from "public/assets/videos/thankyouEN.mp4";
+// import thankSp from "public/assets/videos/thankyouSP.mp4";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -15,10 +15,10 @@ const langs = {
   es: "Spanish",
 };
 
-const getSrc = (langCode: string) => {
-  if (langCode === "es") return thankSp;
-  return thanksEn;
-};
+// const getSrc = (langCode: string) => {
+//   if (langCode === "es") return thankSp;
+//   return thanksEn;
+// };
 
 const ThankPage = () => {
   const [language, setLanguage] = React.useState<string>("en");
@@ -65,12 +65,12 @@ const ThankPage = () => {
             </Select>
           </Input.Group>
 
-          <video
+          {/* <video
             controls
             className={style.video}
             src={getSrc(language)}
             autoPlay
-          />
+          /> */}
           <div className={style.thankYou}>
             <div>
               <h1>Thank You</h1>

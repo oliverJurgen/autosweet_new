@@ -10,8 +10,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { selectStatesAction, selectCitiesAction } from "../../redux/actions";
 // import { welcomeEn, welcomeSp } from "../../public/assets/videos";
-import welcomeEn from "public/assets/videos/welcomeEN.mp4";
-import welcomeSp from "public/assets/videos/welcomeSP.mp4";
+// import welcomeEn from "public/assets/videos/welcomeEN.mp4";
+// import welcomeSp from "public/assets/videos/welcomeSP.mp4";
 import {
   getCities,
   getSelectedVehicleItem,
@@ -118,12 +118,12 @@ class FormPage extends Component {
                     <Select.Option value="Spain">Spanish</Select.Option>
                   </Select>
                 </Input.Group>
-                <video
+                {/* <video
                   controls
                   className={style.video}
                   src={this.state.spain ? welcomeSp : welcomeEn}
                   autoPlay
-                ></video>
+                ></video> */}
               </Row>
               <Row>
                 <form onSubmit={this.handleSubmit}>
