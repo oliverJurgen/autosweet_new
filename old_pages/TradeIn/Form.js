@@ -12,7 +12,10 @@ import {
   Tooltip,
 } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { NavLink, withRouter } from 'react-router-dom';
+// import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'next/router';
+import Link from 'next/link';
+import Image from 'next/image';
 import { selectVehicleAction } from '../../redux/actions';
 
 import http from '../../services/api';
@@ -20,6 +23,7 @@ import http from '../../services/api';
 import Navigation from '../../components/Navigation';
 import style from '../styles/TradeIn.module.css';
 import FormItem from 'antd/lib/form/FormItem';
+import Logo from '../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png';
 class TradeInForm extends Component {
   constructor(props) {
     super(props);
@@ -116,7 +120,9 @@ class TradeInForm extends Component {
     return (
       <>
         <header className={style.Header}>
-          <NavLink className={style.logo} to="/"></NavLink>
+          <Link href="/">
+            <Image src={Logo} alt="logo" className={style.logo} />
+          </Link>
           <Navigation />
         </header>
         <Row className={style.content} justify="center">
@@ -129,152 +135,154 @@ class TradeInForm extends Component {
               </div>
             </div>
           </Col>
-          <Form
-            initialValues={{
-              firstName: '',
-              lastName: '',
-              email: '',
-              phoneNumber: '',
-              mileage: '',
-            }}
-            onFinish={this.onSubmit}
-            onFinishFailed={this.onSubmitFailed}
-          >
-            <Row justify="center">
-              <Col xs={24}>
-                <Row
-                  justify="center"
-                  style={{ backgroundColor: '#303030', padding: '10px 0' }}
-                >
-                  <Col xs={24} md={12} className={style.headerInputBlock}>
-                    <Input
-                      type="text"
-                      className={style.inputHeader}
-                      placeholder={'Enter Make Model Trim'}
-                      prefix={<SearchOutlined />}
-                      onChange={this.handleInput}
-                      value={this.state.ymmtText}
-                    />
-                    {this.state.suggestionTrigger && (
-                      <div className={style.suggestions}>
-                        <ul>
-                          {this.state.ymmtSearch ? (
-                            this.state.ymmtSearch.map((item, index) => (
-                              <li
-                                key={index}
-                                onClick={() => this.handleModelClick(item)}
-                              >{`${item.make} ${item.model} ${item.trim}`}</li>
-                            ))
-                          ) : (
-                            <li>No items</li>
-                          )}
-                        </ul>
-                      </div>
-                    )}
-                  </Col>
-                </Row>
-              </Col>
-              <Col xs={24} md={12}>
-                <Row justify="center">
-                  <div className={style.mv2}>
-                    See below for a sample that similar cars in your market. You
-                    can see:
-                  </div>
-                  <div className={style.list}>
-                    <ul>
-                      {this.listData.map((item, index) => (
-                        <li key={index}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className={style.mv2}>
-                    Please complete the information below for a real-time market
-                    report for your Vehicles
-                  </div>
-                </Row>
-                <Row gutter={[16]}>
-                  <Col xs={24} md={12}>
-                    <FormItem
-                      name="firstName"
-                      rules={[this.requiredField('First Name')]}
-                    >
+          <Col xs={24}>
+            <Form
+              initialValues={{
+                firstName: '',
+                lastName: '',
+                email: '',
+                phoneNumber: '',
+                mileage: '',
+              }}
+              onFinish={this.onSubmit}
+              onFinishFailed={this.onSubmitFailed}
+            >
+              <Row justify="center">
+                <Col xs={24}>
+                  <Row
+                    justify="center"
+                    style={{ backgroundColor: '#303030', padding: '10px 0' }}
+                  >
+                    <Col xs={24} md={12} className={style.headerInputBlock}>
                       <Input
                         type="text"
-                        placeholder="First Name"
-                        className={style.input}
+                        className={style.inputHeader}
+                        placeholder={'Enter Make Model Trim'}
+                        prefix={<SearchOutlined />}
+                        onChange={this.handleInput}
+                        value={this.state.ymmtText}
                       />
-                    </FormItem>
-                  </Col>
-                  <Col xs={24} md={12}>
-                    <FormItem
-                      name="lastName"
-                      rules={[this.requiredField('Last Name')]}
-                    >
-                      <Input
-                        type="text"
-                        placeholder="Last Name"
-                        className={style.input}
-                      />
-                    </FormItem>
-                  </Col>
-                  <Col xs={24}>
-                    <FormItem
-                      name="email"
-                      rules={[this.requiredField('Email')]}
-                    >
-                      <Input
-                        type="email"
-                        placeholder="Email Address"
-                        className={style.input}
-                      />
-                    </FormItem>
-                  </Col>
-                  <Col xs={12}>
-                    <FormItem
-                      name="phoneNumber"
-                      rules={[this.requiredField('Phone Number')]}
-                    >
-                      <Input
-                        type="tel"
-                        placeholder="Phone Number"
-                        className={style.input}
-                      />
-                    </FormItem>
-                  </Col>
-                  <Col xs={12}>
-                    <FormItem
-                      name="mileage"
-                      rules={[
-                        {
-                          type: 'number',
-                          min: 0,
-                          message: 'Only positive number!',
-                        },
-                      ]}
-                    >
-                      <InputNumber
-                        placeholder="Mileage"
-                        className={style.inputNumber}
-                      />
-                    </FormItem>
-                  </Col>
-                  <Col xs={24}>
-                    <Form.Item>
-                      <Tooltip placement="top" title={title}>
-                        <Button
-                          htmlType="submit"
-                          className={style.submit}
-                          block
-                        >
-                          VALUE YOUR TRADE IN
-                        </Button>
-                      </Tooltip>
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Form>
+                      {this.state.suggestionTrigger && (
+                        <div className={style.suggestions}>
+                          <ul>
+                            {this.state.ymmtSearch ? (
+                              this.state.ymmtSearch.map((item, index) => (
+                                <li
+                                  key={index}
+                                  onClick={() => this.handleModelClick(item)}
+                                >{`${item.make} ${item.model} ${item.trim}`}</li>
+                              ))
+                            ) : (
+                              <li>No items</li>
+                            )}
+                          </ul>
+                        </div>
+                      )}
+                    </Col>
+                  </Row>
+                </Col>
+                <Col xs={24} md={12}>
+                  <Row justify="center">
+                    <div className={style.mv2}>
+                      See below for a sample that similar cars in your market.
+                      You can see:
+                    </div>
+                    <div className={style.list}>
+                      <ul>
+                        {this.listData.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className={style.mv2}>
+                      Please complete the information below for a real-time
+                      market report for your Vehicles
+                    </div>
+                  </Row>
+                  <Row gutter={[16]}>
+                    <Col xs={24} md={12}>
+                      <FormItem
+                        name="firstName"
+                        rules={[this.requiredField('First Name')]}
+                      >
+                        <Input
+                          type="text"
+                          placeholder="First Name"
+                          className={style.input}
+                        />
+                      </FormItem>
+                    </Col>
+                    <Col xs={24} md={12}>
+                      <FormItem
+                        name="lastName"
+                        rules={[this.requiredField('Last Name')]}
+                      >
+                        <Input
+                          type="text"
+                          placeholder="Last Name"
+                          className={style.input}
+                        />
+                      </FormItem>
+                    </Col>
+                    <Col xs={24}>
+                      <FormItem
+                        name="email"
+                        rules={[this.requiredField('Email')]}
+                      >
+                        <Input
+                          type="email"
+                          placeholder="Email Address"
+                          className={style.input}
+                        />
+                      </FormItem>
+                    </Col>
+                    <Col xs={12}>
+                      <FormItem
+                        name="phoneNumber"
+                        rules={[this.requiredField('Phone Number')]}
+                      >
+                        <Input
+                          type="tel"
+                          placeholder="Phone Number"
+                          className={style.input}
+                        />
+                      </FormItem>
+                    </Col>
+                    <Col xs={12}>
+                      <FormItem
+                        name="mileage"
+                        rules={[
+                          {
+                            type: 'number',
+                            min: 0,
+                            message: 'Only positive number!',
+                          },
+                        ]}
+                      >
+                        <InputNumber
+                          placeholder="Mileage"
+                          className={style.inputNumber}
+                        />
+                      </FormItem>
+                    </Col>
+                    <Col xs={24}>
+                      <Form.Item>
+                        <Tooltip placement="top" title={title}>
+                          <Button
+                            htmlType="submit"
+                            className={style.submit}
+                            block
+                          >
+                            VALUE YOUR TRADE IN
+                          </Button>
+                        </Tooltip>
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </Form>
+          </Col>
         </Row>
         <Modal
           title="Report"

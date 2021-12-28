@@ -22,7 +22,7 @@ class Navigation extends React.Component {
             </Dropdown>
           </li>
           <li>
-            <Link href="/tradein-form">TRADE IN VALUE</Link>
+            <Link href="/tradein">TRADE IN VALUE</Link>
           </li>
           <li>
             <Link href="/credit-form">GET PRE-QUALIFIED NOW</Link>

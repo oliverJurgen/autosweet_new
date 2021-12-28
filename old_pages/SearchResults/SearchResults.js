@@ -101,152 +101,135 @@ class SearchResults extends React.Component {
     this.props.setSearchValueAction(searchValue);
   }
 
-  // async componentDidMount() {
-  //   const {
-  //     location,
-  //     router,
-  //     query,
-  //     performSearchAction,
-  //     setLat,
-  //     setLon,
-  //     selectedTags,
-  //   } = this.props;
-  //   // console.log("MOUNT", router.isReady);
+  async componentDidMount() {
+    const {
+      location,
+      router,
+      query,
+      performSearchAction,
+      setLat,
+      setLon,
+      selectedTags,
+    } = this.props;
+    // console.log("MOUNT", router.isReady);
 
-  //   let get_lat = this.props.get_lat;
-  //   let get_lon = this.props.get_lon;
-  //   let tags = selectedTags;
+    let get_lat = this.props.get_lat;
+    let get_lon = this.props.get_lon;
+    let tags = selectedTags;
 
-  //   if (router.isReady) {
-  //     // console.log({ routerQuery: router.query, query, router });
-  //     const value = router.query.q;
-  //     const page = router.query.page;
-  //     const lat = router.query.lat;
-  //     const lon = router.query.lon;
+    if (router.isReady) {
+      // console.log({ routerQuery: router.query, query, router });
+      const value = router.query.q;
+      const page = router.query.page;
+      const lat = router.query.lat;
+      const lon = router.query.lon;
 
-  //     // const params = new URLSearchParams(location.search);
-  //     // const value = params.get("q") || "";
-  //     // const page = params.get("page") || 1;
+      // const params = new URLSearchParams(location.search);
+      // const value = params.get("q") || "";
+      // const page = params.get("page") || 1;
 
-  //     // console.log({ get_lat: this.props.get_lat });
+      // console.log({ get_lat: this.props.get_lat });
 
-  //     if (!this.props.get_lat) {
-  //       performSearchAction({
-  //         value,
-  //         page,
-  //         router,
-  //         tags,
-  //         get_lat: lat,
-  //         get_lon: lon,
-  //       });
+      if (!this.props.get_lat) {
+        performSearchAction({
+          value,
+          page,
+          router,
+          tags,
+          get_lat: lat,
+          get_lon: lon,
+        });
 
-  //       // **FIX geolocation logic - prevents search value on initial search**
-  //       // if (navigator.geolocation && isBrowser()) {
-  //       //   console.log("HHHH");
-  //       //   await window.navigator.geolocation.getCurrentPosition(
-  //       //     function (position) {
-  //       //       console.log({ pos: position });
-  //       //       if (position.coords.latitude) {
-  //       //         // const lat = position.coords.latitude.toString().slice(0, 11);
-  //       //         // const lon = position.coords.longitude.toString().slice(0, 11);
-  //       //         setLat(lat);
-  //       //         setLon(lon);
-  //       //         performSearchAction({
-  //       //           value,
-  //       //           page,
-  //       //           router,
-  //       //           tags,
-  //       //           get_lat: lat,
-  //       //           get_lon: lon,
-  //       //         });
-  //       //       }
-  //       //     },
-  //       //     (err) => console.log({ err })
-  //       //   );
+        // **FIX geolocation logic - prevents search value on initial search**
+        // if (navigator.geolocation && isBrowser()) {
+        //   console.log("HHHH");
+        //   await window.navigator.geolocation.getCurrentPosition(
+        //     function (position) {
+        //       console.log({ pos: position });
+        //       if (position.coords.latitude) {
+        //         // const lat = position.coords.latitude.toString().slice(0, 11);
+        //         // const lon = position.coords.longitude.toString().slice(0, 11);
+        //         setLat(lat);
+        //         setLon(lon);
+        //         performSearchAction({
+        //           value,
+        //           page,
+        //           router,
+        //           tags,
+        //           get_lat: lat,
+        //           get_lon: lon,
+        //         });
+        //       }
+        //     },
+        //     (err) => console.log({ err })
+        //   );
 
-  //       //   return;
-  //       // }
-  //     } else {
-  //       performSearchAction({
-  //         value,
-  //         page,
-  //         router,
-  //         tags,
-  //         get_lat,
-  //         get_lon,
-  //       });
-  //     }
-  //   }
-  // }
+        //   return;
+        // }
+      } else {
+        performSearchAction({
+          value,
+          page,
+          router,
+          tags,
+          get_lat,
+          get_lon,
+        });
+      }
+    }
+  }
 
-  // componentDidUpdate(prevProps) {
-  //   const {
-  //     searchValue,
-  //     page,
-  //     router,
-  //     runSearchAction,
-  //     selectedTags,
-  //     validateTags,
-  //     get_lat,
-  //     get_lon,
-  //   } = this.props;
+  componentDidUpdate(prevProps) {
+    const {
+      searchValue,
+      page,
+      router,
+      runSearchAction,
+      selectedTags,
+      validateTags,
+      get_lat,
+      get_lon,
+    } = this.props;
 
-  //   // on browser refresh **
-  //   if (router.isReady !== prevProps.router.isReady) {
-  //     const value = router.query.q;
-  //     const page = router.query.page;
-  //     const lat = router.query.lat;
-  //     const lon = router.query.lon;
-  //     const tags = router.query.tags;
+    // on browser refresh **
+    if (router.isReady !== prevProps.router.isReady) {
+      const value = router.query.q;
+      const page = router.query.page;
+      const lat = router.query.lat;
+      const lon = router.query.lon;
+      const tags = router.query.tags;
 
-  //     runSearchAction({
-  //       value,
-  //       page,
-  //       router,
-  //       tags: tags,
-  //       get_lat: lat,
-  //       get_lon: lon,
-  //     });
-  //     return;
-  //   }
+      runSearchAction({
+        value,
+        page,
+        router,
+        tags: tags,
+        get_lat: lat,
+        get_lon: lon,
+      });
+      return;
+    }
 
-  //   if (prevProps.searchValue && prevProps.searchValue !== searchValue) {
-  //     validateTags(searchValue);
-  //     if (prevProps.selectedTags !== selectedTags) {
-  //       let tags = selectedTags;
-  //       runSearchAction({
-  //         value: searchValue,
-  //         page,
-  //         router,
-  //         tags,
-  //         get_lat,
-  //         get_lon,
-  //       });
-  //     }
-  //   }
-  // }
+    if (prevProps.searchValue && prevProps.searchValue !== searchValue) {
+      validateTags(searchValue);
+      if (prevProps.selectedTags !== selectedTags) {
+        let tags = selectedTags;
+        runSearchAction({
+          value: searchValue,
+          page,
+          router,
+          tags,
+          get_lat,
+          get_lon,
+        });
+      }
+    }
+  }
 
   render() {
-    const ssrProps = this.props.ssrProps;
-    console.log({ ssrProps });
-
-    const vehicleList = ssrProps?.data?.results;
-
-    let {
-      // vehicleList,
-
-      total,
-      page,
-      tags,
-      searchValue,
-      selectedTags,
-      loading,
-    } = this.props;
-    // let [recommendedVehicle] = vehicleList;
-
-    if (!vehicleList) return <div>Loading....</div>;
-
-    console.log({ vehicleList });
+    let { vehicleList, total, page, tags, searchValue, selectedTags, loading } =
+      this.props;
+    let [recommendedVehicle] = vehicleList;
 
     return (
       <>

@@ -1,18 +1,13 @@
 .Header {
   background-color: #303030;
   display: flex;
-  min-width: 100vw;
   justify-content: space-between;
   min-height: 7vh;
 }
 
 .logo {
   margin: 10px;
-  background-image: url("../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png");
-  width: 185px;
   height: 85px;
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 .formHeader {
   width: 100%;

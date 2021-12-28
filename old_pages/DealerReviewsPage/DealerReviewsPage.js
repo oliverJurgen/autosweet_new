@@ -1,30 +1,33 @@
-import React, { Component } from "react";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { Row, Col } from "antd";
-import Navigation from "../../components/Navigation";
-import style from "../styles/DealerReviewsPage.module.css";
-import { Link, NavLink, withRouter } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Select, Checkbox, Pagination } from "antd";
-import Review from "../../components/Review";
-import { selectReviews, selectVehicleAction } from "../../redux/actions";
-import FullPageLoader from "../../components/Preloader/Preloader";
+import React, { Component } from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { Row, Col } from 'antd';
+import Navigation from '../../components/Navigation';
+import style from '../styles/DealerReviewsPage.module.css';
+import { withRouter } from 'next/router';
+import Link from 'next/link';
+import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Select, Checkbox, Pagination } from 'antd';
+import Review from '../../components/Review';
+import { selectReviews, selectVehicleAction } from '../../redux/actions';
+import FullPageLoader from '../../components/Preloader/Preloader';
 import {
   faStar,
   faDirections,
   faClock,
   faDesktop,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
+import Logo from '../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png';
 class DealerReviewsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       reviews: [],
-      checkboxValues: ["facebook", "google"],
+      checkboxValues: ['facebook', 'google'],
       page: 1,
       size: 0,
-      type: 'recent'
+      type: 'recent',
     };
   }
   fetchReviews = (page, filter, value) => {
@@ -32,7 +35,7 @@ class DealerReviewsPage extends Component {
       this.props
         .selectReviews(
           this.props.selectedVehicleItem.dealer.chatMeterLocationId,
-          value ? value : "recent",
+          value ? value : 'recent',
           page
         )
         .then((data) =>
@@ -46,7 +49,7 @@ class DealerReviewsPage extends Component {
       this.props
         .selectReviews(
           this.props.selectedVehicleItem.dealer.chatMeterLocationId,
-          value ? value : "recent",
+          value ? value : 'recent',
           page,
           filter[0]
         )
@@ -61,13 +64,13 @@ class DealerReviewsPage extends Component {
   };
   componentDidMount() {
     this.props
-      .selectVehicleAction(this.props.match.params.id)
+      .selectVehicleAction(this.props.query.id)
       .then(() => this.fetchReviews(1, this.state.checkboxValues));
   }
 
   handleChange = (value) => {
     this.fetchReviews(1, this.state.checkboxValues, value);
-    this.setState({type:value})
+    this.setState({ type: value });
   };
   checkboxHandler = (e) => {
     if (e.length !== 0) {
@@ -80,22 +83,22 @@ class DealerReviewsPage extends Component {
     this.fetchReviews(e, this.state.checkboxValues, this.state.type);
   };
   selectData = [
-    { name: "Most Recent", value: "recent" },
-    { name: "Best Reviews", value: "best" },
-    { name: "Worst Reviews", value: "worst" },
+    { name: 'Most Recent', value: 'recent' },
+    { name: 'Best Reviews', value: 'best' },
+    { name: 'Worst Reviews', value: 'worst' },
   ];
   checkboxOptions = [
-    { label: "Google", value: "google" },
-    { label: "Facebook", value: "facebook" },
+    { label: 'Google', value: 'google' },
+    { label: 'Facebook', value: 'facebook' },
   ];
   paginationButtons = (_current, type, originalElement) => {
-    if (type === "prev") {
+    if (type === 'prev') {
       return (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a className={style.paginationButtons}>Prev</a>
       );
     }
-    if (type === "next") {
+    if (type === 'next') {
       return (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a className={style.paginationButtons}>Next</a>
@@ -108,7 +111,11 @@ class DealerReviewsPage extends Component {
     return (
       <div className={style.DealerReviewsPage}>
         <header className={style.Header}>
-          <NavLink className={style.logo} to="/"></NavLink>
+          <Link href="/">
+            <picture>
+              <Image src={Logo} alt="logo" className={style.logo} />
+            </picture>
+          </Link>
           <Navigation />
         </header>
         <Row className={style.content} justify="center">
@@ -203,8 +210,8 @@ class DealerReviewsPage extends Component {
                   <div className={style.adress}>
                     {selectedVehicleItem.dealer?.dealerStreet1}
                     <br />
-                    {selectedVehicleItem.dealer?.dealerCity},{" "}
-                    {selectedVehicleItem.dealer?.dealerState}{" "}
+                    {selectedVehicleItem.dealer?.dealerCity},{' '}
+                    {selectedVehicleItem.dealer?.dealerState}{' '}
                     {selectedVehicleItem.dealer?.dealerZipCode}
                   </div>
                   <div className={style.direction}>
@@ -217,7 +224,7 @@ class DealerReviewsPage extends Component {
                   </div>
                 </div>
                 <div className={style.center}>
-                  <Link to={"/credit-form"}>
+                  <Link href="/credit-form">
                     <button className={`${style.btn} ${style.gbtn}`}>
                       Get Pre-Qualified Now
                     </button>
@@ -226,7 +233,7 @@ class DealerReviewsPage extends Component {
               </Col>
               <Col lg={15} xs={24} md={24}>
                 <iframe
-                  style={{ border: 0, width: "100%", height: "100%" }}
+                  style={{ border: 0, width: '100%', height: '100%' }}
                   title="map"
                   loading="lazy"
                   allowFullScreen
@@ -270,7 +277,7 @@ class DealerReviewsPage extends Component {
                     <Review
                       border
                       avatar={
-                        item.contentProvider === "FACEBOOK"
+                        item.contentProvider === 'FACEBOOK'
                           ? null
                           : item.reviewerPictureURL
                       }
@@ -279,7 +286,7 @@ class DealerReviewsPage extends Component {
                       date={item.reviewDate}
                       userName={item.reviewerUserName}
                       body={item.reviewDetail}
-                      title={item.reviewDetail?.split(". ", 1)[0]}
+                      title={item.reviewDetail?.split('. ', 1)[0]}
                     />
                   );
                 })
@@ -294,7 +301,7 @@ class DealerReviewsPage extends Component {
                     pageSize={1}
                     onChange={this.paginationHandler}
                     total={this.state.size}
-                    itemRender={this.paginationButtons}
+                    // itemRender={this.paginationButtons}
                     responsive
                   />
                 )}
