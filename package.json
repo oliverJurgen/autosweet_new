@@ -2,10 +2,9 @@
   "name": "autosweet_frontend",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "node server.js"
   },
   "dependencies": {
     "@ant-design/icons": "^4.5.0",
