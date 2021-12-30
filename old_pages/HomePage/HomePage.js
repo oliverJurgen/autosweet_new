@@ -78,11 +78,13 @@ class HomePage extends React.Component {
   hardcodeData = {
     condition: [
       {
+        type: 'new',
         name: 'New Cars',
         count: '10,000',
         price: '10,000',
       },
       {
+        type: 'used',
         name: 'Used Cars',
         count: '10,000',
         price: '10,000',
@@ -159,7 +161,7 @@ class HomePage extends React.Component {
               </header>
               <div className={style.linkCardsBlock}>
                 {this.hardcodeData.condition.map((item) => (
-                  <Link href={`/search-result?q=${item.name}&page=1`}>
+                  <a href={`/search-result/${item.type}`}>
                     <div className={style.linkCard}>
                       <h5 className={style.linkCardHeader}>{item.name}</h5>
                       <p className={style.linkCardBody}>
@@ -168,7 +170,7 @@ class HomePage extends React.Component {
                         Start from ${item.price}
                       </p>
                     </div>
-                  </Link>
+                  </a>
                 ))}
               </div>
             </article>
@@ -180,14 +182,14 @@ class HomePage extends React.Component {
               </header>
               <div className={style.linkCardsBlock}>
                 {this.hardcodeData.brands.map((item) => (
-                  <Link href={`/search-result?q=${item.name}&page=1`}>
+                  <a href={`/search-result?q=${item.name}&page=1`}>
                     <div className={style.linkCard}>
                       <h5 className={style.linkCardHeader}>{item.name}</h5>
                       <p className={style.linkCardBody}>
                         {item.count} Listings
                       </p>
                     </div>
-                  </Link>
+                  </a>
                 ))}
               </div>
             </article>
