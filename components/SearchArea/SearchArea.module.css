@@ -1,4 +1,4 @@
-.searcharea{  
+.searcharea {
   grid-area: search;
   margin: 10px 0;
   border: 1px solid #161414;
@@ -21,14 +21,13 @@
 }
 .icon {
   margin: 0 4px;
-  min-width: 24px;
   width: 24px;
   cursor: pointer;
 }
 .icon img {
   width: 100%;
 }
-.clean{
+.clean {
   display: none;
 }
 .divider {

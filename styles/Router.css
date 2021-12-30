@@ -144,10 +144,8 @@ textarea.ant-input {
   background-position: center;
 }
 .homeHeader {
-  grid-area: header_menu;
-  justify-self: end;
-  align-self: start;
-  padding: 55px 25px 0 25px;
+  align-self: flex-end;
+  padding: 55px 25px 10px 25px;
 }
 .homeHeader ul {
   list-style: none;
