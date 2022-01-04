@@ -1,3 +1,4 @@
+import React from "react";
 import type { NextPage } from "next";
 // import SearchResultsPage from "../old_pages/SearchResults";
 import client from "utils/client";
@@ -10,16 +11,24 @@ import Footer from "components/Footer";
 import { Pagination } from "antd";
 import Logo from "public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
 import CarInfo from "components/CarInfo";
+import SearchArea from "components/SearchArea";
 import style from "../../old_pages/styles/SearchResults.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
+import {
+  changeResultPageAction,
+  setSearchValueAction,
+  addTag,
+  removeTag,
+  clearSearchAction,
+} from "redux/actions";
+import isBrowser from "utils/isBrowser";
+import { getSearchValue, getSelectedTags } from "../../redux/selectors";
+import { useSelector, useDispatch } from "react-redux";
 
 type PageType = string | number | undefined;
 
 const querySearch = (searchQuery: string, page?: PageType) => async () => {
-  // console.log({ searchQuery, page });
-
   try {
     const response = await client.get("/api/search", {
       params: {
@@ -35,12 +44,49 @@ const querySearch = (searchQuery: string, page?: PageType) => async () => {
 };
 
 const Search: NextPage = () => {
-  const {
-    register,
-    handleSubmit,
-    // watch,
-    formState: { errors },
-  } = useForm();
+  const dispatch = useDispatch();
+
+  const searchValue = useSelector(getSearchValue);
+  const selectedTags = useSelector(getSelectedTags);
+  const tags = useSelector((state: any) => state.tags);
+
+  const [lat, setLat] = React.useState(0);
+  const [lon, setLon] = React.useState(0);
+
+  const runSearch = (value: string) => {
+    // changeResultPageAction(1);
+    dispatch(changeResultPageAction(1));
+    router.push(
+      "/search-result?q=" +
+        value +
+        "&page=1" +
+        "&tags=" +
+        "&lat=" +
+        lat +
+        "&lon=" +
+        lon
+    );
+  };
+  const searchTermChange = ({ searchValue }: any) => {
+    dispatch(setSearchValueAction(searchValue));
+  };
+
+  const isOnBrowser = isBrowser();
+
+  React.useEffect(() => {
+    if (navigator.geolocation && isBrowser()) {
+      navigator.geolocation.getCurrentPosition(function (position: any) {
+        if (position.coords.latitude) {
+          setLat(position.coords.latitude.toString().slice(0, 11));
+          setLon(position.coords.longitude.toString().slice(0, 11));
+        }
+      });
+    }
+  }, [isOnBrowser]);
+
+  React.useEffect(() => {
+    dispatch(clearSearchAction());
+  }, []);
 
   const router = useRouter();
   const searchQuery = router.query.searchQuery as string;
@@ -51,12 +97,7 @@ const Search: NextPage = () => {
     querySearch(searchQuery, page)
   );
 
-  console.log({ data, isLoading, page });
-
-  // if (isLoading) return <CenterSpinner />;
-
   const results = data?.results;
-  // const page = data?.page;
   const pageSize = data?.pageSize;
   const totalCount = data?.totalCount;
   const getPageVal = () => (page ? parseInt(page) : 1);
@@ -65,7 +106,17 @@ const Search: NextPage = () => {
     router.push(`/search/${searchQuery}?page=${pageNum}`);
   };
 
-  console.log({ results, data });
+  const toggleTag = (tag: any) => {
+    dispatch(addTag(tag));
+  };
+  const handleRemoveTag = (tag: any, isSelected: any) => {
+    dispatch(
+      removeTag({
+        tag,
+        isSelected,
+      })
+    );
+  };
 
   return (
     <>
@@ -77,16 +128,17 @@ const Search: NextPage = () => {
       </header>
       <section className={style.SearchResults}>
         <header className={style.results}>
-          {/* REIMPLEMENT SEARCH FUNCTIONALITY - Decouple from Redux */}
-          {/* <SearchArea
-            onSearch={this.runSearch}
-            searchValue={searchValue}
-            onSearchChange={this.searchTermChange}
-            onToggleTag={this.toggleTag}
-            tags={tags}
-            selectedTags={selectedTags}
-            onRemoveTag={this.removeTag}
-          /> */}
+          {!isLoading && (
+            <SearchArea
+              onSearch={runSearch}
+              searchValue={searchValue}
+              onSearchChange={searchTermChange}
+              onToggleTag={toggleTag}
+              tags={tags}
+              selectedTags={selectedTags}
+              onRemoveTag={handleRemoveTag}
+            />
+          )}
         </header>
 
         {isLoading ? (
@@ -116,37 +168,15 @@ const Search: NextPage = () => {
             </footer>
           </>
         )}
-        {/* {results?.length && isLoading ? (
-          <>
-            <article className={style.results}>
-              {!isLoading ? (
-                results.map((data: any, index: any) => (
-                  <CarInfo key={`car_info_${index}`} {...data} />
-                ))
-              ) : (
-                <CenterSpinner />
-              )}
-            </article>
-            <footer className={style.pagination}>
-              <Pagination
-                current={parseInt(page)}
-                defaultCurrent={1}
-                pageSize={pageSize}
-                onChange={onPageChange}
-                total={totalCount}
-                responsive
-              />
-            </footer>
-          </>
-        ) : (
-          <article className="empty-results">No results</article>
-        )} */}
       </section>
       <Footer />
     </>
   );
 };
 
+export default Search;
+
+// LEAVE TEMPORARILY CHECK IF REQUIREMENT FOR Fetching on server is required
 // export async function getServerSideProps(context: any) {
 //   const queryParams = context.query;
 //   console.log({ queryParams });
@@ -170,5 +200,3 @@ const Search: NextPage = () => {
 //     }, // will be passed to the page component as props
 //   };
 // }
-
-export default Search;

@@ -1,8 +1,10 @@
 import React from "react";
 import style from "../SearchArea/SearchArea.module.css";
 import clsx from "clsx";
+import { chakra, Wrap, WrapItem } from "@chakra-ui/react";
 import selectedCloseIconSrc from "public/assets/img/icons/close-white.png";
 import closeIcon from "public/assets/img/icons/clean.png";
+import Image from "next/image";
 
 export default class SearchTags extends React.Component {
   constructor(props) {
@@ -30,26 +32,30 @@ export default class SearchTags extends React.Component {
   render() {
     const { tags, selected } = this.props;
     return (
-      <>
+      <Wrap spacing="1px">
         {tags.map((tag, i) => (
-          <div
-            key={`tag_${i}${selected && "s"}`}
-            className={clsx([style.tag, selected && style.selectedTag])}
-            onClick={() => this.addTag(tag)}
-          >
-            <div
-              className={clsx([style.icon, style.delete])}
-              onClick={(e) => this.removeTag(e, tag)}
+          <WrapItem>
+            <chakra.div
+              d="flex"
+              alignItems={"center"}
+              key={`tag_${i}${selected && "s"}`}
+              className={clsx([style.tag, selected && style.selectedTag])}
+              onClick={() => this.addTag(tag)}
             >
-              <img
-                src={selected ? selectedCloseIconSrc : closeIcon}
-                alt="Delete"
-              />
-            </div>
-            <div className={style.tagText}>{tag}</div>
-          </div>
+              <div
+                className={clsx([style.icon, style.delete])}
+                onClick={(e) => this.removeTag(e, tag)}
+              >
+                <Image
+                  src={selected ? selectedCloseIconSrc : closeIcon}
+                  alt="Delete"
+                />
+              </div>
+              <div className={style.tagText}>{tag}</div>
+            </chakra.div>
+          </WrapItem>
         ))}
-      </>
+      </Wrap>
     );
   }
 }
