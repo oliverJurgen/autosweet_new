@@ -183,8 +183,6 @@ const main = (state = initialState, action) => {
       let t = state.allTags;
       let st = [];
 
-      console.log({ st, a, t });
-
       t?.forEach((element) => {
         if (a.toLowerCase().includes(element.toLowerCase())) {
           st.push(element);

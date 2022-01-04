@@ -175,28 +175,3 @@ const Search: NextPage = () => {
 };
 
 export default Search;
-
-// LEAVE TEMPORARILY CHECK IF REQUIREMENT FOR Fetching on server is required
-// export async function getServerSideProps(context: any) {
-//   const queryParams = context.query;
-//   console.log({ queryParams });
-
-//   const { searchQuery = "", page = 1, tags, lat, lon } = queryParams;
-//   const response = await client.get("api/search", {
-//     params: {
-//       q: searchQuery,
-//       page,
-//       tags,
-//       lat,
-//       lon,
-//     },
-//   });
-
-//   const data = response?.data;
-
-//   return {
-//     props: {
-//       data,
-//     }, // will be passed to the page component as props
-//   };
-// }
