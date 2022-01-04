@@ -23,7 +23,7 @@ import {
   GET_CITIES_SUCCESS,
   GET_STATES,
   GET_STATES_SUCCESS,
-  SET_ANCHOR
+  SET_ANCHOR,
 } from "./actionTypes";
 
 const initialState = {
@@ -36,7 +36,7 @@ const initialState = {
   total: 0,
   selectedVehicleItem: new VehicleModel(),
   isLoading: false,
-  scrollAnchor:false,
+  scrollAnchor: false,
   isTags: false,
   lat: "",
   lon: "",
@@ -116,7 +116,7 @@ const main = (state = initialState, action) => {
       };
 
     case SET_ANCHOR:
-      return{ ...state, scrollAnchor:action.payload}
+      return { ...state, scrollAnchor: action.payload };
 
     case PERFORM_SEARCH_FAIL:
       return {
@@ -182,6 +182,8 @@ const main = (state = initialState, action) => {
       let a = action.payload;
       let t = state.allTags;
       let st = [];
+
+      console.log({ st, a, t });
 
       t?.forEach((element) => {
         if (a.toLowerCase().includes(element.toLowerCase())) {
