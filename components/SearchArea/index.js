@@ -46,7 +46,6 @@ class SearchArea extends React.Component {
   }
 
   cleanSearch() {
-    console.log("CLEAN_SEARCH");
     this.props.onSearchChange({ searchValue: "", page: 1 });
   }
 

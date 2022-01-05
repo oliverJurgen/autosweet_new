@@ -1,11 +1,11 @@
-import React from 'react';
-import { compose } from 'redux';
+import React from "react";
+import { compose } from "redux";
 // import { withRouter } from 'react-router-dom';
-import { withRouter } from 'next/router';
-import Link from 'next/link';
-import Image from 'next/image';
-import { connect } from 'react-redux';
-import SearchArea from '../../components/SearchArea';
+import { withRouter } from "next/router";
+import Link from "next/link";
+import Image from "next/image";
+import { connect } from "react-redux";
+import SearchArea from "../../components/SearchArea";
 import {
   getTags,
   performSearchAction,
@@ -15,12 +15,13 @@ import {
   setLat,
   removeTag,
   addTag,
-} from '../../redux/actions';
-import { getSearchValue, getSelectedTags } from '../../redux/selectors';
-import Navigation from '../../components/Navigation';
-import style from '../../styles/modules/HomePage.module.css';
-import Logo from '../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png';
-import Footer from '../../components/Footer';
+} from "../../redux/actions";
+import { getSearchValue, getSelectedTags } from "../../redux/selectors";
+import Navigation from "../../components/Navigation";
+import style from "../../styles/modules/HomePage.module.css";
+import Logo from "../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
+import Footer from "../../components/Footer";
+import quickLinks from "constants/quickLinks";
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -47,13 +48,13 @@ class HomePage extends React.Component {
   runSearch(value) {
     this.props.changeResultPageAction(1);
     this.props.router.push(
-      '/search-result?q=' +
+      "/search-result?q=" +
         value +
-        '&page=1' +
-        '&tags=' +
-        '&lat=' +
+        "&page=1" +
+        "&tags=" +
+        "&lat=" +
         this.props.lat +
-        '&lon=' +
+        "&lon=" +
         this.props.lon
     );
   }
@@ -75,56 +76,7 @@ class HomePage extends React.Component {
       }
     }
   }
-  hardcodeData = {
-    condition: [
-      {
-        type: 'new',
-        name: 'New Cars',
-        count: '10,000',
-        price: '10,000',
-      },
-      {
-        type: 'used',
-        name: 'Used Cars',
-        count: '10,000',
-        price: '10,000',
-      },
-    ],
-    brands: [
-      {
-        name: 'BMW',
-        count: '11,278',
-      },
-      {
-        name: 'Audi',
-        count: '11,278',
-      },
-      {
-        name: 'Honda',
-        count: '11,278',
-      },
-      {
-        name: 'Toyota',
-        count: '11,278',
-      },
-      {
-        name: 'Ford',
-        count: '11,278',
-      },
-      {
-        name: 'Mercedes-Benz',
-        count: '11,278',
-      },
-      {
-        name: 'Hyundai',
-        count: '11,278',
-      },
-      {
-        name: 'GMC',
-        count: '11,278',
-      },
-    ],
-  };
+
   render() {
     const { tags, searchValue, selectedTags } = this.props;
     return (
@@ -160,17 +112,19 @@ class HomePage extends React.Component {
                 </p>
               </header>
               <div className={style.linkCardsBlock}>
-                {this.hardcodeData.condition.map((item) => (
-                  <a href={`/search-result/${item.type}`}>
-                    <div className={style.linkCard}>
-                      <h5 className={style.linkCardHeader}>{item.name}</h5>
-                      <p className={style.linkCardBody}>
-                        {item.count} Listings
-                        <br />
-                        Start from ${item.price}
-                      </p>
-                    </div>
-                  </a>
+                {quickLinks.condition.map((item) => (
+                  <Link href={`/search/${item.type}`} passHref>
+                    <a>
+                      <div className={style.linkCard}>
+                        <h5 className={style.linkCardHeader}>{item.name}</h5>
+                        <p className={style.linkCardBody}>
+                          {item.count} Listings
+                          <br />
+                          Start from ${item.price}
+                        </p>
+                      </div>
+                    </a>
+                  </Link>
                 ))}
               </div>
             </article>
@@ -181,15 +135,17 @@ class HomePage extends React.Component {
                 </p>
               </header>
               <div className={style.linkCardsBlock}>
-                {this.hardcodeData.brands.map((item) => (
-                  <a href={`/search-result?q=${item.name}&page=1`}>
-                    <div className={style.linkCard}>
-                      <h5 className={style.linkCardHeader}>{item.name}</h5>
-                      <p className={style.linkCardBody}>
-                        {item.count} Listings
-                      </p>
-                    </div>
-                  </a>
+                {quickLinks.brands.map((item) => (
+                  <Link href={`/search/${item.name}`} passHref>
+                    <a>
+                      <div className={style.linkCard}>
+                        <h5 className={style.linkCardHeader}>{item.name}</h5>
+                        <p className={style.linkCardBody}>
+                          {item.count} Listings
+                        </p>
+                      </div>
+                    </a>
+                  </Link>
                 ))}
               </div>
             </article>
