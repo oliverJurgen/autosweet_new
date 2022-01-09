@@ -44,6 +44,7 @@ import Like from "../../public/assets/img/icons/VDP_01_Save_Toggle_Grey.png";
 import LikeActive from "../../public/assets/img/icons/VDP_01_Save_Toggle.png";
 import Dislike from "../../public/assets/img/icons/VDP_01_Ignore_Toggle_Grey.png";
 import DislikeActive from "../../public/assets/img/icons/VDP_01_Ignore_Toggle.png";
+import Header from "components/shared/Header";
 
 class VehicleDetailsPage extends React.Component {
   constructor(props) {
@@ -159,12 +160,7 @@ class VehicleDetailsPage extends React.Component {
     console.log({ vehicleModel });
     return (
       <>
-        <header className={style.Header}>
-          <Link href="/">
-            <Image src={Logo} alt="logo" className={style.logo} />
-          </Link>
-          <Navigation />
-        </header>
+        <Header />
         <main className={style.wrap}>
           <section className={style.results}>
             <header>
