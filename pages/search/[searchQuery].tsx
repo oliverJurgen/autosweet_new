@@ -67,6 +67,7 @@ const Search: NextPage = () => {
         lon
     );
   };
+
   const searchTermChange = ({ searchValue }: any) => {
     dispatch(setSearchValueAction(searchValue));
   };
