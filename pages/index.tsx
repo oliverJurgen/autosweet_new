@@ -6,9 +6,9 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import useGeolocation from "react-hook-geolocation";
 import SearchArea from "components/SearchArea";
+import { useQuery } from "react-query";
+import { chakra as c } from "@chakra-ui/react";
 import {
-  // getTags,
-  // performSearchAction,
   setSearchValueAction,
   changeResultPageAction,
   removeTag,
@@ -16,37 +16,63 @@ import {
 } from "redux/actions";
 import { getSearchValue, getSelectedTags } from "redux/selectors";
 import Navigation from "components/Navigation";
-// import style from "styles/modules/HomePage.module.css";
 import style from "styles/modules/HomePage.module.css";
 import Logo from "public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
 import Footer from "components/Footer";
-import quickLinks from "constants/quickLinks";
+import client from "utils/client";
+import CenterSpinner from "components/shared/CenterSpinner/CenterSpinner";
+import Header from "components/shared/Header";
+
+const fetchQuickLinks = async () => {
+  try {
+    const res = await client.get("api/listdata");
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+type QuickLinkType = {
+  count: number;
+  minimumPrice: number;
+  name: string;
+  type: string;
+};
+
+const quicklinkTypes = {
+  CONDITION: "Condition",
+  BODY_TYPE: "BodyType",
+  STATE: "State",
+  BRAND: "Brand",
+};
 
 const HomePage: NextPage = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-
   const geoLocation = useGeolocation();
-  console.log({ geoLocation });
+  const lat = geoLocation.latitude || "";
+  const lon = geoLocation.longitude || "";
+
+  const getQuerySearchUrl = (value: string) =>
+    "/search-result?q=" +
+    value +
+    "&page=1" +
+    "&tags=" +
+    "&lat=" +
+    lat +
+    "&lon=" +
+    lon;
 
   const searchValue = useSelector(getSearchValue);
   const selectedTags = useSelector(getSelectedTags);
   const tags = useSelector((state: any) => state.tags);
 
+  const { data, isLoading } = useQuery(["quicklinks"], fetchQuickLinks);
+  console.log({ data });
+
   const runSearch = (value: string) => {
-    const lat = geoLocation.latitude || "";
-    const lon = geoLocation.longitude || "";
     dispatch(changeResultPageAction(1));
-    router.push(
-      "/search-result?q=" +
-        value +
-        "&page=1" +
-        "&tags=" +
-        "&lat=" +
-        lat +
-        "&lon=" +
-        lon
-    );
+    router.push(getQuerySearchUrl(value));
   };
   const searchTermChange = ({ searchValue }: any) => {
     dispatch(setSearchValueAction(searchValue));
@@ -65,14 +91,7 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <header className={style.header}>
-        <Link href="/">
-          <picture>
-            <Image src={Logo} alt="logo" className={style.logo} />
-          </picture>
-        </Link>
-        <Navigation />
-      </header>
+      <Header />
       <main>
         <section className={style.searchSection}>
           <div>
@@ -88,52 +107,126 @@ const HomePage: NextPage = () => {
             />
           </div>
         </section>
-        <section className={style.quickLinkSection}>
-          <article className={style.linkArticle}>
-            <header>
-              <p className={style.linkArticleHeader}>
-                <b>Condition</b>
-              </p>
-            </header>
-            <div className={style.linkCardsBlock}>
-              {quickLinks.condition.map((item) => (
-                <Link href={`/search/${item.type}`} passHref>
-                  <a>
-                    <div className={style.linkCard}>
-                      <h5 className={style.linkCardHeader}>{item.name}</h5>
-                      <p className={style.linkCardBody}>
-                        {item.count} Listings
-                        <br />
-                        Start from ${item.price}
-                      </p>
-                    </div>
-                  </a>
-                </Link>
-              ))}
-            </div>
-          </article>
-          <article className={style.linkArticle}>
-            <header>
-              <p className={style.linkArticleHeader}>
-                <b>Brands</b>
-              </p>
-            </header>
-            <div className={style.linkCardsBlock}>
-              {quickLinks.brands.map((item) => (
-                <Link href={`/search/${item.name}`} passHref>
-                  <a>
-                    <div className={style.linkCard}>
-                      <h5 className={style.linkCardHeader}>{item.name}</h5>
-                      <p className={style.linkCardBody}>
-                        {item.count} Listings
-                      </p>
-                    </div>
-                  </a>
-                </Link>
-              ))}
-            </div>
-          </article>
-        </section>
+        {isLoading ? (
+          <CenterSpinner />
+        ) : (
+          <section className={style.quickLinkSection}>
+            <article className={style.linkArticle}>
+              <header>
+                <p className={style.linkArticleHeader}>
+                  <b>Condition</b>
+                </p>
+              </header>
+              <div className={style.linkCardsBlock}>
+                {data.map((item: QuickLinkType) => {
+                  if (item.type === quicklinkTypes.CONDITION)
+                    return (
+                      <Link href={`/search/${item.name}`} passHref>
+                        <a>
+                          <div className={style.linkCard}>
+                            <h5 className={style.linkCardHeader}>
+                              {item.name}
+                            </h5>
+                            <p className={style.linkCardBody}>
+                              {item.count} Listings
+                              <br />
+                              Start from ${item.minimumPrice}
+                            </p>
+                          </div>
+                        </a>
+                      </Link>
+                    );
+                })}
+              </div>
+            </article>
+            <article className={style.linkArticle}>
+              <header>
+                <p className={style.linkArticleHeader}>
+                  <b>Brands</b>
+                </p>
+              </header>
+              <div className={style.linkCardsBlock}>
+                {data.map((item: QuickLinkType) => {
+                  if (item.type === quicklinkTypes.BRAND)
+                    return (
+                      <Link href={`/search/${item.name}`} passHref>
+                        <a>
+                          <div className={style.linkCard}>
+                            <h5 className={style.linkCardHeader}>
+                              {item.name}
+                            </h5>
+                            <p className={style.linkCardBody}>
+                              {item.count} Listings
+                              <br />
+                              Start from ${item.minimumPrice}
+                            </p>
+                          </div>
+                        </a>
+                      </Link>
+                    );
+                })}
+              </div>
+            </article>
+
+            <article className={style.linkArticle}>
+              <header>
+                <p className={style.linkArticleHeader}>
+                  <b>Body Type</b>
+                </p>
+              </header>
+              <div className={style.linkCardsBlock}>
+                {data.map((item: QuickLinkType) => {
+                  if (item.type === quicklinkTypes.BODY_TYPE)
+                    return (
+                      <Link href={getQuerySearchUrl(item.name)} passHref>
+                        <a>
+                          <div className={style.linkCard}>
+                            <h5 className={style.linkCardHeader}>
+                              {item.name}
+                            </h5>
+                            <p className={style.linkCardBody}>
+                              {item.count} Listings
+                              <br />
+                              Start from ${item.minimumPrice}
+                            </p>
+                          </div>
+                        </a>
+                      </Link>
+                    );
+                })}
+              </div>
+            </article>
+
+            <article className={style.linkArticle}>
+              <header>
+                <p className={style.linkArticleHeader}>
+                  <b>State</b>
+                </p>
+              </header>
+              <div className={style.linkCardsBlock}>
+                {data.map((item: QuickLinkType) => {
+                  if (item.type === quicklinkTypes.STATE)
+                    return (
+                      <Link href={`/search/${item.name}`} passHref>
+                        <a>
+                          <div className={style.linkCard}>
+                            <h5 className={style.linkCardHeader}>
+                              {item.name}
+                            </h5>
+                            <p className={style.linkCardBody}>
+                              {item.count} Listings
+                              <br />
+                              Start from ${item.minimumPrice}
+                            </p>
+                          </div>
+                        </a>
+                      </Link>
+                    );
+                })}
+              </div>
+            </article>
+          </section>
+        )}
       </main>
       <Footer />
     </>
