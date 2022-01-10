@@ -13,7 +13,6 @@ import {
   getTags,
   getSelectedTags,
 } from "../../redux/selectors";
-// import { NavLink, withRouter } from 'react-router-dom';
 import { withRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
@@ -34,7 +33,7 @@ import Footer from "../../components/Footer";
 import { Pagination } from "antd";
 import FullPageLoader from "../../components/Preloader/Preloader";
 import Logo from "../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
-import isBrowser from "utils/isBrowser";
+import Header from "components/shared/Header";
 
 class SearchResults extends React.Component {
   constructor(props) {
@@ -233,12 +232,7 @@ class SearchResults extends React.Component {
 
     return (
       <>
-        <header className={style.Header}>
-          <Link href="/">
-            <Image src={Logo} alt="logo" className={style.logo} />
-          </Link>
-          <Navigation />
-        </header>
+        <Header />
         <section className={style.SearchResults}>
           <header className={style.results}>
             <SearchArea

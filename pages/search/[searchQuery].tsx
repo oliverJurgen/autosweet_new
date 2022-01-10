@@ -1,9 +1,6 @@
 import React from "react";
 import type { NextPage } from "next";
-// import SearchResultsPage from "../old_pages/SearchResults";
 import client from "utils/client";
-import { Box, Input } from "@chakra-ui/react";
-import Navigation from "components/Navigation";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import CenterSpinner from "components/shared/CenterSpinner/CenterSpinner";
@@ -13,8 +10,6 @@ import Logo from "public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
 import CarInfo from "components/CarInfo";
 import SearchArea from "components/SearchArea";
 import style from "../../old_pages/styles/SearchResults.module.css";
-import Image from "next/image";
-import Link from "next/link";
 import {
   changeResultPageAction,
   setSearchValueAction,
@@ -25,6 +20,7 @@ import {
 import isBrowser from "utils/isBrowser";
 import { getSearchValue, getSelectedTags } from "../../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
+import Header from "components/shared/Header";
 
 type PageType = string | number | undefined;
 
@@ -67,6 +63,7 @@ const Search: NextPage = () => {
         lon
     );
   };
+
   const searchTermChange = ({ searchValue }: any) => {
     dispatch(setSearchValueAction(searchValue));
   };
@@ -120,12 +117,8 @@ const Search: NextPage = () => {
 
   return (
     <>
-      <header className={style.Header}>
-        <Link href="/">
-          <Image src={Logo} alt="logo" className={style.logo} />
-        </Link>
-        <Navigation />
-      </header>
+      <Header />
+
       <section className={style.SearchResults}>
         <header className={style.results}>
           {!isLoading && (
