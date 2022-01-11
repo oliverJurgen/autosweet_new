@@ -68,7 +68,6 @@ const HomePage: NextPage = () => {
   const tags = useSelector((state: any) => state.tags);
 
   const { data, isLoading } = useQuery(["quicklinks"], fetchQuickLinks);
-  console.log({ data });
 
   const runSearch = (value: string) => {
     dispatch(changeResultPageAction(1));
@@ -121,7 +120,11 @@ const HomePage: NextPage = () => {
                 {data.map((item: QuickLinkType) => {
                   if (item.type === quicklinkTypes.CONDITION)
                     return (
-                      <Link href={`/search/${item.name}`} passHref>
+                      <Link
+                        key={item?.name}
+                        href={`/search/${item.name}`}
+                        passHref
+                      >
                         <a>
                           <div className={style.linkCard}>
                             <h5 className={style.linkCardHeader}>
@@ -149,7 +152,11 @@ const HomePage: NextPage = () => {
                 {data.map((item: QuickLinkType) => {
                   if (item.type === quicklinkTypes.BRAND)
                     return (
-                      <Link href={`/search/${item.name}`} passHref>
+                      <Link
+                        key={item?.name}
+                        href={`/search/${item.name}`}
+                        passHref
+                      >
                         <a>
                           <div className={style.linkCard}>
                             <h5 className={style.linkCardHeader}>
@@ -178,7 +185,11 @@ const HomePage: NextPage = () => {
                 {data.map((item: QuickLinkType) => {
                   if (item.type === quicklinkTypes.BODY_TYPE)
                     return (
-                      <Link href={getQuerySearchUrl(item.name)} passHref>
+                      <Link
+                        key={item?.name}
+                        href={getQuerySearchUrl(item.name)}
+                        passHref
+                      >
                         <a>
                           <div className={style.linkCard}>
                             <h5 className={style.linkCardHeader}>
@@ -207,7 +218,11 @@ const HomePage: NextPage = () => {
                 {data.map((item: QuickLinkType) => {
                   if (item.type === quicklinkTypes.STATE)
                     return (
-                      <Link href={`/search/${item.name}`} passHref>
+                      <Link
+                        key={item?.name}
+                        href={`/search/${item.name}`}
+                        passHref
+                      >
                         <a>
                           <div className={style.linkCard}>
                             <h5 className={style.linkCardHeader}>
