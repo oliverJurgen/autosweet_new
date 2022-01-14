@@ -35,6 +35,9 @@ const quicklinkTypes = {
 
 const HomePage: NextPage = (props: any) => {
   console.log({ props });
+  const quickLinksData = props.listApiData;
+
+  console.log({ quickLinksData });
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -42,22 +45,22 @@ const HomePage: NextPage = (props: any) => {
   const lat = geoLocation.latitude || "";
   const lon = geoLocation.longitude || "";
 
-  const [quickLinksData, setQuickLinksData] = useState([]);
-  const [linksLoading, setLinksloading] = useState(false);
+  // const [quickLinksData, setQuickLinksData] = useState([]);
+  // const [linksLoading, setLinksloading] = useState(false);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        setLinksloading(true);
-        const res = (await client.get("api/listdata")).data;
-        setQuickLinksData(res);
-        setLinksloading(false);
-      } catch (error) {
-        setLinksloading(false);
-        throw error;
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       setLinksloading(true);
+  //       const res = (await client.get("api/listdata")).data;
+  //       setQuickLinksData(res);
+  //       setLinksloading(false);
+  //     } catch (error) {
+  //       setLinksloading(false);
+  //       throw error;
+  //     }
+  //   })();
+  // }, []);
 
   const getQuerySearchUrl = (value: string) =>
     `/search-result?q=${value}&page=1&tags=&lat=${lat}&lon=${lon}`;
@@ -103,142 +106,135 @@ const HomePage: NextPage = (props: any) => {
             />
           </div>
         </section>
-        {linksLoading ? (
+        <section className={style.quickLinkSection}>
+          <article className={style.linkArticle}>
+            <header>
+              <p className={style.linkArticleHeader}>
+                <b>Condition</b>
+              </p>
+            </header>
+            <div className={style.linkCardsBlock}>
+              {quickLinksData.map((item: QuickLinkType) => {
+                if (item.type === quicklinkTypes.CONDITION)
+                  return (
+                    <Link
+                      key={item?.name}
+                      href={`/search/${item.name}`}
+                      passHref
+                    >
+                      <a>
+                        <div className={style.linkCard}>
+                          <h5 className={style.linkCardHeader}>{item.name}</h5>
+                          <p className={style.linkCardBody}>
+                            {item.count} Listings
+                            <br />
+                            Start from ${item.minimumPrice}
+                          </p>
+                        </div>
+                      </a>
+                    </Link>
+                  );
+              })}
+            </div>
+          </article>
+          <article className={style.linkArticle}>
+            <header>
+              <p className={style.linkArticleHeader}>
+                <b>Brands</b>
+              </p>
+            </header>
+            <div className={style.linkCardsBlock}>
+              {quickLinksData.map((item: QuickLinkType) => {
+                if (item.type === quicklinkTypes.BRAND)
+                  return (
+                    <Link
+                      key={item?.name}
+                      href={`/search/${item.name}`}
+                      passHref
+                    >
+                      <a>
+                        <div className={style.linkCard}>
+                          <h5 className={style.linkCardHeader}>{item.name}</h5>
+                          <p className={style.linkCardBody}>
+                            {item.count} Listings
+                            <br />
+                            Start from ${item.minimumPrice}
+                          </p>
+                        </div>
+                      </a>
+                    </Link>
+                  );
+              })}
+            </div>
+          </article>
+
+          <article className={style.linkArticle}>
+            <header>
+              <p className={style.linkArticleHeader}>
+                <b>Body Type</b>
+              </p>
+            </header>
+            <div className={style.linkCardsBlock}>
+              {quickLinksData.map((item: QuickLinkType) => {
+                if (item.type === quicklinkTypes.BODY_TYPE)
+                  return (
+                    <Link
+                      key={item?.name}
+                      href={getQuerySearchUrl(item.name)}
+                      passHref
+                    >
+                      <a>
+                        <div className={style.linkCard}>
+                          <h5 className={style.linkCardHeader}>{item.name}</h5>
+                          <p className={style.linkCardBody}>
+                            {item.count} Listings
+                            <br />
+                            Start from ${item.minimumPrice}
+                          </p>
+                        </div>
+                      </a>
+                    </Link>
+                  );
+              })}
+            </div>
+          </article>
+
+          <article className={style.linkArticle}>
+            <header>
+              <p className={style.linkArticleHeader}>
+                <b>State</b>
+              </p>
+            </header>
+            <div className={style.linkCardsBlock}>
+              {quickLinksData.map((item: QuickLinkType) => {
+                if (item.type === quicklinkTypes.STATE)
+                  return (
+                    <Link
+                      key={item?.name}
+                      href={`/search/${item.name}`}
+                      passHref
+                    >
+                      <a>
+                        <div className={style.linkCard}>
+                          <h5 className={style.linkCardHeader}>{item.name}</h5>
+                          <p className={style.linkCardBody}>
+                            {item.count} Listings
+                            <br />
+                            Start from ${item.minimumPrice}
+                          </p>
+                        </div>
+                      </a>
+                    </Link>
+                  );
+              })}
+            </div>
+          </article>
+        </section>
+        {/* {linksLoading ? (
           <CenterSpinner />
         ) : (
-          <section className={style.quickLinkSection}>
-            <article className={style.linkArticle}>
-              <header>
-                <p className={style.linkArticleHeader}>
-                  <b>Condition</b>
-                </p>
-              </header>
-              <div className={style.linkCardsBlock}>
-                {quickLinksData.map((item: QuickLinkType) => {
-                  if (item.type === quicklinkTypes.CONDITION)
-                    return (
-                      <Link
-                        key={item?.name}
-                        href={`/search/${item.name}`}
-                        passHref
-                      >
-                        <a>
-                          <div className={style.linkCard}>
-                            <h5 className={style.linkCardHeader}>
-                              {item.name}
-                            </h5>
-                            <p className={style.linkCardBody}>
-                              {item.count} Listings
-                              <br />
-                              Start from ${item.minimumPrice}
-                            </p>
-                          </div>
-                        </a>
-                      </Link>
-                    );
-                })}
-              </div>
-            </article>
-            <article className={style.linkArticle}>
-              <header>
-                <p className={style.linkArticleHeader}>
-                  <b>Brands</b>
-                </p>
-              </header>
-              <div className={style.linkCardsBlock}>
-                {quickLinksData.map((item: QuickLinkType) => {
-                  if (item.type === quicklinkTypes.BRAND)
-                    return (
-                      <Link
-                        key={item?.name}
-                        href={`/search/${item.name}`}
-                        passHref
-                      >
-                        <a>
-                          <div className={style.linkCard}>
-                            <h5 className={style.linkCardHeader}>
-                              {item.name}
-                            </h5>
-                            <p className={style.linkCardBody}>
-                              {item.count} Listings
-                              <br />
-                              Start from ${item.minimumPrice}
-                            </p>
-                          </div>
-                        </a>
-                      </Link>
-                    );
-                })}
-              </div>
-            </article>
 
-            <article className={style.linkArticle}>
-              <header>
-                <p className={style.linkArticleHeader}>
-                  <b>Body Type</b>
-                </p>
-              </header>
-              <div className={style.linkCardsBlock}>
-                {quickLinksData.map((item: QuickLinkType) => {
-                  if (item.type === quicklinkTypes.BODY_TYPE)
-                    return (
-                      <Link
-                        key={item?.name}
-                        href={getQuerySearchUrl(item.name)}
-                        passHref
-                      >
-                        <a>
-                          <div className={style.linkCard}>
-                            <h5 className={style.linkCardHeader}>
-                              {item.name}
-                            </h5>
-                            <p className={style.linkCardBody}>
-                              {item.count} Listings
-                              <br />
-                              Start from ${item.minimumPrice}
-                            </p>
-                          </div>
-                        </a>
-                      </Link>
-                    );
-                })}
-              </div>
-            </article>
-
-            <article className={style.linkArticle}>
-              <header>
-                <p className={style.linkArticleHeader}>
-                  <b>State</b>
-                </p>
-              </header>
-              <div className={style.linkCardsBlock}>
-                {quickLinksData.map((item: QuickLinkType) => {
-                  if (item.type === quicklinkTypes.STATE)
-                    return (
-                      <Link
-                        key={item?.name}
-                        href={`/search/${item.name}`}
-                        passHref
-                      >
-                        <a>
-                          <div className={style.linkCard}>
-                            <h5 className={style.linkCardHeader}>
-                              {item.name}
-                            </h5>
-                            <p className={style.linkCardBody}>
-                              {item.count} Listings
-                              <br />
-                              Start from ${item.minimumPrice}
-                            </p>
-                          </div>
-                        </a>
-                      </Link>
-                    );
-                })}
-              </div>
-            </article>
-          </section>
-        )}
+        )} */}
       </main>
       <Footer />
     </>
