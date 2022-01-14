@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import useGeolocation from "react-hook-geolocation";
 import SearchArea from "components/SearchArea";
-import { useQuery } from "react-query";
-import { chakra as c } from "@chakra-ui/react";
 import {
   setSearchValueAction,
   changeResultPageAction,
@@ -15,22 +12,12 @@ import {
   addTag,
 } from "redux/actions";
 import { getSearchValue, getSelectedTags } from "redux/selectors";
-import Navigation from "components/Navigation";
 import style from "styles/modules/HomePage.module.css";
-import Logo from "public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
 import Footer from "components/Footer";
 import client from "utils/client";
 import CenterSpinner from "components/shared/CenterSpinner/CenterSpinner";
 import Header from "components/shared/Header";
-
-const fetchQuickLinks = async () => {
-  try {
-    const res = await client.get("api/listdata");
-    return res.data;
-  } catch (error) {
-    throw error;
-  }
-};
+// import client from 'utils/client'
 
 type QuickLinkType = {
   count: number;
@@ -46,28 +33,38 @@ const quicklinkTypes = {
   BRAND: "Brand",
 };
 
-const HomePage: NextPage = () => {
+const HomePage: NextPage = (props: any) => {
+  console.log({ props });
+
   const router = useRouter();
   const dispatch = useDispatch();
   const geoLocation = useGeolocation();
   const lat = geoLocation.latitude || "";
   const lon = geoLocation.longitude || "";
 
+  const [quickLinksData, setQuickLinksData] = useState([]);
+  const [linksLoading, setLinksloading] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLinksloading(true);
+        const res = (await client.get("api/listdata")).data;
+        setQuickLinksData(res);
+        setLinksloading(false);
+      } catch (error) {
+        setLinksloading(false);
+        throw error;
+      }
+    })();
+  }, []);
+
   const getQuerySearchUrl = (value: string) =>
-    "/search-result?q=" +
-    value +
-    "&page=1" +
-    "&tags=" +
-    "&lat=" +
-    lat +
-    "&lon=" +
-    lon;
+    `/search-result?q=${value}&page=1&tags=&lat=${lat}&lon=${lon}`;
 
   const searchValue = useSelector(getSearchValue);
   const selectedTags = useSelector(getSelectedTags);
   const tags = useSelector((state: any) => state.tags);
-
-  const { data, isLoading } = useQuery(["quicklinks"], fetchQuickLinks);
 
   const runSearch = (value: string) => {
     dispatch(changeResultPageAction(1));
@@ -106,7 +103,7 @@ const HomePage: NextPage = () => {
             />
           </div>
         </section>
-        {isLoading ? (
+        {linksLoading ? (
           <CenterSpinner />
         ) : (
           <section className={style.quickLinkSection}>
@@ -117,7 +114,7 @@ const HomePage: NextPage = () => {
                 </p>
               </header>
               <div className={style.linkCardsBlock}>
-                {data.map((item: QuickLinkType) => {
+                {quickLinksData.map((item: QuickLinkType) => {
                   if (item.type === quicklinkTypes.CONDITION)
                     return (
                       <Link
@@ -149,7 +146,7 @@ const HomePage: NextPage = () => {
                 </p>
               </header>
               <div className={style.linkCardsBlock}>
-                {data.map((item: QuickLinkType) => {
+                {quickLinksData.map((item: QuickLinkType) => {
                   if (item.type === quicklinkTypes.BRAND)
                     return (
                       <Link
@@ -182,7 +179,7 @@ const HomePage: NextPage = () => {
                 </p>
               </header>
               <div className={style.linkCardsBlock}>
-                {data.map((item: QuickLinkType) => {
+                {quickLinksData.map((item: QuickLinkType) => {
                   if (item.type === quicklinkTypes.BODY_TYPE)
                     return (
                       <Link
@@ -215,7 +212,7 @@ const HomePage: NextPage = () => {
                 </p>
               </header>
               <div className={style.linkCardsBlock}>
-                {data.map((item: QuickLinkType) => {
+                {quickLinksData.map((item: QuickLinkType) => {
                   if (item.type === quicklinkTypes.STATE)
                     return (
                       <Link
@@ -249,3 +246,14 @@ const HomePage: NextPage = () => {
 };
 
 export default HomePage;
+
+export async function getServerSideProps() {
+  console.log("Server side fetch");
+  const res = await client.get("api/listdata");
+  const listApiData = res.data;
+  return {
+    props: {
+      listApiData,
+    }, // will be passed to the page component as props
+  };
+}
