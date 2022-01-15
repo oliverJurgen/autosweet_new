@@ -68,7 +68,7 @@ class SearchArea extends React.Component {
         <div className={style.search}>
           <div className={clsx([style.icon])} onClick={this.search}>
             <img
-              stc="assets/img/icons/Landing_Page_02_Search_icon.png"
+              src="assets/img/icons/Landing_Page_02_Search_icon.png"
               alt="Search"
             />
           </div>
