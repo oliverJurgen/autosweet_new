@@ -385,7 +385,6 @@ class FormPage extends Component {
                     on the prequalification criteria.
                   </p>
                   <div className={style.terms}>
-      <Image src={Logotype} alt="logotype" className={style.logo} />
                     <input type="checkbox" name="agree" required />
                     <label>
                       I have read and agree to the Terms and Conditions
