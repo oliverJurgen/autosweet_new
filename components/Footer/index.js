@@ -6,7 +6,7 @@ import Image from "next/image";
 const Footer = () => {
   return (
     <footer className={style.footer}>
-      <Image src={Logotype} alt="logotype" className={style.logo} />
+      <img src={Logotype.src} alt="logotype" />
       <ul className={style.menu}>
         <li>OUR COMPANY</li>
         <li>SITE INFO</li>
