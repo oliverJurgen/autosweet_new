@@ -1,9 +1,9 @@
 import React from "react";
 import style from "./SearchArea.module.css";
-import closeIcon from "public/assets/img/icons/clean.png";
-import Image from "next/image";
-import tagIcon from "public/assets/img/icons/SRP_02_Tag_Black.png";
-import searchIcon from "public/assets/img/icons/Landing_Page_02_Search_icon.png";
+// import closeIcon from "public/assets/img/icons/clean.png";
+// import Image from "next/image";
+// import tagIcon from "public/assets/img/icons/SRP_02_Tag_Black.png";
+// import searchIcon from "public/assets/img/icons/Landing_Page_02_Search_icon.png";
 import clsx from "clsx";
 import SearchTags from "../SearchTags";
 
@@ -67,7 +67,10 @@ class SearchArea extends React.Component {
       <div className={clsx([style.searcharea, dark && style.dark])}>
         <div className={style.search}>
           <div className={clsx([style.icon])} onClick={this.search}>
-            <Image src={searchIcon} alt="Search" />
+            <img
+              stc="assets/img/icons/Landing_Page_02_Search_icon.png"
+              alt="Search"
+            />
           </div>
           <input
             type="text"
@@ -80,11 +83,13 @@ class SearchArea extends React.Component {
             className={clsx([style.icon, style.clean])}
             onClick={this.cleanSearch}
           >
-            <Image src={closeIcon} alt="Clean" />
+            {/* <Image src={closeIcon} alt="Clean" /> */}
+            <img src="assets/img/icons/clean.png" alt="Clean" />
           </div>
           <div className={style.divider}></div>
           <div className={clsx([style.icon])} onClick={this.toggleTagsPanel}>
-            <Image src={tagIcon} alt="Tag" />
+            {/* <Image src={tagIcon} alt="Tag" /> */}
+            <img src="assets/img/icons/SRP_02_Tag_Black.png" alt="Tag" />
           </div>
         </div>
         {showTagsPanel && (
