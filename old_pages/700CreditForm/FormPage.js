@@ -8,6 +8,7 @@ import style from "../styles/FormPage.module.css";
 import { withRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
+import Logotype from "public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
 import { selectStatesAction, selectCitiesAction } from "../../redux/actions";
 // import { welcomeEn, welcomeSp } from "../../public/assets/videos";
 import welcomeEn from "public/assets/videos/welcomeEN.mp4";
@@ -384,6 +385,7 @@ class FormPage extends Component {
                     on the prequalification criteria.
                   </p>
                   <div className={style.terms}>
+      <Image src={Logotype} alt="logotype" className={style.logo} />
                     <input type="checkbox" name="agree" required />
                     <label>
                       I have read and agree to the Terms and Conditions
