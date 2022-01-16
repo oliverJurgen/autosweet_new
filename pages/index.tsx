@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -15,9 +15,7 @@ import { getSearchValue, getSelectedTags } from "redux/selectors";
 import style from "styles/modules/HomePage.module.css";
 import Footer from "components/Footer";
 import client from "utils/client";
-import CenterSpinner from "components/shared/CenterSpinner/CenterSpinner";
 import Header from "components/shared/Header";
-// import client from 'utils/client'
 
 type QuickLinkType = {
   count: number;
@@ -34,33 +32,13 @@ const quicklinkTypes = {
 };
 
 const HomePage: NextPage = (props: any) => {
-  console.log({ props });
   const quickLinksData = props.listApiData;
-
-  console.log({ quickLinksData });
 
   const router = useRouter();
   const dispatch = useDispatch();
   const geoLocation = useGeolocation();
   const lat = geoLocation.latitude || "";
   const lon = geoLocation.longitude || "";
-
-  // const [quickLinksData, setQuickLinksData] = useState([]);
-  // const [linksLoading, setLinksloading] = useState(false);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       setLinksloading(true);
-  //       const res = (await client.get("api/listdata")).data;
-  //       setQuickLinksData(res);
-  //       setLinksloading(false);
-  //     } catch (error) {
-  //       setLinksloading(false);
-  //       throw error;
-  //     }
-  //   })();
-  // }, []);
 
   const getQuerySearchUrl = (value: string) =>
     `/search-result?q=${value}&page=1&tags=&lat=${lat}&lon=${lon}`;
@@ -230,11 +208,6 @@ const HomePage: NextPage = (props: any) => {
             </div>
           </article>
         </section>
-        {/* {linksLoading ? (
-          <CenterSpinner />
-        ) : (
-
-        )} */}
       </main>
       <Footer />
     </>
@@ -244,7 +217,6 @@ const HomePage: NextPage = (props: any) => {
 export default HomePage;
 
 export async function getServerSideProps() {
-  console.log("Server side fetch");
   const res = await client.get("api/listdata");
   const listApiData = res.data;
   return {
