@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
 import {
   Row,
   Col,
@@ -10,20 +10,20 @@ import {
   Button,
   Modal,
   Tooltip,
-} from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+} from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 // import { NavLink, withRouter } from 'react-router-dom';
-import { withRouter } from 'next/router';
-import Link from 'next/link';
-import Image from 'next/image';
-import { selectVehicleAction } from '../../redux/actions';
+import { withRouter } from "next/router";
+import Link from "next/link";
+import Image from "next/image";
+import { selectVehicleAction } from "../../redux/actions";
 
-import http from '../../services/api';
+import http from "../../services/api";
 
-import Navigation from '../../components/Navigation';
-import style from '../styles/TradeIn.module.css';
-import FormItem from 'antd/lib/form/FormItem';
-import Logo from '../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png';
+import Navigation from "../../components/Navigation";
+import style from "../styles/TradeIn.module.css";
+import FormItem from "antd/lib/form/FormItem";
+import Header from "components/shared/Header";
 class TradeInForm extends Component {
   constructor(props) {
     super(props);
@@ -31,10 +31,10 @@ class TradeInForm extends Component {
       modalShow: false,
       report: null,
       ymmtSelected: {
-        make: '',
-        model: '',
-        trim: '',
-        year: '',
+        make: "",
+        model: "",
+        trim: "",
+        year: "",
       },
       suggestionTrigger: false,
       ymmtText: null,
@@ -49,21 +49,21 @@ class TradeInForm extends Component {
       mileage: parseInt(values.mileage ? values.mileage : 0),
       dealerUrl:
         this.props.selectedVehicleItem.dealer.dealerWebsite ||
-        'http://www.autosweet.com',
-      zipCode: this.props.selectedVehicleItem.dealer.dealerZipCode || '43220',
+        "http://www.autosweet.com",
+      zipCode: this.props.selectedVehicleItem.dealer.dealerZipCode || "43220",
       ...this.state.ymmtSelected,
     };
     try {
       http
-        .post('api/TradeInValue/report', {
+        .post("api/TradeInValue/report", {
           ...this.state.ymmtSelected,
           ...values,
           mileage: parseInt(values.mileage),
           dealerUrl:
             this.props.selectedVehicleItem.dealer.dealerWebsite ||
-            'http://www.autosweet.com',
+            "http://www.autosweet.com",
           zipCode:
-            this.props.selectedVehicleItem.dealer.dealerZipCode || '43220',
+            this.props.selectedVehicleItem.dealer.dealerZipCode || "43220",
         })
         .then((item) => {
           this.setState({
@@ -77,13 +77,13 @@ class TradeInForm extends Component {
   };
 
   onSubmitFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
 
   handleInput = async (e) => {
     this.setState({ ymmtText: e.target.value });
     if (e.target.value.trim()) {
-      const res = await http.get('api/TradeInValue/ymmt-search', {
+      const res = await http.get("api/TradeInValue/ymmt-search", {
         params: { ymmtKeywords: e.target.value.trim() },
       });
       this.setState({ ymmtSearch: res.data, suggestionTrigger: true });
@@ -93,8 +93,8 @@ class TradeInForm extends Component {
   };
 
   inputStyle = {
-    borderRadius: '5px',
-    borderColor: '#d514ed',
+    borderRadius: "5px",
+    borderColor: "#d514ed",
   };
 
   handleModelClick = (data) => {
@@ -110,21 +110,16 @@ class TradeInForm extends Component {
     return { required: true, message: `Please enter your ${message}!` };
   };
   listData = [
-    'Local Supply - what is the local market supply?',
-    'Local Market Demand - how popular is your car?',
-    'Estimated Value - what does the market say your car is worth?',
+    "Local Supply - what is the local market supply?",
+    "Local Market Demand - how popular is your car?",
+    "Estimated Value - what does the market say your car is worth?",
   ];
   render() {
-    const title = !this.state.ymmtText ? 'Please enter Make Model Trim' : '';
+    const title = !this.state.ymmtText ? "Please enter Make Model Trim" : "";
     const tradeInData = this.state.submitData;
     return (
       <>
-        <header className={style.Header}>
-          <Link href="/">
-            <Image src={Logo} alt="logo" className={style.logo} />
-          </Link>
-          <Navigation />
-        </header>
+        <Header />
         <Row className={style.content} justify="center">
           <Col xs={24}>
             <div className={style.headerText}>
@@ -138,11 +133,11 @@ class TradeInForm extends Component {
           <Col xs={24}>
             <Form
               initialValues={{
-                firstName: '',
-                lastName: '',
-                email: '',
-                phoneNumber: '',
-                mileage: '',
+                firstName: "",
+                lastName: "",
+                email: "",
+                phoneNumber: "",
+                mileage: "",
               }}
               onFinish={this.onSubmit}
               onFinishFailed={this.onSubmitFailed}
@@ -151,13 +146,13 @@ class TradeInForm extends Component {
                 <Col xs={24}>
                   <Row
                     justify="center"
-                    style={{ backgroundColor: '#303030', padding: '10px 0' }}
+                    style={{ backgroundColor: "#303030", padding: "10px 0" }}
                   >
                     <Col xs={24} md={12} className={style.headerInputBlock}>
                       <Input
                         type="text"
                         className={style.inputHeader}
-                        placeholder={'Enter Make Model Trim'}
+                        placeholder={"Enter Make Model Trim"}
                         prefix={<SearchOutlined />}
                         onChange={this.handleInput}
                         value={this.state.ymmtText}
@@ -203,7 +198,7 @@ class TradeInForm extends Component {
                     <Col xs={24} md={12}>
                       <FormItem
                         name="firstName"
-                        rules={[this.requiredField('First Name')]}
+                        rules={[this.requiredField("First Name")]}
                       >
                         <Input
                           type="text"
@@ -215,7 +210,7 @@ class TradeInForm extends Component {
                     <Col xs={24} md={12}>
                       <FormItem
                         name="lastName"
-                        rules={[this.requiredField('Last Name')]}
+                        rules={[this.requiredField("Last Name")]}
                       >
                         <Input
                           type="text"
@@ -227,7 +222,7 @@ class TradeInForm extends Component {
                     <Col xs={24}>
                       <FormItem
                         name="email"
-                        rules={[this.requiredField('Email')]}
+                        rules={[this.requiredField("Email")]}
                       >
                         <Input
                           type="email"
@@ -239,7 +234,7 @@ class TradeInForm extends Component {
                     <Col xs={12}>
                       <FormItem
                         name="phoneNumber"
-                        rules={[this.requiredField('Phone Number')]}
+                        rules={[this.requiredField("Phone Number")]}
                       >
                         <Input
                           type="tel"
@@ -253,9 +248,9 @@ class TradeInForm extends Component {
                         name="mileage"
                         rules={[
                           {
-                            type: 'number',
+                            type: "number",
                             min: 0,
-                            message: 'Only positive number!',
+                            message: "Only positive number!",
                           },
                         ]}
                       >

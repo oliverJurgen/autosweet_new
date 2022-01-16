@@ -33,6 +33,7 @@
 }
 .logo {
   padding-top: 35px;
+  background-image: url("../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png");
 }
 
 @media (max-width: 800px) {
