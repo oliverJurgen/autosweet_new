@@ -3,10 +3,11 @@ import type { NextPage } from "next";
 import client from "utils/client";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
+import { NextSeo } from "next-seo";
 import CenterSpinner from "components/shared/CenterSpinner/CenterSpinner";
 import Footer from "components/Footer";
 import { Pagination } from "antd";
-import Logo from "public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
+import useGeolocation from "react-hook-geolocation";
 import CarInfo from "components/CarInfo";
 import SearchArea from "components/SearchArea";
 import style from "../../old_pages/styles/SearchResults.module.css";
@@ -17,7 +18,6 @@ import {
   removeTag,
   clearSearchAction,
 } from "redux/actions";
-import isBrowser from "utils/isBrowser";
 import { getSearchValue, getSelectedTags } from "../../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "components/shared/Header";
@@ -25,10 +25,15 @@ import Header from "components/shared/Header";
 type PageType = string | number | undefined;
 
 const querySearch = (searchQuery: string, page?: PageType) => async () => {
+  let finalQuery = searchQuery;
+  if (searchQuery && searchQuery.indexOf("-") >= 0) {
+    finalQuery = searchQuery.split("-").join(" ");
+  }
+
   try {
     const response = await client.get("/api/search", {
       params: {
-        q: searchQuery,
+        q: finalQuery,
         page: page || 1,
       },
     });
@@ -46,11 +51,11 @@ const Search: NextPage = () => {
   const selectedTags = useSelector(getSelectedTags);
   const tags = useSelector((state: any) => state.tags);
 
-  const [lat, setLat] = React.useState(0);
-  const [lon, setLon] = React.useState(0);
+  const geoLocation = useGeolocation();
+  const lat = geoLocation.latitude || "";
+  const lon = geoLocation.longitude || "";
 
   const runSearch = (value: string) => {
-    // changeResultPageAction(1);
     dispatch(changeResultPageAction(1));
     router.push(
       "/search-result?q=" +
@@ -67,19 +72,6 @@ const Search: NextPage = () => {
   const searchTermChange = ({ searchValue }: any) => {
     dispatch(setSearchValueAction(searchValue));
   };
-
-  const isOnBrowser = isBrowser();
-
-  React.useEffect(() => {
-    if (navigator.geolocation && isBrowser()) {
-      navigator.geolocation.getCurrentPosition(function (position: any) {
-        if (position.coords.latitude) {
-          setLat(position.coords.latitude.toString().slice(0, 11));
-          setLon(position.coords.longitude.toString().slice(0, 11));
-        }
-      });
-    }
-  }, [isOnBrowser]);
 
   React.useEffect(() => {
     dispatch(clearSearchAction());
@@ -117,8 +109,27 @@ const Search: NextPage = () => {
 
   return (
     <>
+      <NextSeo
+        title="Auto Sweet Autos"
+        description="Search for Cars using AutoSweet"
+        canonical={`https://dev-autosweet.azurewebsites.net/search/${searchValue}`}
+        openGraph={{
+          type: "website",
+          url: `https://dev-autosweet.azurewebsites.net/search/${searchValue}`,
+          site_name: "Auto Sweet Autos",
+          description: "Automotive Marketing Agency for Dealerships",
+          images: [
+            {
+              url: "/assets/img/icons/AutosweetAUTOS_Final-1png-03.png",
+              width: 400,
+              height: 300,
+              alt: "AutoSweet Logo",
+              type: "image/png",
+            },
+          ],
+        }}
+      />
       <Header />
-
       <section className={style.SearchResults}>
         <header className={style.results}>
           {!isLoading && (

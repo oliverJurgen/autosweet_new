@@ -9,7 +9,7 @@ const Header = () => {
         <c.div cursor="pointer">
           <picture>
             <Image
-              src="assets/img/icons/AutosweetAUTOS_Final-1png-03.png"
+              src="/assets/img/icons/AutosweetAUTOS_Final-1png-03.png"
               alt="logo"
             />
           </picture>
