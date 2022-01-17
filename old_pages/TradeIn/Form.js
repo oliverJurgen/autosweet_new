@@ -14,8 +14,6 @@ import {
 import { SearchOutlined } from "@ant-design/icons";
 // import { NavLink, withRouter } from 'react-router-dom';
 import { withRouter } from "next/router";
-import Link from "next/link";
-import Image from "next/image";
 import { selectVehicleAction } from "../../redux/actions";
 
 import http from "../../services/api";
