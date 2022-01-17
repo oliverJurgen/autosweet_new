@@ -4,7 +4,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import style from "../../old_pages/styles/VehicleDetailsPage.module.css";
 // import { Link } from "react-router-dom";
 import Link from "next/link";
-
+import { Image } from "@chakra-ui/react";
 import DirectionIcon from "public/assets/img/icons/VDP_02_Seller_Info_Direction_icon.png";
 import WebIcon from "public/assets/img/icons/VDP_02_Seller_Info_Website_icon.png";
 
@@ -61,9 +61,9 @@ class VehicleInformationIconBlock extends React.Component {
         </section>
         <p className={style.direction}>
           <picture>
-            <img
+            <Image
               alt="DirectionIcon"
-              src={DirectionIcon}
+              src={DirectionIcon.src}
               className={style.iconSmall}
             />
           </picture>
@@ -93,7 +93,11 @@ class VehicleInformationIconBlock extends React.Component {
         </div> */}
         <p className={style.direction}>
           <picture>
-            <img alt="WebIcon" src={WebIcon} className={style.iconSmall} />
+            <Image
+              alt="WebIcon"
+              src={WebIcon.src}
+              className={style.iconSmall}
+            />
           </picture>
           <a
             href={`${vehicleModel.dealer?.dealerWebsite}`}
@@ -124,9 +128,9 @@ class VehicleInformationIconBlock extends React.Component {
           </p>
           <p className={style.direction}>
             <picture>
-              <img
+              <Image
                 alt="DirectionIcon"
-                src={DirectionIcon}
+                src={DirectionIcon.src}
                 className={style.iconSmall}
               />
             </picture>

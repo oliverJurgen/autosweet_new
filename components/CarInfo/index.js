@@ -61,7 +61,9 @@ class CarItem extends React.Component {
     } = this.props;
     const { dealer, vin, id, model, make, stockNumber, trim, router } =
       this.props;
-    const vehicleModelUrl = `/vehicledetails/${id}?vin=${vin}&stockNum=${stockNumber}&dCity=${dealer.city}&dState=${dealer.state}&make=${make}&model=${model}&trim=${trim}`;
+
+    // const vehicleModelUrl = `/vehicledetails/${id}?vin=${vin}&stockNum=${stockNumber}&dCity=${dealer.city}&dState=${dealer.state}&make=${make}&model=${model}&trim=${trim}`;
+    const vehicleModelUrl = `/vehicledetails/${id}`;
 
     const image = imageURLs && imageURLs.split("|")[0];
 
