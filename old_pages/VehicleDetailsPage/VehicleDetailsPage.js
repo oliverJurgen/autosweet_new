@@ -4,9 +4,9 @@ import style from "../styles/VehicleDetailsPage.module.css";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withRouter } from "next/router";
-import Link from "next/link";
 import { Image } from "@chakra-ui/react";
 import isBrowser from "utils/isBrowser";
+import { NextSeo } from "next-seo";
 
 import {
   performSearchAction,
@@ -151,11 +151,39 @@ class VehicleDetailsPage extends React.Component {
   }
 
   render() {
-    let { vehicleModel, searchValue, tags, selectedTags } = this.props;
+    let { vehicleModel, searchValue, tags, selectedTags, router, imageURLs } =
+      this.props;
 
     console.log({ vehicleModel });
+    const { conditionDescription, year, make, model, customText } =
+      vehicleModel;
+
+    const seoTitle = `${conditionDescription} ${year}
+                    ${make} ${model}`;
+    const seoDescription = `${customText}`;
+    const { asPath } = router;
     return (
       <>
+        <NextSeo
+          title={seoTitle}
+          description={seoDescription}
+          canonical={`https://dev-autosweet.azurewebsites.net${asPath}`}
+          openGraph={{
+            type: "website",
+            url: `https://dev-autosweet.azurewebsites.net${asPath}`,
+            site_name: "Auto Sweet Autos",
+            description: "Automotive Marketing Agency for Dealerships",
+            images: [
+              {
+                url: imageURLs,
+                width: 400,
+                height: 300,
+                alt: "AutoSweet Logo",
+                type: "image/png",
+              },
+            ],
+          }}
+        />
         <Header />
         <main className={style.wrap}>
           <section className={style.results}>
