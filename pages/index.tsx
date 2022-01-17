@@ -41,7 +41,17 @@ const HomePage: NextPage = () => {
 
   const [quickLinksData, setQuickLinksData] = useState<QuickLinkType[]>();
   const [linksLoading, setLinksloading] = useState(false);
-
+  const linksApiRequest = async () => {
+    setLinksloading(true);
+    const res: QuickLinkType[] = (await client.get('api/listdata')).data;
+    const localStorageData = {
+      links: [...res],
+      refreshDate: new Date(),
+    };
+    localStorage.setItem('quickLinks', JSON.stringify(localStorageData));
+    setQuickLinksData([...res]);
+    setLinksloading(false);
+  };
   useEffect(() => {
     let links = localStorage.getItem('quickLinks');
     if (links) {
@@ -49,31 +59,18 @@ const HomePage: NextPage = () => {
       const diffFromNow =
         Math.abs(new Date().getTime() - new Date(data.refreshDate).getTime()) /
         1000;
+      const tmp =
+        Math.abs(
+          new Date().getTime() - new Date('2021-05-31T15:24:00').getTime()
+        ) / 1000;
+      console.log(Math.floor(tmp / 86400));
       if (Math.floor(diffFromNow / 3600) % 24 > 24) {
-        (async () => {
-          try {
-            setLinksloading(true);
-            const res: QuickLinkType[] = (await client.get('api/listdata'))
-              .data;
-            const localStorageData = {
-              links: [ ...res ],
-              refreshDate: new Date(),
-            };
-            localStorage.setItem(
-              'quickLinks',
-              JSON.stringify(localStorageData)
-            );
-            setQuickLinksData([...res]);
-            console.log(res);
-            setLinksloading(false);
-          } catch (error) {
-            setLinksloading(false);
-            throw error;
-          }
-        })();
+        linksApiRequest();
       } else {
         setQuickLinksData(data.links);
       }
+    } else {
+      linksApiRequest();
     }
   }, []);
 
@@ -192,7 +189,11 @@ const HomePage: NextPage = () => {
                 {quickLinksData?.map((item: QuickLinkType, index) => {
                   if (item.type === quicklinkTypes.BODY_TYPE)
                     return (
-                      <Link href={getQuerySearchUrl(item.name)} passHref key={index}>
+                      <Link
+                        href={getQuerySearchUrl(item.name)}
+                        passHref
+                        key={index}
+                      >
                         <a>
                           <div className={style.linkCard}>
                             <h5 className={style.linkCardHeader}>
