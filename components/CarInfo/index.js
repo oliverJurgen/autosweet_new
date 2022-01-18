@@ -11,7 +11,6 @@ import Link from "next/link";
 class CarItem extends React.Component {
   constructor(props) {
     super(props);
-    // this.vehicleDetails = this.vehicleDetails.bind(this);
   }
 
   formPage = () => {
@@ -41,11 +40,8 @@ class CarItem extends React.Component {
 
   render() {
     let {
-      // dealer,
       year,
       imageURLs,
-      // make,
-      // model,
       series,
       extColor,
       intColor,
@@ -130,7 +126,6 @@ class CarItem extends React.Component {
                   <figure onClick={() => this.vehicleDetails(true)}>
                     <img
                       className={style.social_icons}
-                      // src={GoogleIcon}
                       src="/assets/img/icons/google.png"
                       alt="GoogleIcon"
                     />
@@ -151,9 +146,8 @@ class CarItem extends React.Component {
                   <figure>
                     <img
                       className={style.social_icons}
-                      // src={FacebookIcon}
                       src="/assets/img/icons/facebook.png"
-                      alt="GoogleIcon"
+                      alt="FacebookIcon"
                     />
                   </figure>
                 </a>
