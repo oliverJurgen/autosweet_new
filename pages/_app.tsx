@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Script strategy="lazyOnload">
         {`
         if(typeof window !== 'undefined'){
-          console.log('MWAHAHAHA')
+          console.log("GA-Loaded")
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
