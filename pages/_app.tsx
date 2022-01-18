@@ -3,6 +3,7 @@ import "../styles/index.css";
 import "../styles/Router.css";
 import "../node_modules/antd/dist/antd.css";
 import "../components/SearchArea/SearchArea.module.css";
+import Script from "next/script";
 import type { AppProps } from "next/app";
 import { DefaultSeo } from "next-seo";
 import { Provider } from "react-redux";
@@ -11,6 +12,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  console.log({ gA: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS });
+
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -20,18 +23,22 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
   return (
     <>
-      {/* <Script
+      <Script
         strategy="lazyOnload"
-        src="https://www.googletagmanager.com/gtag/js?id=G-N37ZXGM4J6"
-      /> */}
-      {/* <Script strategy="lazyOnload">
+        src="https://www.googletagmanager.com/gtag/js?id=UA-214227270"
+      />
+      <Script strategy="lazyOnload">
         {`
+        if(typeof window !== 'undefined'){
+          console.log('MWAHAHAHA')
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS});
+        }
+
         `}
-      </Script> */}
+      </Script>
       <DefaultSeo
         title="Auto Sweet Autos"
         description="Automotive Marketing Agency for Dealerships"
