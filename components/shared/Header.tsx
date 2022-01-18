@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { chakra as c, Image } from "@chakra-ui/react";
 import Navigation from "components/Navigation";
+import Logo from "public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
 
 const Header = () => {
   return (
@@ -8,10 +9,7 @@ const Header = () => {
       <Link href="/">
         <c.div cursor="pointer">
           <picture>
-            <Image
-              src="assets/img/icons/AutosweetAUTOS_Final-1png-03.png"
-              alt="logo"
-            />
+            <Image src={Logo.src} alt="logo" />
           </picture>
         </c.div>
       </Link>

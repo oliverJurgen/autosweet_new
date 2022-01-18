@@ -1,10 +1,9 @@
 import React from "react";
 import style from "../SearchArea/SearchArea.module.css";
 import clsx from "clsx";
-import { chakra, Wrap, WrapItem } from "@chakra-ui/react";
+import { chakra, Wrap, WrapItem, Image } from "@chakra-ui/react";
 import selectedCloseIconSrc from "public/assets/img/icons/close-white.png";
 import closeIcon from "public/assets/img/icons/clean.png";
-import Image from "next/image";
 
 export default class SearchTags extends React.Component {
   constructor(props) {
@@ -47,7 +46,7 @@ export default class SearchTags extends React.Component {
                 onClick={(e) => this.removeTag(e, tag)}
               >
                 <Image
-                  src={selected ? selectedCloseIconSrc : closeIcon}
+                  src={selected ? selectedCloseIconSrc.src : closeIcon.src}
                   alt="Delete"
                 />
               </div>

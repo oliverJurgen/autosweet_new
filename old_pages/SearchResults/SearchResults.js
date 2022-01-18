@@ -14,8 +14,6 @@ import {
   getSelectedTags,
 } from "../../redux/selectors";
 import { withRouter } from "next/router";
-import Link from "next/link";
-import Image from "next/image";
 import {
   performSearchAction,
   changeResultPageAction,

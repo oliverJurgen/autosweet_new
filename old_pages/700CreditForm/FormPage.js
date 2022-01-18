@@ -7,7 +7,7 @@ import style from "../styles/FormPage.module.css";
 // import { NavLink, withRouter } from 'react-router-dom';
 import { withRouter } from "next/router";
 import Link from "next/link";
-import Image from "next/image";
+import { Image } from "@chakra-ui/react";
 import Logotype from "public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
 import { selectStatesAction, selectCitiesAction } from "../../redux/actions";
 // import { welcomeEn, welcomeSp } from "../../public/assets/videos";
