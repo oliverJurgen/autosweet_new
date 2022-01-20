@@ -149,7 +149,7 @@ const Search: NextPage = () => {
           <CenterSpinner />
         ) : (
           <>
-            <article>
+            <article className={style.results}>
               {results?.length ? (
                 results.map((data: any, index: any) => (
                   <CarInfo key={`car_info_${index}`} {...data} />
@@ -167,6 +167,7 @@ const Search: NextPage = () => {
                 pageSize={pageSize}
                 onChange={onPageChange}
                 total={totalCount}
+                showSizeChanger={false}
                 responsive
               />
             </footer>
