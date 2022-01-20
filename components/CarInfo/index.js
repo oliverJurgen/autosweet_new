@@ -80,7 +80,7 @@ class CarItem extends React.Component {
         >
           <a>
             <figure className={style.itemImg}>
-              <img src={image} alt="VehiclePhoto" />
+              <img src={image} loading="lazy" alt="VehiclePhoto" />
             </figure>
           </a>
         </Link>
