@@ -1,16 +1,16 @@
-import React from "react";
-import "react-image-gallery/styles/css/image-gallery.css";
-import style from "../../old_pages/styles/VehicleDetailsPage.module.css";
-import { connect } from "react-redux";
-import { Rate } from "antd";
-import { getAnchor } from "../../redux/selectors";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import GoogleIcon from "public/assets/img/icons/google.png";
-import FacebookIcon from "public/assets/img/icons/facebook.png";
-import Link from "next/link";
-import { Row, Col } from "antd";
-import { Image } from "@chakra-ui/react";
+import React from 'react';
+import 'react-image-gallery/styles/css/image-gallery.css';
+import style from '../../old_pages/styles/VehicleDetailsPage.module.css';
+import { connect } from 'react-redux';
+import { Rate } from 'antd';
+import { getAnchor } from '../../redux/selectors';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faUser } from '@fortawesome/free-solid-svg-icons';
+import GoogleIcon from 'public/assets/img/icons/google.png';
+import FacebookIcon from 'public/assets/img/icons/facebook.png';
+import Link from 'next/link';
+import { Row, Col } from 'antd';
+import { Image } from '@chakra-ui/react';
 
 class SellerNotes extends React.Component {
   constructor(props) {
@@ -56,7 +56,7 @@ class SellerNotes extends React.Component {
                   <FontAwesomeIcon icon={faStar} className={style.faStar} />
                   {vehicleModel.dealer.googleScore
                     ? vehicleModel.dealer.googleScore
-                    : "-"}
+                    : '-'}
                 </div>
                 <div>
                   <Image
@@ -66,7 +66,7 @@ class SellerNotes extends React.Component {
                   />
                   {vehicleModel.dealer.numberOfFacebookReviews
                     ? vehicleModel.dealer.numberOfFacebookReviews
-                    : "-"}
+                    : '-'}
                 </div>
               </div>
               {reviews.length > 0 && (
@@ -77,21 +77,29 @@ class SellerNotes extends React.Component {
                 </Link>
               )}
             </div>
-            {reviews.length > 0 ? (
+            {!!reviews.length ? (
               reviews.map((item, index) => (
                 <div key={index} className={style.review}>
                   <div className={style.avatar}>
-                    <Image alt="avatar" src={item.reviewerPictureURL} />
+                    {item.reviewerPictureURL ? (
+                      <img src={item.reviewerPictureURL} alt="avatar" />
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={faUser}
+                        color="white"
+                        style={{ width: '20px', height: '20px' }}
+                      />
+                    )}
                   </div>
                   <div>
                     <div className={style.name}>{item.reviewerUserName}</div>
                     <div className={style.rating}>
-                      <Rate disabled value={item.rating} />{" "}
+                      <Rate disabled value={item.rating} />{' '}
                       <div className={style.date}>
-                        {new Intl.DateTimeFormat("en-US", {
-                          month: "long",
-                          day: "numeric",
-                          year: "numeric",
+                        {new Intl.DateTimeFormat('en-US', {
+                          month: 'long',
+                          day: 'numeric',
+                          year: 'numeric',
                         }).format(new Date(item.reviewDate))}
                       </div>
                     </div>
