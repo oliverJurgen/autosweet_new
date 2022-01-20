@@ -14,7 +14,7 @@ class VehicleRecomend extends React.Component {
       <div className={style.ResultItem}>
         <div className={style.ad}>{vehicle.dealer.dealerWebsite}</div>
         <div className={style.itemImg}>
-          <img src={image} alt="" />
+          <img src={image} alt="" loading='lazy'/>
         </div>
         <div className={style.itemInfo}>
           
