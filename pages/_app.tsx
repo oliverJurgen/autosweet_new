@@ -12,7 +12,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  // console.log({ gA: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS });
+  console.log({ gA: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS });
 
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
   return (
     <>
-      {/* <Script
+      <Script
         strategy="lazyOnload"
         src="https://www.googletagmanager.com/gtag/js?id=UA-214227270"
       />
@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         }
 
         `}
-      </Script> */}
+      </Script>
       <DefaultSeo
         title="Auto Sweet Autos"
         description="Automotive Marketing Agency for Dealerships"
