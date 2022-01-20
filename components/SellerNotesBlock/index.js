@@ -8,10 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import GoogleIcon from "public/assets/img/icons/google.png";
 import FacebookIcon from "public/assets/img/icons/facebook.png";
-// import { Link } from "react-router-dom";
 import Link from "next/link";
 import { Row, Col } from "antd";
-import Image from "next/image";
+import { Image } from "@chakra-ui/react";
 
 class SellerNotes extends React.Component {
   constructor(props) {
@@ -51,7 +50,7 @@ class SellerNotes extends React.Component {
                 <div>
                   <Image
                     className={style.icon}
-                    src={GoogleIcon}
+                    src={GoogleIcon.src}
                     alt="googleicon"
                   />
                   <FontAwesomeIcon icon={faStar} className={style.faStar} />
@@ -60,7 +59,11 @@ class SellerNotes extends React.Component {
                     : "-"}
                 </div>
                 <div>
-                  <Image className={style.icon} src={FacebookIcon} alt="icon" />
+                  <Image
+                    className={style.icon}
+                    src={FacebookIcon.src}
+                    alt="icon"
+                  />
                   {vehicleModel.dealer.numberOfFacebookReviews
                     ? vehicleModel.dealer.numberOfFacebookReviews
                     : "-"}

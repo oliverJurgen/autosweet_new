@@ -2,11 +2,7 @@ import React from "react";
 import "react-image-gallery/styles/css/image-gallery.css";
 import style from "../../old_pages/styles/VehicleDetailsPage.module.css";
 import { connect } from "react-redux";
-import { faArrowAltCircleUp } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Social from "./../Social/Social";
-import { Input, Radio } from "antd";
-import Image from "next/image";
+import { Image } from "@chakra-ui/react";
 import Condition from "public/assets/img/icons/VDP_02_Vehicle_Info_Condition.png";
 import Trim from "public/assets/img/icons/VDP_02_Vehicle_Info_Trim.png";
 import Mileage from "public/assets/img/icons/VDP_02_Vehicle_Info_Mileage.png";
@@ -31,7 +27,7 @@ class VehicleInformationIconBlock extends React.Component {
             <div className={style.InformationBlockItem}>
               <picture>
                 <Image
-                  src={Condition}
+                  src={Condition.src}
                   alt="sectionIcon"
                   className={style.infoBlock}
                 />
@@ -52,7 +48,7 @@ class VehicleInformationIconBlock extends React.Component {
             <div className={style.InformationBlockItem}>
               <picture>
                 <Image
-                  src={Trim}
+                  src={Trim.src}
                   alt="sectionIcon"
                   className={style.infoBlock}
                 />
@@ -65,7 +61,7 @@ class VehicleInformationIconBlock extends React.Component {
             <div className={style.InformationBlockItem}>
               <picture>
                 <Image
-                  src={Mileage}
+                  src={Mileage.src}
                   alt="sectionIcon"
                   className={style.infoBlock}
                 />
@@ -83,7 +79,7 @@ class VehicleInformationIconBlock extends React.Component {
             <div className={style.InformationBlockItem}>
               <picture>
                 <Image
-                  src={StockNumber}
+                  src={StockNumber.src}
                   alt="sectionIcon"
                   className={style.infoBlock}
                 />
@@ -96,7 +92,7 @@ class VehicleInformationIconBlock extends React.Component {
             <div className={style.InformationBlockItem}>
               <picture>
                 <Image
-                  src={EngineDescription}
+                  src={EngineDescription.src}
                   alt="sectionIcon"
                   className={style.infoBlock}
                 />
@@ -114,7 +110,7 @@ class VehicleInformationIconBlock extends React.Component {
             <div className={style.InformationBlockItem}>
               <picture>
                 <Image
-                  src={TrasmissionIcon}
+                  src={TrasmissionIcon.src}
                   alt="sectionIcon"
                   className={style.infoBlock}
                 />
@@ -130,7 +126,7 @@ class VehicleInformationIconBlock extends React.Component {
             <div className={style.InformationBlockItem}>
               <picture>
                 <Image
-                  src={Drivetrain}
+                  src={Drivetrain.src}
                   alt="sectionIcon"
                   className={style.infoBlock}
                 />
@@ -144,7 +140,7 @@ class VehicleInformationIconBlock extends React.Component {
             <div className={style.InformationBlockItem}>
               <picture>
                 <Image
-                  src={ExtColor}
+                  src={ExtColor.src}
                   alt="sectionIcon"
                   className={style.infoBlock}
                 />
@@ -158,7 +154,7 @@ class VehicleInformationIconBlock extends React.Component {
             <div className={style.InformationBlockItem}>
               <picture>
                 <Image
-                  src={IntColor}
+                  src={IntColor.src}
                   alt="sectionIcon"
                   className={style.infoBlock}
                 />
@@ -172,7 +168,7 @@ class VehicleInformationIconBlock extends React.Component {
             <div className={style.InformationBlockItem}>
               <picture>
                 <Image
-                  src={FuelType}
+                  src={FuelType.src}
                   alt="sectionIcon"
                   className={style.infoBlock}
                 />

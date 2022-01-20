@@ -3,11 +3,10 @@ import Navigation from "../../components/Navigation";
 import style from "../styles/VehicleDetailsPage.module.css";
 import { connect } from "react-redux";
 import { compose } from "redux";
-// import { NavLink, withRouter } from "react-router-dom";
 import { withRouter } from "next/router";
-import Link from "next/link";
-import Image from "next/image";
+import { Image } from "@chakra-ui/react";
 import isBrowser from "utils/isBrowser";
+import { NextSeo } from "next-seo";
 
 import {
   performSearchAction,
@@ -37,7 +36,6 @@ import SellerInfo from "../../components/SellerInfo";
 import OptionsBlock from "../../components/OptionsBlock";
 import SellerNotesBlock from "../../components/SellerNotesBlock";
 import SearchArea from "../../components/SearchArea";
-import Logo from "../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
 import FuelEconomyIcon from "../../public/assets/img/icons/VDP_02_Vehicle_Info_Fuel_Economy.png";
 import CarFaxIcon from "../../public/assets/img/icons/carfax-certified-pre-owned-used-car-vehicle-ryan-gosling.jpg";
 import Like from "../../public/assets/img/icons/VDP_01_Save_Toggle_Grey.png";
@@ -153,13 +151,39 @@ class VehicleDetailsPage extends React.Component {
   }
 
   render() {
-    let { vehicleModel, searchValue, tags, selectedTags } = this.props;
-
-    console.log("WELRJLWEKJ");
+    let { vehicleModel, searchValue, tags, selectedTags, router, imageURLs } =
+      this.props;
 
     console.log({ vehicleModel });
+    const { conditionDescription, year, make, model, customText } =
+      vehicleModel;
+
+    const seoTitle = `${conditionDescription} ${year}
+                    ${make} ${model}`;
+    const seoDescription = `${customText}`;
+    const { asPath } = router;
     return (
       <>
+        <NextSeo
+          title={seoTitle}
+          description={seoDescription}
+          canonical={`https://dev-autosweet.azurewebsites.net${asPath}`}
+          openGraph={{
+            type: "website",
+            url: `https://dev-autosweet.azurewebsites.net${asPath}`,
+            site_name: "Auto Sweet Autos",
+            description: "Automotive Marketing Agency for Dealerships",
+            images: [
+              {
+                url: imageURLs,
+                width: 400,
+                height: 300,
+                alt: "AutoSweet Logo",
+                type: "image/png",
+              },
+            ],
+          }}
+        />
         <Header />
         <main className={style.wrap}>
           <section className={style.results}>
@@ -189,14 +213,16 @@ class VehicleDetailsPage extends React.Component {
                 <div>
                   <picture onClick={this.onLikeHandler}>
                     <Image
-                      src={vehicleModel.liked ? LikeActive : Like}
+                      src={vehicleModel.liked ? LikeActive.src : Like.src}
                       alt="Like"
                       className={style.likeActionIcon}
                     />
                   </picture>
                   <picture onClick={this.onDisLikeHandler}>
                     <Image
-                      src={vehicleModel.disliked ? DislikeActive : Dislike}
+                      src={
+                        vehicleModel.disliked ? DislikeActive.src : Dislike.src
+                      }
                       alt="Dislike"
                       className={style.likeActionIcon}
                     />
@@ -216,7 +242,7 @@ class VehicleDetailsPage extends React.Component {
               <picture>
                 <Image
                   alt="Fuelicon"
-                  src={FuelEconomyIcon}
+                  src={FuelEconomyIcon.src}
                   className={style.infoBlock}
                 />
               </picture>
@@ -234,7 +260,7 @@ class VehicleDetailsPage extends React.Component {
                   objectFit="contain"
                   width="160px"
                   alt="carFaxIcon"
-                  src={CarFaxIcon}
+                  src={CarFaxIcon.src}
                   className={style.carFaxIco}
                 />
               </picture>

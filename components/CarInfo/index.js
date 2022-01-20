@@ -6,14 +6,11 @@ import { withRouter } from "next/router";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { selectVehicleAction, setAnchor } from "../../redux/actions";
-import GoogleIcon from "public/assets/img/icons/google.png";
-import FacebookIcon from "public/assets/img/icons/facebook.png";
 import Link from "next/link";
 
 class CarItem extends React.Component {
   constructor(props) {
     super(props);
-    // this.vehicleDetails = this.vehicleDetails.bind(this);
   }
 
   formPage = () => {
@@ -43,11 +40,8 @@ class CarItem extends React.Component {
 
   render() {
     let {
-      // dealer,
       year,
       imageURLs,
-      // make,
-      // model,
       series,
       extColor,
       intColor,
@@ -63,7 +57,9 @@ class CarItem extends React.Component {
     } = this.props;
     const { dealer, vin, id, model, make, stockNumber, trim, router } =
       this.props;
-    const vehicleModelUrl = `/vehicledetails/${id}?vin=${vin}&stockNum=${stockNumber}&dCity=${dealer.city}&dState=${dealer.state}&make=${make}&model=${model}&trim=${trim}`;
+
+    // const vehicleModelUrl = `/vehicledetails/${id}?vin=${vin}&stockNum=${stockNumber}&dCity=${dealer.city}&dState=${dealer.state}&make=${make}&model=${model}&trim=${trim}`;
+    const vehicleModelUrl = `/vehicledetails/${id}`;
 
     const image = imageURLs && imageURLs.split("|")[0];
 
@@ -90,26 +86,14 @@ class CarItem extends React.Component {
         </Link>
         <section className={style.itemInfo}>
           <span className={style.ad}>{dealer.dealerWebsite}</span>
-          <Link
-            href={vehicleModelUrl}
-            // onClick={() => {
-            //   this.props.selectVehicleAction(id);
-            // }}
-          >
+          <Link href={vehicleModelUrl}>
             <a>
-              <h3
-              // onClick={() => this.vehicleDetails(false)}
-              >
+              <h3>
                 {dealer.dealerName} | {year} {make} {model} {series}
               </h3>
             </a>
           </Link>
-          <Link
-            href={vehicleModelUrl}
-            // onClick={() => {
-            //   this.props.selectVehicleAction(id);
-            // }}
-          >
+          <Link href={vehicleModelUrl}>
             <a>
               <p className={style.textDecoration}>
                 Come see this {year} {make} today! - Exterior: {extColor}-
@@ -142,7 +126,7 @@ class CarItem extends React.Component {
                   <figure onClick={() => this.vehicleDetails(true)}>
                     <img
                       className={style.social_icons}
-                      src={GoogleIcon}
+                      src="/assets/img/icons/google.png"
                       alt="GoogleIcon"
                     />
                   </figure>
@@ -159,13 +143,11 @@ class CarItem extends React.Component {
             <div className={style.google}>
               <Link href={vehicleModelUrl}>
                 <a>
-                  <figure
-                  // onClick={() => this.vehicleDetails(true)}
-                  >
+                  <figure>
                     <img
                       className={style.social_icons}
-                      src={FacebookIcon}
-                      alt="GoogleIcon"
+                      src="/assets/img/icons/facebook.png"
+                      alt="FacebookIcon"
                     />
                   </figure>
                 </a>
