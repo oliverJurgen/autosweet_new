@@ -2,6 +2,7 @@ import React from "react";
 import type { NextPage } from "next";
 import client from "utils/client";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { useQuery } from "react-query";
 import { NextSeo } from "next-seo";
 import CenterSpinner from "components/shared/CenterSpinner/CenterSpinner";
@@ -21,6 +22,8 @@ import {
 import { getSearchValue, getSelectedTags } from "../../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "components/shared/Header";
+import { Icon } from "@chakra-ui/react";
+import { AiFillBackward, AiFillForward } from "react-icons/ai";
 
 type PageType = string | number | undefined;
 
@@ -107,6 +110,8 @@ const Search: NextPage = () => {
     );
   };
 
+  console.log({ router });
+
   return (
     <>
       <NextSeo
@@ -168,6 +173,45 @@ const Search: NextPage = () => {
                 onChange={onPageChange}
                 total={totalCount}
                 responsive
+                // simple
+                itemRender={(pageNum, pageNumType) => {
+                  console.log({ pageNum, pageNumType });
+                  if (pageNumType === "jump-prev")
+                    return (
+                      <Link href={`/search/${searchQuery}?page=${pageNum}`}>
+                        <a>
+                          {" "}
+                          <Icon as={AiFillBackward} />
+                        </a>
+                      </Link>
+                    );
+                  if (pageNumType === "jump-next")
+                    return (
+                      <Link href={`/search/${searchQuery}?page=${pageNum}`}>
+                        <a>
+                          <Icon as={AiFillForward} />
+                        </a>
+                      </Link>
+                    );
+                  if (pageNumType === "prev")
+                    return (
+                      <Link href={`/search/${searchQuery}?page=${pageNum}`}>
+                        <a>prev</a>
+                      </Link>
+                    );
+                  if (pageNumType === "next")
+                    return (
+                      <Link href={`/search/${searchQuery}?page=${pageNum}`}>
+                        <a>next</a>
+                      </Link>
+                    );
+
+                  return (
+                    <Link href={`/search/${searchQuery}?page=${pageNum}`}>
+                      <a>{pageNum}</a>
+                    </Link>
+                  );
+                }}
               />
             </footer>
           </>

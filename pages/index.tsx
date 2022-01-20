@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Head from "next/head";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -112,20 +113,28 @@ const HomePage: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <meta
+          name="google-site-verification"
+          content="-t2NYxo_sURLxJXYnOWgCl9Q-8Lze6c_kykg3u3oU1U"
+        />
+      </Head>
       <NextSeo
-        title="Auto Sweet Autos"
-        description="Search for Cars"
+        noindex={true}
+        title="New and Used Cars for Sale | AutoSweet"
+        description="The biggest database of used and pre-owned vehicles you can find in your area."
         canonical="https://dev-autosweet.azurewebsites.net/"
         openGraph={{
           type: "website",
           url: "https://dev-autosweet.azurewebsites.net/",
           site_name: "Auto Sweet Autos",
-          description: "Automotive Marketing Agency for Dealerships",
+          description:
+            "The biggest database of used and pre-owned vehicles you can find in your area.",
           images: [
             {
               url: "/assets/img/icons/AutosweetAUTOS_Final-1png-03.png",
-              width: 400,
-              height: 300,
+              width: 200,
+              height: 100,
               alt: "AutoSweet Logo",
               type: "image/png",
             },
