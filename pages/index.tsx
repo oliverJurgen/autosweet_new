@@ -20,6 +20,7 @@ import Footer from "components/Footer";
 import client from "utils/client";
 // import CenterSpinner from "components/shared/CenterSpinner/CenterSpinner";
 import Header from "components/shared/Header";
+import CarImage from "/public/assets/img/imageedit_1_9231715404.png";
 
 type QuickLinkType = {
   count: number;
@@ -150,16 +151,12 @@ const HomePage: NextPage = (props: any) => {
           align="center"
           justify="center"
           height="58vh"
-          // bgImage={CarImage.src}
-          bg="linear-gradient( to bottom,
-          rgba(48, 48, 48, 1),
-          rgba(255, 255, 255, 0)
-            ),
-            "
-          backgroundSize="cover"
-        >
-          {/* <Image h="100%" w="100%" src={CarImage.src} /> */}
-        </Flex>
+          bg="linear-gradient(
+      to bottom,
+      rgba(48, 48, 48, 1),
+      rgba(255, 255, 255, 0)
+    )"
+        ></Flex>
         {/* <section className={style.searchSection}> */}
         {/* <div>
             <SearchArea
