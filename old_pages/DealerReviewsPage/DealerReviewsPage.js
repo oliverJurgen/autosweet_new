@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { Row, Col } from "antd";
-import Navigation from "../../components/Navigation";
 import style from "../styles/DealerReviewsPage.module.css";
 import { withRouter } from "next/router";
 import Link from "next/link";
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Select, Checkbox, Pagination } from "antd";
 import Review from "../../components/Review";
@@ -18,7 +16,6 @@ import {
   faClock,
   faDesktop,
 } from "@fortawesome/free-solid-svg-icons";
-import Logo from "../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
 import Header from "components/shared/Header";
 class DealerReviewsPage extends Component {
   constructor(props) {
@@ -64,9 +61,10 @@ class DealerReviewsPage extends Component {
     }
   };
   componentDidMount() {
-    this.props
-      .selectVehicleAction(this.props.query.id)
-      .then(() => this.fetchReviews(1, this.state.checkboxValues));
+    console.log(this.props.query)
+    // this.props
+    //   .selectVehicleAction(this.props.query.id)
+    //   .then(() => this.fetchReviews(1, this.state.checkboxValues));
   }
 
   handleChange = (value) => {

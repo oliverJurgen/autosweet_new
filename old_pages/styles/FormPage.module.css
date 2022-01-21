@@ -26,18 +26,12 @@
   width: 100%;
 }
 
-/* form {
-  width: 100%;
-} */
 .fieldset {
   border-radius: 10px;
   padding: 20px;
   border: 1px dashed black;
   margin-bottom: 20px;
 }
-/* legend {
-  width: unset !important;
-} */
 
 .FormPage img {
   margin: 0 20px;
@@ -67,7 +61,7 @@
   margin-right: 5px;
 }
 
-/* input[type="submit"] {
+.submitButton {
   cursor: pointer;
   border: none;
   background-color: #007bff;
@@ -75,7 +69,7 @@
   margin: 20px 0;
   padding: 10px 20px;
   border-radius: 5px;
-} */
+}
 
 .thankYou {
   text-align: center;
