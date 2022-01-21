@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Head from "next/head";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -6,9 +6,9 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { NextSeo } from "next-seo";
 import useGeolocation from "react-hook-geolocation";
-import SearchArea from "components/SearchArea";
+// import SearchArea from "components/SearchArea";
 import {
-  setSearchValueAction,
+  // setSearchValueAction,
   changeResultPageAction,
   removeTag,
   addTag,
@@ -17,7 +17,7 @@ import { getSearchValue, getSelectedTags } from "redux/selectors";
 import style from "styles/modules/HomePage.module.css";
 import Footer from "components/Footer";
 import client from "utils/client";
-import CenterSpinner from "components/shared/CenterSpinner/CenterSpinner";
+// import CenterSpinner from "components/shared/CenterSpinner/CenterSpinner";
 import Header from "components/shared/Header";
 
 type QuickLinkType = {
@@ -98,9 +98,9 @@ const HomePage: NextPage = (props: any) => {
     dispatch(changeResultPageAction(1));
     router.push(getQuerySearchUrl(value));
   };
-  const searchTermChange = ({ searchValue }: any) => {
-    dispatch(setSearchValueAction(searchValue));
-  };
+  // const searchTermChange = ({ searchValue }: any) => {
+  //   dispatch(setSearchValueAction(searchValue));
+  // };
   const toggleTag = (tag: any) => {
     dispatch(addTag(tag));
   };
@@ -146,7 +146,7 @@ const HomePage: NextPage = (props: any) => {
       <Header />
       <main>
         <section className={style.searchSection}>
-          <div>
+          {/* <div>
             <SearchArea
               dark={true}
               tags={tags}
@@ -157,7 +157,7 @@ const HomePage: NextPage = (props: any) => {
               onRemoveTag={handleRemoveTag}
               onToggleTag={toggleTag}
             />
-          </div>
+          </div> */}
         </section>
         <section className={style.quickLinkSection}>
           <article className={style.linkArticle}>
