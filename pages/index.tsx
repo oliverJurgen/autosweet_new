@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { NextSeo } from "next-seo";
+import { Flex, Box, Image } from "@chakra-ui/react";
 import useGeolocation from "react-hook-geolocation";
 // import SearchArea from "components/SearchArea";
 import {
@@ -145,8 +146,22 @@ const HomePage: NextPage = (props: any) => {
       />
       <Header />
       <main>
-        <section className={style.searchSection}>
-          {/* <div>
+        <Flex
+          align="center"
+          justify="center"
+          height="58vh"
+          // bgImage={CarImage.src}
+          bg="linear-gradient( to bottom,
+          rgba(48, 48, 48, 1),
+          rgba(255, 255, 255, 0)
+            ),
+            "
+          backgroundSize="cover"
+        >
+          {/* <Image h="100%" w="100%" src={CarImage.src} /> */}
+        </Flex>
+        {/* <section className={style.searchSection}> */}
+        {/* <div>
             <SearchArea
               dark={true}
               tags={tags}
@@ -158,7 +173,7 @@ const HomePage: NextPage = (props: any) => {
               onToggleTag={toggleTag}
             />
           </div> */}
-        </section>
+        {/* </section> */}
         <section className={style.quickLinkSection}>
           <article className={style.linkArticle}>
             <header>
