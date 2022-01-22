@@ -43,6 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         title="Auto Sweet Autos"
         description="Automotive Marketing Agency for Dealerships"
         canonical="https://dev-autosweet.azurewebsites.net/"
+        noindex={true}
         openGraph={{
           type: "website",
           url: "https://dev-autosweet.azurewebsites.net/",
