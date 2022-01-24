@@ -3,16 +3,16 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 import root from "./reducer";
 import { NODE_ENV } from "../config";
+import isBrowser from "utils/isBrowser";
 
 const middleware = [thunk];
 
-// In case of development mode add redux-logger middleware
 if (NODE_ENV === "development") {
-  // middleware.push(logger);
+  middleware.push(logger);
 }
 
-// const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const composeEnhancer = compose;
+const composeEnhancer =
+  (isBrowser() && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 export default createStore(
   root,
