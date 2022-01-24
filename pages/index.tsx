@@ -34,7 +34,9 @@ const quicklinkTypes = {
   BRAND: "Brand",
 };
 
-const SearchArea = dynamic(() => import("components/SearchArea"));
+const SearchArea = dynamic(() => import("components/SearchArea"), {
+  ssr: false,
+});
 
 const HomePage: NextPage = (props: any) => {
   const router = useRouter();
