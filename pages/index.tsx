@@ -118,9 +118,13 @@ const HomePage: NextPage = (props: any) => {
   return (
     <>
       <Head>
-        <meta
+        {/* <meta
           name="google-site-verification"
           content="-t2NYxo_sURLxJXYnOWgCl9Q-8Lze6c_kykg3u3oU1U"
+        /> */}
+        <meta
+          name="google-site-verification"
+          content="s21crY2hKxA5oHy_1qyjuNTfUZYFS_ZFbnuJRR3G9kc"
         />
       </Head>
       <NextSeo
