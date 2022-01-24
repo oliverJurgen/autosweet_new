@@ -17,6 +17,7 @@ class FullPageLoader extends Component {
             height="200px"
             alt="loader"
             src={LoaderGif.src}
+            loading="lazy"
           />
         </div>
       </div>
