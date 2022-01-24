@@ -67,29 +67,14 @@
   columns: 2;
   -webkit-columns: 2;
   -moz-columns: 2;
+  list-style-position: inside;
   list-style-image: url('../../public/assets/img/icons/blueArrow.svg');
   /* ../../public/assets/img/icons/blueArrow.svg */
 }
 .options > li {
-  margin-left: 10px;
+  margin-left: 16px;
   padding-top: 15px;
   line-height: 18px;
-}
-.optionColumn {
-  padding-top: 15px;
-  display: flex;
-  min-width: 100%;
-}
-.optionRows {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  padding-left: 40px;
-  padding-bottom: 10px;
-}
-.optionHeader {
-  margin-left: 10px;
-  font-weight: 500;
 }
 .arrow {
   color: red;
@@ -138,12 +123,6 @@
 .icon {
   width: 40px;
   height: 40px;
-}
-.google_ico {
-  background-image: url('../../public/assets/img/icons/google.png');
-}
-.facebook_ico {
-  background-image: url('../../public/assets/img/icons/facebook.png');
 }
 .alert {
   background-image: url('../../public/assets/img/icons/VDP_01_Alert_grey_icon.png');
@@ -552,7 +531,6 @@
   grid-area: notes;
   width: 100%;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
 }
 .sellerNotes {
@@ -592,6 +570,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .review {
@@ -599,7 +578,8 @@
   border-top: 1px solid black;
   padding: 10px 20px;
 }
-.review > .avatar {
+.avatar {
+  max-width: unset;
   margin-right: 10px;
   width: 30px;
   height: 30px;
@@ -694,6 +674,12 @@
   }
   .ResultItem {
     max-height: 50px;
+  }
+  .ratingRow {
+    justify-content: center;
+  }
+  .notes > div:last-of-type{
+    margin-bottom: 10px;
   }
 }
 @media (max-width: 768px) {
