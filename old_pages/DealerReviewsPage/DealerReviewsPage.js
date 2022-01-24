@@ -1,31 +1,34 @@
-import React, { Component } from "react";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { Row, Col } from "antd";
-import style from "../styles/DealerReviewsPage.module.css";
-import { withRouter } from "next/router";
-import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Select, Checkbox, Pagination } from "antd";
-import Review from "../../components/Review";
-import { selectReviews, selectVehicleAction } from "../../redux/actions";
-import FullPageLoader from "../../components/Preloader/Preloader";
+import React, { Component } from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { Row, Col } from 'antd';
+import style from '../styles/DealerReviewsPage.module.css';
+import { withRouter } from 'next/router';
+import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Select, Checkbox, Pagination } from 'antd';
+import Review from '../../components/Review';
+import { selectReviews, selectVehicleAction } from '../../redux/actions';
+import FullPageLoader from '../../components/Preloader/Preloader';
 import {
   faStar,
   faDirections,
   faClock,
   faDesktop,
-} from "@fortawesome/free-solid-svg-icons";
-import Header from "components/shared/Header";
+} from '@fortawesome/free-solid-svg-icons';
+import Header from 'components/shared/Header';
+import GoogleIcon from '/public/assets/img/icons/google.png';
+import FacebookIcon from '/public/assets/img/icons/facebook.png';
+
 class DealerReviewsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       reviews: [],
-      checkboxValues: ["facebook", "google"],
+      checkboxValues: ['facebook', 'google'],
       page: 1,
       size: 0,
-      type: "recent",
+      type: 'recent',
     };
   }
   fetchReviews = (page, filter, value) => {
@@ -33,7 +36,7 @@ class DealerReviewsPage extends Component {
       this.props
         .selectReviews(
           this.props.selectedVehicleItem.dealer.chatMeterLocationId,
-          value ? value : "recent",
+          value ? value : 'recent',
           page
         )
         .then((data) =>
@@ -47,7 +50,7 @@ class DealerReviewsPage extends Component {
       this.props
         .selectReviews(
           this.props.selectedVehicleItem.dealer.chatMeterLocationId,
-          value ? value : "recent",
+          value ? value : 'recent',
           page,
           filter[0]
         )
@@ -60,11 +63,16 @@ class DealerReviewsPage extends Component {
         );
     }
   };
-  componentDidMount() {
-    console.log(this.props.query)
-    // this.props
-    //   .selectVehicleAction(this.props.query.id)
-    //   .then(() => this.fetchReviews(1, this.state.checkboxValues));
+  componentDidUpdate(prevProps) {
+    console.log(prevProps);
+    if (this.props.router.query.id !== prevProps.router.query.id) {
+      this.props
+        .selectVehicleAction(this.props.router.query.id)
+        .then(() =>
+          this.fetchReviews(this.state.page, this.state.checkboxValues)
+        );
+      console.log(this.props.router.query.id);
+    }
   }
 
   handleChange = (value) => {
@@ -82,22 +90,22 @@ class DealerReviewsPage extends Component {
     this.fetchReviews(e, this.state.checkboxValues, this.state.type);
   };
   selectData = [
-    { name: "Most Recent", value: "recent" },
-    { name: "Best Reviews", value: "best" },
-    { name: "Worst Reviews", value: "worst" },
+    { name: 'Most Recent', value: 'recent' },
+    { name: 'Best Reviews', value: 'best' },
+    { name: 'Worst Reviews', value: 'worst' },
   ];
   checkboxOptions = [
-    { label: "Google", value: "google" },
-    { label: "Facebook", value: "facebook" },
+    { label: 'Google', value: 'google' },
+    { label: 'Facebook', value: 'facebook' },
   ];
   paginationButtons = (_current, type, originalElement) => {
-    if (type === "prev") {
+    if (type === 'prev') {
       return (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a className={style.paginationButtons}>Prev</a>
       );
     }
-    if (type === "next") {
+    if (type === 'next') {
       return (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a className={style.paginationButtons}>Next</a>
@@ -108,7 +116,7 @@ class DealerReviewsPage extends Component {
   render() {
     const { selectedVehicleItem } = this.props;
     return (
-      <div className={style.DealerReviewsPage}>
+      <>
         <Header />
         <Row className={style.content} justify="center">
           <Col span={16}>
@@ -122,17 +130,27 @@ class DealerReviewsPage extends Component {
               <Col md={10}>
                 <div className={style.reviews}>
                   <div>
-                    <div
-                      className={`${style.google_ico} ${style.social_icons}`}
-                    ></div>
-                    <FontAwesomeIcon icon={faStar} className={style.faStar} />
+                    <img
+                      className={style.social_icons}
+                      src={GoogleIcon.src}
+                      alt="GoogleIcon"
+                    />
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      className={`${style.faStar} ${style.icon}`}
+                    />
                     <div>{selectedVehicleItem.dealer.googleScore}</div>
                   </div>
                   <div>
-                    <div
-                      className={`${style.facebook_ico} ${style.social_icons}`}
-                    ></div>
-                    <FontAwesomeIcon icon={faStar} className={style.faStar} />
+                    <img
+                      className={style.social_icons}
+                      src={FacebookIcon.src}
+                      alt="GoogleIcon"
+                    />
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      className={`${style.faStar} ${style.icon}`}
+                    />
                     <div>{selectedVehicleItem.dealer.facebookScore}</div>
                   </div>
                 </div>
@@ -142,11 +160,7 @@ class DealerReviewsPage extends Component {
               <Col className={style.dealerInfo} lg={8} md={24} sm={24} xs={24}>
                 <div className={style.time}>
                   <div>
-                    <FontAwesomeIcon
-                      size="lg"
-                      icon={faClock}
-                      style={{ marginRight: 10 }}
-                    />
+                    <FontAwesomeIcon icon={faClock} className={style.icon} />
                   </div>
                   <div>
                     {selectedVehicleItem &&
@@ -163,11 +177,7 @@ class DealerReviewsPage extends Component {
                   </div>
                 </div>
                 <div className={style.direction}>
-                  <FontAwesomeIcon
-                    size="lg"
-                    icon={faDirections}
-                    style={{ marginRight: 10 }}
-                  />
+                  <FontAwesomeIcon icon={faDirections} className={style.icon} />
                   <a
                     className={style.link}
                     href={`tel:${selectedVehicleItem.dealer?.phoneNumber}`}
@@ -178,11 +188,7 @@ class DealerReviewsPage extends Component {
                   </a>
                 </div>
                 <div className={style.direction}>
-                  <FontAwesomeIcon
-                    size="lg"
-                    icon={faDesktop}
-                    style={{ marginRight: 10 }}
-                  />
+                  <FontAwesomeIcon icon={faDesktop} className={style.icon} />
                   {selectedVehicleItem.dealer?.dealerWebsite ? (
                     <a
                       href={selectedVehicleItem.dealer.dealerWebsite}
@@ -202,15 +208,14 @@ class DealerReviewsPage extends Component {
                   <div className={style.adress}>
                     {selectedVehicleItem.dealer?.dealerStreet1}
                     <br />
-                    {selectedVehicleItem.dealer?.dealerCity},{" "}
-                    {selectedVehicleItem.dealer?.dealerState}{" "}
+                    {selectedVehicleItem.dealer?.dealerCity},{' '}
+                    {selectedVehicleItem.dealer?.dealerState}{' '}
                     {selectedVehicleItem.dealer?.dealerZipCode}
                   </div>
                   <div className={style.direction}>
                     <FontAwesomeIcon
-                      size="lg"
                       icon={faDirections}
-                      style={{ marginRight: 10 }}
+                      className={style.icon}
                     />
                     Get Directions
                   </div>
@@ -225,7 +230,7 @@ class DealerReviewsPage extends Component {
               </Col>
               <Col lg={15} xs={24} md={24}>
                 <iframe
-                  style={{ border: 0, width: "100%", height: "100%" }}
+                  style={{ border: 0, width: '100%', height: '100%' }}
                   title="map"
                   loading="lazy"
                   allowFullScreen
@@ -269,7 +274,7 @@ class DealerReviewsPage extends Component {
                     <Review
                       border
                       avatar={
-                        item.contentProvider === "FACEBOOK"
+                        item.contentProvider === 'FACEBOOK'
                           ? null
                           : item.reviewerPictureURL
                       }
@@ -278,7 +283,7 @@ class DealerReviewsPage extends Component {
                       date={item.reviewDate}
                       userName={item.reviewerUserName}
                       body={item.reviewDetail}
-                      title={item.reviewDetail?.split(". ", 1)[0]}
+                      title={item.reviewDetail?.split('. ', 1)[0]}
                     />
                   );
                 })
@@ -301,7 +306,7 @@ class DealerReviewsPage extends Component {
             </Row>
           </Col>
         </Row>
-      </div>
+      </>
     );
   }
 }

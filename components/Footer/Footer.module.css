@@ -27,13 +27,7 @@
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
-}
-.menu li:first-of-type{
-  margin-right: 40px;
-}
-.logo {
-  padding-top: 35px;
-  background-image: url("../../public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png");
+  margin-right:40px
 }
 
 @media (max-width: 800px) {

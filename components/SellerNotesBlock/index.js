@@ -80,14 +80,15 @@ class SellerNotes extends React.Component {
             {!!reviews.length ? (
               reviews.map((item, index) => (
                 <div key={index} className={style.review}>
-                  <div className={style.avatar}>
+                  <div>
                     {item.reviewerPictureURL ? (
-                      <img src={item.reviewerPictureURL} alt="avatar" />
+                      <img className={style.avatar} src={item.reviewerPictureURL} alt="avatar" />
                     ) : (
                       <FontAwesomeIcon
+                        className={style.avatar}
                         icon={faUser}
                         color="white"
-                        style={{ width: '20px', height: '20px' }}
+                        style={{padding:"5px"}}
                       />
                     )}
                   </div>

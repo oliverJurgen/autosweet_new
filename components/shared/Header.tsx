@@ -8,7 +8,7 @@ const Header = () => {
     <Flex
       bg="#303030"
       d="flex"
-      justifyContent="space-around"
+      justifyContent="space-between"
       align="center"
       minH="7vh"
     >
