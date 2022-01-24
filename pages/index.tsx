@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { NextSeo } from "next-seo";
 import useGeolocation from "react-hook-geolocation";
-import SearchArea from "components/SearchArea";
+// import SearchArea from "components/SearchArea";
 import {
   setSearchValueAction,
   changeResultPageAction,
@@ -17,9 +17,8 @@ import { getSearchValue, getSelectedTags } from "redux/selectors";
 import style from "styles/modules/HomePage.module.css";
 import Footer from "components/Footer";
 import client from "utils/client";
-// import CenterSpinner from "components/shared/CenterSpinner/CenterSpinner";
+import dynamic from "next/dynamic";
 import Header from "components/shared/Header";
-import CarImage from "/public/assets/img/imageedit_1_9231715404.png";
 
 type QuickLinkType = {
   count: number;
@@ -34,6 +33,8 @@ const quicklinkTypes = {
   STATE: "State",
   BRAND: "Brand",
 };
+
+const SearchArea = dynamic(() => import("components/SearchArea"));
 
 const HomePage: NextPage = (props: any) => {
   const router = useRouter();
