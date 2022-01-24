@@ -5,7 +5,7 @@ import Logotype from "public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
 const Footer = () => {
   return (
     <footer className={style.footer}>
-      <img src={Logotype.src} alt="logotype" />
+      <img src={Logotype.src} alt="logotype" loading="lazy" />
       <ul className={style.menu}>
         <li>OUR COMPANY</li>
         <li>SITE INFO</li>

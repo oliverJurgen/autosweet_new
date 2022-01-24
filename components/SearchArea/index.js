@@ -66,6 +66,7 @@ class SearchArea extends React.Component {
             <img
               src="/assets/img/icons/Landing_Page_02_Search_icon.png"
               alt="Search"
+              loading="lazy"
             />
           </div>
           <input
@@ -79,11 +80,15 @@ class SearchArea extends React.Component {
             className={clsx([style.icon, style.clean])}
             onClick={this.cleanSearch}
           >
-            <img src="/assets/img/icons/clean.png" alt="Clean" />
+            <img src="/assets/img/icons/clean.png" alt="Clean" loading="lazy" />
           </div>
           <div className={style.divider}></div>
           <div className={clsx([style.icon])} onClick={this.toggleTagsPanel}>
-            <img src="/assets/img/icons/SRP_02_Tag_Black.png" alt="Tag" />
+            <img
+              src="/assets/img/icons/SRP_02_Tag_Black.png"
+              alt="Tag"
+              loading="lazy"
+            />
           </div>
         </div>
         {showTagsPanel && (

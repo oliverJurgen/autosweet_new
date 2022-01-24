@@ -46,6 +46,7 @@ export default class SearchTags extends React.Component {
                 onClick={(e) => this.removeTag(e, tag)}
               >
                 <Image
+                  loading="lazy"
                   src={selected ? selectedCloseIconSrc.src : closeIcon.src}
                   alt="Delete"
                 />

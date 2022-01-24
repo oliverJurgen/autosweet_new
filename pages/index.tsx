@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { NextSeo } from "next-seo";
 import useGeolocation from "react-hook-geolocation";
-// import SearchArea from "components/SearchArea";
 import {
   setSearchValueAction,
   changeResultPageAction,
@@ -120,13 +119,9 @@ const HomePage: NextPage = (props: any) => {
   return (
     <>
       <Head>
-        {/* <meta
-          name="google-site-verification"
-          content="-t2NYxo_sURLxJXYnOWgCl9Q-8Lze6c_kykg3u3oU1U"
-        /> */}
         <meta
           name="google-site-verification"
-          content="s21crY2hKxA5oHy_1qyjuNTfUZYFS_ZFbnuJRR3G9kc"
+          content="-t2NYxo_sURLxJXYnOWgCl9Q-8Lze6c_kykg3u3oU1U"
         />
       </Head>
       <NextSeo
@@ -276,11 +271,6 @@ const HomePage: NextPage = (props: any) => {
             </div>
           </article>
         </section>
-        {/* {linksLoading ? (
-          <CenterSpinner />
-        ) : (
-
-        )} */}
       </main>
       <Footer />
     </>
