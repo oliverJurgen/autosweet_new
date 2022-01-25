@@ -5,11 +5,9 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { NextSeo } from "next-seo";
-import { Flex, Box, Image } from "@chakra-ui/react";
 import useGeolocation from "react-hook-geolocation";
-// import SearchArea from "components/SearchArea";
 import {
-  // setSearchValueAction,
+  setSearchValueAction,
   changeResultPageAction,
   removeTag,
   addTag,
@@ -18,9 +16,8 @@ import { getSearchValue, getSelectedTags } from "redux/selectors";
 import style from "styles/modules/HomePage.module.css";
 import Footer from "components/Footer";
 import client from "utils/client";
-// import CenterSpinner from "components/shared/CenterSpinner/CenterSpinner";
+import dynamic from "next/dynamic";
 import Header from "components/shared/Header";
-import CarImage from "/public/assets/img/imageedit_1_9231715404.png";
 
 type QuickLinkType = {
   count: number;
@@ -35,6 +32,10 @@ const quicklinkTypes = {
   STATE: "State",
   BRAND: "Brand",
 };
+
+const SearchArea = dynamic(() => import("components/SearchArea"), {
+  ssr: false,
+});
 
 const HomePage: NextPage = (props: any) => {
   const router = useRouter();
@@ -100,9 +101,9 @@ const HomePage: NextPage = (props: any) => {
     dispatch(changeResultPageAction(1));
     router.push(getQuerySearchUrl(value));
   };
-  // const searchTermChange = ({ searchValue }: any) => {
-  //   dispatch(setSearchValueAction(searchValue));
-  // };
+  const searchTermChange = ({ searchValue }: any) => {
+    dispatch(setSearchValueAction(searchValue));
+  };
   const toggleTag = (tag: any) => {
     dispatch(addTag(tag));
   };
@@ -147,18 +148,8 @@ const HomePage: NextPage = (props: any) => {
       />
       <Header />
       <main>
-        <Flex
-          align="center"
-          justify="center"
-          height="58vh"
-          bg="linear-gradient(
-      to bottom,
-      rgba(48, 48, 48, 1),
-      rgba(255, 255, 255, 0)
-    )"
-        ></Flex>
-        {/* <section className={style.searchSection}> */}
-        {/* <div>
+        <section className={style.searchSection}>
+          <div>
             <SearchArea
               dark={true}
               tags={tags}
@@ -169,8 +160,8 @@ const HomePage: NextPage = (props: any) => {
               onRemoveTag={handleRemoveTag}
               onToggleTag={toggleTag}
             />
-          </div> */}
-        {/* </section> */}
+          </div>
+        </section>
         <section className={style.quickLinkSection}>
           <article className={style.linkArticle}>
             <header>
@@ -280,11 +271,6 @@ const HomePage: NextPage = (props: any) => {
             </div>
           </article>
         </section>
-        {/* {linksLoading ? (
-          <CenterSpinner />
-        ) : (
-
-        )} */}
       </main>
       <Footer />
     </>
