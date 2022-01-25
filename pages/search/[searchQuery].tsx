@@ -110,9 +110,6 @@ const Search: NextPage = () => {
     );
   };
 
-  // console.log({ router });
-  console.log({ searchQuery });
-
   return (
     <>
       <NextSeo

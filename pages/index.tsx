@@ -46,41 +46,6 @@ const HomePage: NextPage = (props: any) => {
 
   const quickLinksData = props.listData;
 
-  // const [quickLinksData, setQuickLinksData] = useState<QuickLinkType[]>();
-  // const [linksLoading, setLinksloading] = useState(false);
-  // const linksApiRequest = async () => {
-  //   setLinksloading(true);
-  //   const res: QuickLinkType[] = (await client.get("api/listdata")).data;
-  //   const localStorageData = {
-  //     links: [...res],
-  //     refreshDate: new Date(),
-  //   };
-  //   localStorage.setItem("quickLinks", JSON.stringify(localStorageData));
-  //   setQuickLinksData([...res]);
-  //   setLinksloading(false);
-  // };
-  // useEffect(() => {
-  //   let links = localStorage.getItem("quickLinks");
-  //   if (links) {
-  //     const data = JSON.parse(links);
-  //     const diffFromNow =
-  //       Math.abs(new Date().getTime() - new Date(data.refreshDate).getTime()) /
-  //       1000;
-  //     const tmp =
-  //       Math.abs(
-  //         new Date().getTime() - new Date("2021-05-31T15:24:00").getTime()
-  //       ) / 1000;
-  //     console.log(Math.floor(tmp / 86400));
-  //     if (Math.floor(diffFromNow / 3600) % 24 > 24) {
-  //       linksApiRequest();
-  //     } else {
-  //       setQuickLinksData(data.links);
-  //     }
-  //   } else {
-  //     linksApiRequest();
-  //   }
-  // }, []);
-
   const getBodyTypeUrl = (value: string) => {
     if (value && value.indexOf(" ") >= 0) {
       const searchWordsArr = value.split(" ");
