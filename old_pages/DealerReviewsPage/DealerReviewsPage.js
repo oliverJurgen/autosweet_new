@@ -31,6 +31,24 @@ class DealerReviewsPage extends Component {
       type: 'recent',
     };
   }
+
+  componentDidMount() {
+    const { id } = this.props.router.query;
+    if (id) {
+      this.props
+        .selectVehicleAction(id)
+        .then(() => this.fetchReviews(1, this.state.checkboxValues));
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.router.query.id !== prevProps.router.query.id) {
+      this.props
+        .selectVehicleAction(this.props.router.query.id)
+        .then(() =>
+          this.fetchReviews(this.state.page, this.state.checkboxValues)
+        );
+    }
+  }
   fetchReviews = (page, filter, value) => {
     if (filter.length > 1) {
       this.props
@@ -63,17 +81,6 @@ class DealerReviewsPage extends Component {
         );
     }
   };
-  componentDidUpdate(prevProps) {
-    console.log(prevProps);
-    if (this.props.router.query.id !== prevProps.router.query.id) {
-      this.props
-        .selectVehicleAction(this.props.router.query.id)
-        .then(() =>
-          this.fetchReviews(this.state.page, this.state.checkboxValues)
-        );
-      console.log(this.props.router.query.id);
-    }
-  }
 
   handleChange = (value) => {
     this.fetchReviews(1, this.state.checkboxValues, value);
@@ -298,6 +305,7 @@ class DealerReviewsPage extends Component {
                     pageSize={1}
                     onChange={this.paginationHandler}
                     total={this.state.size}
+                    showSizeChanger={false}
                     // itemRender={this.paginationButtons}
                     responsive
                   />
