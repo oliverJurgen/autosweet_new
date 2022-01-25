@@ -110,17 +110,18 @@ const Search: NextPage = () => {
     );
   };
 
-  console.log({ router });
+  // console.log({ router });
+  console.log({ searchQuery });
 
   return (
     <>
       <NextSeo
         title="Auto Sweet Autos"
         description="Search for Cars using AutoSweet"
-        canonical={`https://dev-autosweet.azurewebsites.net/search/${searchValue}`}
+        canonical={`https://dev-autosweet.azurewebsites.net/search/${searchQuery}`}
         openGraph={{
           type: "website",
-          url: `https://dev-autosweet.azurewebsites.net/search/${searchValue}`,
+          url: `https://dev-autosweet.azurewebsites.net/search/${searchQuery}`,
           site_name: "Auto Sweet Autos",
           description: "Automotive Marketing Agency for Dealerships",
           images: [
@@ -176,7 +177,6 @@ const Search: NextPage = () => {
                 responsive
                 // simple
                 itemRender={(pageNum, pageNumType) => {
-                  console.log({ pageNum, pageNumType });
                   if (pageNumType === "jump-prev")
                     return (
                       <Link href={`/search/${searchQuery}?page=${pageNum}`}>
