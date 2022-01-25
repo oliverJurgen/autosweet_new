@@ -600,10 +600,9 @@
   height: 18px;
 }
 .reviewText {
-  max-height: 50px;
-  text-overflow: ellipsis;
+  max-height: 60px;
+  line-height: 20px;
   overflow: hidden;
-  display: block;
 }
 .date {
   margin-left: 10px;

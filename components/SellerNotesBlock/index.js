@@ -104,7 +104,7 @@ class SellerNotes extends React.Component {
                         }).format(new Date(item.reviewDate))}
                       </div>
                     </div>
-                    <div className={style.reviewText}>{item.reviewDetail}</div>
+                    <p className={style.reviewText}>{item.reviewDetail}</p>
                   </div>
                 </div>
               ))
