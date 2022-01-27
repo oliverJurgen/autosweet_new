@@ -1,12 +1,12 @@
-import React from 'react';
-import Navigation from '../../components/Navigation';
-import style from '../styles/VehicleDetailsPage.module.css';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { withRouter } from 'next/router';
-import { Image } from '@chakra-ui/react';
-import isBrowser from 'utils/isBrowser';
-import { NextSeo } from 'next-seo';
+import React from "react";
+// import Navigation from "../../components/Navigation";
+import style from "../styles/VehicleDetailsPage.module.css";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { withRouter } from "next/router";
+import { Image } from "@chakra-ui/react";
+import isBrowser from "utils/isBrowser";
+import { NextSeo } from "next-seo";
 
 import {
   performSearchAction,
@@ -20,29 +20,29 @@ import {
   likeAction,
   disLikeAction,
   selectReviews,
-} from '../../redux/actions';
+} from "../../redux/actions";
 import {
   getSearchValue,
   getTotal,
   getCurrentPage,
   getTags,
   getSelectedTags,
-} from '../../redux/selectors';
-import Footer from '../../components/Footer';
-import ImagesGallerySection from '../../components/ImagesGallerySection';
-import VehicleInformationSection from '../../components/VehicleInformationSection';
-import VehicleInformationIconBlock from '../../components/VehicleInformationIconBlock';
-import SellerInfo from '../../components/SellerInfo';
-import OptionsBlock from '../../components/OptionsBlock';
-import SellerNotesBlock from '../../components/SellerNotesBlock';
-import SearchArea from '../../components/SearchArea';
-import FuelEconomyIcon from '../../public/assets/img/icons/VDP_02_Vehicle_Info_Fuel_Economy.png';
-import CarFaxIcon from '../../public/assets/img/icons/carfax-certified-pre-owned-used-car-vehicle-ryan-gosling.jpg';
-import Like from '../../public/assets/img/icons/VDP_01_Save_Toggle_Grey.png';
-import LikeActive from '../../public/assets/img/icons/VDP_01_Save_Toggle.png';
-import Dislike from '../../public/assets/img/icons/VDP_01_Ignore_Toggle_Grey.png';
-import DislikeActive from '../../public/assets/img/icons/VDP_01_Ignore_Toggle.png';
-import Header from 'components/shared/Header';
+} from "../../redux/selectors";
+import Footer from "../../components/Footer";
+import ImagesGallerySection from "../../components/ImagesGallerySection";
+import VehicleInformationSection from "../../components/VehicleInformationSection";
+import VehicleInformationIconBlock from "../../components/VehicleInformationIconBlock";
+import SellerInfo from "../../components/SellerInfo";
+import OptionsBlock from "../../components/OptionsBlock";
+import SellerNotesBlock from "../../components/SellerNotesBlock";
+import SearchArea from "../../components/SearchArea";
+import FuelEconomyIcon from "../../public/assets/img/icons/VDP_02_Vehicle_Info_Fuel_Economy.png";
+import CarFaxIcon from "../../public/assets/img/icons/carfax-certified-pre-owned-used-car-vehicle-ryan-gosling.jpg";
+import Like from "../../public/assets/img/icons/VDP_01_Save_Toggle_Grey.png";
+import LikeActive from "../../public/assets/img/icons/VDP_01_Save_Toggle.png";
+import Dislike from "../../public/assets/img/icons/VDP_01_Ignore_Toggle_Grey.png";
+import DislikeActive from "../../public/assets/img/icons/VDP_01_Ignore_Toggle.png";
+import Header from "components/shared/Header";
 
 class VehicleDetailsPage extends React.Component {
   constructor(props) {
@@ -103,7 +103,8 @@ class VehicleDetailsPage extends React.Component {
       console.log({ query: router.query });
 
       const id = router.query.id;
-      this.props.selectVehicleAction(id);
+
+      // this.props.selectVehicleAction(id);
     }
 
     // this.props.selectVehicleAction(this.props.match.params.id);
@@ -130,7 +131,7 @@ class VehicleDetailsPage extends React.Component {
     if (
       prevProps.searchValue &&
       prevProps.searchValue !== searchValue &&
-      prevProps.selectedTags + '' !== selectedTags + ''
+      prevProps.selectedTags + "" !== selectedTags + ""
     ) {
       let get_lat = this.props.get_lat;
       let get_lon = this.props.get_lon;
@@ -144,7 +145,7 @@ class VehicleDetailsPage extends React.Component {
       });
     }
     if (prevProps.vehicleModel !== vehicleModel) {
-      selectReviews(vehicleModel.dealer.chatMeterLocationId, 'topReviews').then(
+      selectReviews(vehicleModel.dealer.chatMeterLocationId, "topReviews").then(
         (reviews) => this.setState({ reviews: reviews })
       );
     }
@@ -169,17 +170,17 @@ class VehicleDetailsPage extends React.Component {
           description={seoDescription}
           canonical={`https://dev-autosweet.azurewebsites.net${asPath}`}
           openGraph={{
-            type: 'website',
+            type: "website",
             url: `https://dev-autosweet.azurewebsites.net${asPath}`,
-            site_name: 'Auto Sweet Autos',
-            description: 'Automotive Marketing Agency for Dealerships',
+            site_name: "Auto Sweet Autos",
+            description: "Automotive Marketing Agency for Dealerships",
             images: [
               {
                 url: imageURLs,
                 width: 400,
                 height: 300,
-                alt: 'AutoSweet Logo',
-                type: 'image/png',
+                alt: "AutoSweet Logo",
+                type: "image/png",
               },
             ],
           }}
@@ -200,13 +201,13 @@ class VehicleDetailsPage extends React.Component {
               <div className={style.info_actions}>
                 <div className={style.info_actions_info}>
                   <div>
-                    {vehicleModel.conditionDescription} {vehicleModel.year}{' '}
+                    {vehicleModel.conditionDescription} {vehicleModel.year}{" "}
                     {vehicleModel.make} {vehicleModel.model}
                   </div>
                   <div className={style.gray}>
                     {vehicleModel.mileage
-                      ? vehicleModel.mileage.toLocaleString('en-us')
-                      : '-'}{' '}
+                      ? vehicleModel.mileage.toLocaleString("en-us")
+                      : "-"}{" "}
                     Miles
                   </div>
                 </div>
