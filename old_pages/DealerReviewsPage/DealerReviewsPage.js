@@ -1,43 +1,43 @@
-import React, { Component } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { Row, Col } from 'antd';
-import style from '../styles/DealerReviewsPage.module.css';
-import { withRouter } from 'next/router';
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Select, Checkbox, Pagination } from 'antd';
-import Review from '../../components/Review';
-import { selectReviews, selectVehicleAction } from '../../redux/actions';
-import FullPageLoader from '../../components/Preloader/Preloader';
+import React, { Component } from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { Row, Col } from "antd";
+import style from "../styles/DealerReviewsPage.module.css";
+import { withRouter } from "next/router";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Select, Checkbox, Pagination } from "antd";
+import Review from "../../components/Review";
+import { selectReviews, selectVehicleAction } from "../../redux/actions";
+import FullPageLoader from "../../components/Preloader/Preloader";
 import {
   faStar,
   faDirections,
   faClock,
   faDesktop,
-} from '@fortawesome/free-solid-svg-icons';
-import Header from 'components/shared/Header';
-import GoogleIcon from '/public/assets/img/icons/google.png';
-import FacebookIcon from '/public/assets/img/icons/facebook.png';
+} from "@fortawesome/free-solid-svg-icons";
+import Header from "components/shared/Header";
+import GoogleIcon from "/public/assets/img/icons/google.png";
+import FacebookIcon from "/public/assets/img/icons/facebook.png";
 
 class DealerReviewsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       reviews: [],
-      checkboxValues: ['facebook', 'google'],
+      checkboxValues: ["facebook", "google"],
       page: 1,
       size: 0,
-      type: 'recent',
+      type: "recent",
     };
   }
 
   componentDidMount() {
     const { id } = this.props.router.query;
     if (id) {
-      this.props
-        .selectVehicleAction(id)
-        .then(() => this.fetchReviews(1, this.state.checkboxValues));
+      this.props.selectVehicleAction(id).then(() => {
+        this.fetchReviews(1, this.state.checkboxValues);
+      });
     }
   }
   componentDidUpdate(prevProps) {
@@ -54,21 +54,22 @@ class DealerReviewsPage extends Component {
       this.props
         .selectReviews(
           this.props.selectedVehicleItem.dealer.chatMeterLocationId,
-          value ? value : 'recent',
+          value ? value : "recent",
           page
         )
-        .then((data) =>
+        .then((data) => {
+          console.log({ data });
           this.setState({
             reviews: data.reviews,
             size: data.numberOfReviews / 5,
             page: page ? page : 1,
-          })
-        );
+          });
+        });
     } else if (filter.length === 1) {
       this.props
         .selectReviews(
           this.props.selectedVehicleItem.dealer.chatMeterLocationId,
-          value ? value : 'recent',
+          value ? value : "recent",
           page,
           filter[0]
         )
@@ -97,22 +98,22 @@ class DealerReviewsPage extends Component {
     this.fetchReviews(e, this.state.checkboxValues, this.state.type);
   };
   selectData = [
-    { name: 'Most Recent', value: 'recent' },
-    { name: 'Best Reviews', value: 'best' },
-    { name: 'Worst Reviews', value: 'worst' },
+    { name: "Most Recent", value: "recent" },
+    { name: "Best Reviews", value: "best" },
+    { name: "Worst Reviews", value: "worst" },
   ];
   checkboxOptions = [
-    { label: 'Google', value: 'google' },
-    { label: 'Facebook', value: 'facebook' },
+    { label: "Google", value: "google" },
+    { label: "Facebook", value: "facebook" },
   ];
   paginationButtons = (_current, type, originalElement) => {
-    if (type === 'prev') {
+    if (type === "prev") {
       return (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a className={style.paginationButtons}>Prev</a>
       );
     }
-    if (type === 'next') {
+    if (type === "next") {
       return (
         // eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a className={style.paginationButtons}>Next</a>
@@ -215,8 +216,8 @@ class DealerReviewsPage extends Component {
                   <div className={style.adress}>
                     {selectedVehicleItem.dealer?.dealerStreet1}
                     <br />
-                    {selectedVehicleItem.dealer?.dealerCity},{' '}
-                    {selectedVehicleItem.dealer?.dealerState}{' '}
+                    {selectedVehicleItem.dealer?.dealerCity},{" "}
+                    {selectedVehicleItem.dealer?.dealerState}{" "}
                     {selectedVehicleItem.dealer?.dealerZipCode}
                   </div>
                   <div className={style.direction}>
@@ -237,7 +238,7 @@ class DealerReviewsPage extends Component {
               </Col>
               <Col lg={15} xs={24} md={24}>
                 <iframe
-                  style={{ border: 0, width: '100%', height: '100%' }}
+                  style={{ border: 0, width: "100%", height: "100%" }}
                   title="map"
                   loading="lazy"
                   allowFullScreen
@@ -281,7 +282,7 @@ class DealerReviewsPage extends Component {
                     <Review
                       border
                       avatar={
-                        item.contentProvider === 'FACEBOOK'
+                        item.contentProvider === "FACEBOOK"
                           ? null
                           : item.reviewerPictureURL
                       }
@@ -290,7 +291,7 @@ class DealerReviewsPage extends Component {
                       date={item.reviewDate}
                       userName={item.reviewerUserName}
                       body={item.reviewDetail}
-                      title={item.reviewDetail?.split('. ', 1)[0]}
+                      title={item.reviewDetail?.split(". ", 1)[0]}
                     />
                   );
                 })

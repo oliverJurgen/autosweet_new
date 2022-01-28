@@ -85,11 +85,8 @@ const VehicleDetails = (props: any) => {
     );
   };
 
-  const vehicleModel = props?.data;
-  console.log({ vehicleModel });
-  // let { vehicleModel, imageURLs } = props;
+  const vehicleModel = props?.vehicleModel;
 
-  // console.log({ vehicleModel });
   const {
     year,
     make,
@@ -120,8 +117,6 @@ const VehicleDetails = (props: any) => {
       thumbnail: url,
       originalClass: "featured-slide",
     }));
-
-  // console.log({ seoTitle, seoDescription });
 
   return (
     <>
@@ -256,7 +251,7 @@ export async function getServerSideProps(ctx: NextPageContext) {
 
   return {
     props: {
-      data,
+      vehicleModel: data,
     },
   };
 }

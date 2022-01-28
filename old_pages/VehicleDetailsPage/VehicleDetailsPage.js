@@ -155,7 +155,6 @@ class VehicleDetailsPage extends React.Component {
     let { vehicleModel, searchValue, tags, selectedTags, router, imageURLs } =
       this.props;
 
-    console.log({ vehicleModel });
     const { conditionDescription, year, make, model, customText } =
       vehicleModel;
 
