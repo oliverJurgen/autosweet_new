@@ -1,11 +1,13 @@
 // import "../styles/globals.css";
+import { useEffect } from "react";
 import "../styles/index.css";
 import "../styles/Router.css";
 import "../node_modules/antd/dist/antd.css";
 import "../components/SearchArea/SearchArea.module.css";
-import Script from "next/script";
+// import Script from "next/script";
 import type { AppProps } from "next/app";
 import { DefaultSeo } from "next-seo";
+import TagManager from "react-gtm-module";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -21,9 +23,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       },
     },
   });
+
+  useEffect(() => {
+    TagManager.initialize({ gtmId: "GTM-PR9FW3P" });
+  }, []);
+
   return (
     <>
-      <Script
+      {/* <Script
         strategy="lazyOnload"
         src="https://www.googletagmanager.com/gtag/js?id=UA-214227270"
       />
@@ -38,12 +45,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         }
 
         `}
-      </Script>
+      </Script> */}
       <DefaultSeo
         title="Auto Sweet Autos"
         description="Automotive Marketing Agency for Dealerships"
         canonical="https://dev-autosweet.azurewebsites.net/"
         noindex={true}
+        nofollow={true}
         openGraph={{
           type: "website",
           url: "https://dev-autosweet.azurewebsites.net/",
