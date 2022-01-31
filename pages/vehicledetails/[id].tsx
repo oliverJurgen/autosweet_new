@@ -35,9 +35,10 @@ import VehicleInfoIconBlock from "components/VehicleInfoIconBlock";
 // import VehicleInformationIconBlock from "components/VehicleInformationIconBlock";
 // import OptionsBlock from "components/OptionsBlock";
 import VehicleFeatures from "components/VehicleFeatures";
-import SellerNotesBlock from "components/SellerNotesBlock";
+// import SellerNotesBlock from "components/SellerNotesBlock";
 import SellerNotes from "components/SellerNotes";
 import Footer from "components/Footer";
+import isStaging from "utils/isStaging";
 
 const getConditionDescription = (condition: 1 | 0) => {
   if (condition === 1) return "Pre-Owned";
@@ -85,11 +86,8 @@ const VehicleDetails = (props: any) => {
     );
   };
 
-  const vehicleModel = props?.data;
-  console.log({ vehicleModel });
-  // let { vehicleModel, imageURLs } = props;
+  const vehicleModel = props?.vehicleModel;
 
-  // console.log({ vehicleModel });
   const {
     year,
     make,
@@ -121,13 +119,13 @@ const VehicleDetails = (props: any) => {
       originalClass: "featured-slide",
     }));
 
-  // console.log({ seoTitle, seoDescription });
-
   return (
     <>
       <NextSeo
         title={seoTitle}
         description={seoDescription}
+        noindex={isStaging() && true}
+        nofollow={isStaging() && true}
         canonical={`https://dev-autosweet.azurewebsites.net${asPath}`}
         openGraph={{
           type: "website",
@@ -256,7 +254,7 @@ export async function getServerSideProps(ctx: NextPageContext) {
 
   return {
     props: {
-      data,
+      vehicleModel: data,
     },
   };
 }

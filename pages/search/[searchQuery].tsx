@@ -12,6 +12,7 @@ import useGeolocation from "react-hook-geolocation";
 import CarInfo from "components/CarInfo";
 import SearchArea from "components/SearchArea";
 import style from "../../old_pages/styles/SearchResults.module.css";
+import { chakra as c } from "@chakra-ui/react";
 import {
   changeResultPageAction,
   setSearchValueAction,
@@ -149,7 +150,9 @@ const Search: NextPage = () => {
         </header>
 
         {isLoading ? (
-          <CenterSpinner />
+          <c.div h="80vh">
+            <CenterSpinner />
+          </c.div>
         ) : (
           <>
             <article className={style.results}>

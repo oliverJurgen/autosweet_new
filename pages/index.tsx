@@ -18,6 +18,7 @@ import Footer from "components/Footer";
 import client from "utils/client";
 import dynamic from "next/dynamic";
 import Header from "components/shared/Header";
+import isStaging from "utils/isStaging";
 
 type QuickLinkType = {
   count: number;
@@ -90,7 +91,8 @@ const HomePage: NextPage = (props: any) => {
         />
       </Head>
       <NextSeo
-        noindex={true}
+        noindex={isStaging() && true}
+        nofollow={isStaging() && true}
         title="New and Used Cars for Sale | AutoSweet"
         description="The biggest database of used and pre-owned vehicles you can find in your area."
         canonical="https://dev-autosweet.azurewebsites.net/"
