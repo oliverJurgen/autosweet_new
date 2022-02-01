@@ -38,6 +38,11 @@ const SearchArea = dynamic(() => import("components/SearchArea"), {
   ssr: false,
 });
 
+console.log({
+  env: process.env.NEXT_PUBLIC_NODE_ENV,
+  nodeEnv: process.env.NODE_ENV,
+});
+
 const HomePage: NextPage = (props: any) => {
   const router = useRouter();
   const dispatch = useDispatch();

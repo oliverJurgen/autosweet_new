@@ -1,5 +1,5 @@
+import { NextPageContext, NextPage } from "next";
 import React from "react";
-import type { NextPage } from "next";
 import client from "utils/client";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -28,6 +28,10 @@ import { AiFillBackward, AiFillForward } from "react-icons/ai";
 
 type PageType = string | number | undefined;
 
+type Props = {
+  searchQuery: string;
+};
+
 const querySearch = (searchQuery: string, page?: PageType) => async () => {
   let finalQuery = searchQuery;
   if (searchQuery && searchQuery.indexOf("-") >= 0) {
@@ -48,7 +52,7 @@ const querySearch = (searchQuery: string, page?: PageType) => async () => {
   }
 };
 
-const Search: NextPage = () => {
+const Search: NextPage<Props> = (props: Props) => {
   const dispatch = useDispatch();
 
   const searchValue = useSelector(getSearchValue);
@@ -81,8 +85,10 @@ const Search: NextPage = () => {
     dispatch(clearSearchAction());
   }, []);
 
+  const searchQuery = props.searchQuery;
+
   const router = useRouter();
-  const searchQuery = router.query.searchQuery as string;
+  // const searchQuery = router.query.searchQuery as string;
   const page = router.query.page as string;
 
   const { data, isLoading } = useQuery(
@@ -224,3 +230,13 @@ const Search: NextPage = () => {
 };
 
 export default Search;
+
+export async function getServerSideProps(ctx: NextPageContext) {
+  const searchQuery = ctx?.query?.searchQuery;
+
+  return {
+    props: {
+      searchQuery,
+    },
+  };
+}
