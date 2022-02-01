@@ -119,7 +119,8 @@ class SearchResults extends React.Component {
       const page = router.query.page;
       const lat = router.query.lat;
       const lon = router.query.lon;
-
+      setLat(lat);
+      setLon(lon);
       // const params = new URLSearchParams(location.search);
       // const value = params.get("q") || "";
       // const page = params.get("page") || 1;
