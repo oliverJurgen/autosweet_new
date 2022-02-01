@@ -1,11 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
-import "react-image-gallery/styles/css/image-gallery.css";
-import style from "../../old_pages/styles/VehicleDetailsPage.module.css";
-import Link from "next/link";
-import { Image } from "@chakra-ui/react";
-import DirectionIcon from "public/assets/img/icons/VDP_02_Seller_Info_Direction_icon.png";
-import WebIcon from "public/assets/img/icons/VDP_02_Seller_Info_Website_icon.png";
+import React from 'react';
+import { connect } from 'react-redux';
+import 'react-image-gallery/styles/css/image-gallery.css';
+import style from '../../old_pages/styles/VehicleDetailsPage.module.css';
+import Link from 'next/link';
+import { Image } from '@chakra-ui/react';
+import DirectionIcon from 'public/assets/img/icons/VDP_02_Seller_Info_Direction_icon.png';
+import WebIcon from 'public/assets/img/icons/VDP_02_Seller_Info_Website_icon.png';
 
 type Props = {
   vehicleModel: any;
@@ -15,10 +15,10 @@ class VehicleSellerInfo extends React.Component<Props, any> {
   render() {
     const { vehicleModel } = this.props;
 
-    const options: any = { weekday: "long" };
+    const options: any = { weekday: 'long' };
     let D = new Date(),
       day = D.getUTCDay();
-    let dayText = new Intl.DateTimeFormat("en-US", options).format(day);
+    let dayText = new Intl.DateTimeFormat('en-US', options).format(day);
     let today = vehicleModel.dealer?.salesHours
       ? vehicleModel.dealer?.salesHours?.filter(
           (day: any) => day.day === dayText
@@ -38,7 +38,7 @@ class VehicleSellerInfo extends React.Component<Props, any> {
         </a>
         <span />
         <section className={style.hours}>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: 'flex' }}>
             <div className={style.clock} />
             <div>Hours of Operation:</div>
           </div>
@@ -46,15 +46,15 @@ class VehicleSellerInfo extends React.Component<Props, any> {
             <div>
               {vehicleModel.dealer?.salesHours && (
                 <div className={style.dropdown}>
-                  <div>{today && today.open + "-" + today.close}</div>
+                  <div>{today && today.open + '-' + today.close}</div>
                   <div className={`${style.dropbtn} ${style.arrowDowm}`}></div>
                   <div className={style.weekHours}>
                     {vehicleModel.dealer?.salesHours.map((item: any) => (
                       <div className={style.weekday}>
                         <div> {item.day}</div>
                         <div>
-                          {" "}
-                          {item.open} - {item.close}{" "}
+                          {' '}
+                          {item.open} - {item.close}{' '}
                         </div>
                       </div>
                     ))}
@@ -127,8 +127,8 @@ class VehicleSellerInfo extends React.Component<Props, any> {
           <p className={style.adress}>
             {vehicleModel.dealer?.dealerStreet1}
             <br />
-            {vehicleModel.dealer?.dealerCity},{" "}
-            {vehicleModel.dealer?.dealerState}{" "}
+            {vehicleModel.dealer?.dealerCity},{' '}
+            {vehicleModel.dealer?.dealerState}{' '}
             {vehicleModel.dealer?.dealerZipCode}
           </p>
           <p className={style.direction}>
@@ -143,7 +143,7 @@ class VehicleSellerInfo extends React.Component<Props, any> {
           </p>
         </section>
         <footer>
-          <Link href="/credit-form">
+          <Link href={`/credit-form/${vehicleModel.id}`}>
             <button className={`${style.btn} ${style.gbtn}`}>
               Get Pre-Qualified Now
             </button>
