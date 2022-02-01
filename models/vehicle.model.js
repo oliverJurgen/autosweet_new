@@ -7,7 +7,9 @@ export default class VehicleModel {
     this.year = data.year;
     this.mileage = data.mileage || '';
     this.model = data.model;
-    this.dealer = data.dealer ? new DealerModel(data.dealer) : {};
+    this.dealer = data.dealer
+      ? new DealerModel(data.dealer)
+      : new DealerModel();
     this.series = data.series;
     this.engineDescription = data.engineDescription;
     this.extColor = data.extColor;
