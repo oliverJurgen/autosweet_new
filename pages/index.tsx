@@ -44,6 +44,7 @@ console.log({
 });
 
 const HomePage: NextPage = (props: any) => {
+  console.log({ isStaging: isStaging() });
   const router = useRouter();
   const dispatch = useDispatch();
   const geoLocation = useGeolocation();
