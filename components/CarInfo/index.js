@@ -1,22 +1,21 @@
-import React from "react";
-import style from "./CarInfo.module.css";
-import { faArrowAltCircleUp } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { withRouter } from "next/router";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { selectVehicleAction, setAnchor } from "../../redux/actions";
-import Link from "next/link";
+import React from 'react';
+import style from './CarInfo.module.css';
+import { faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { withRouter } from 'next/router';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import {
+  selectVehicleAction,
+  setAnchor,
+  setVehicleId,
+} from '../../redux/actions';
+import Link from 'next/link';
 
 class CarItem extends React.Component {
   constructor(props) {
     super(props);
   }
-
-  formPage = () => {
-    this.props.selectVehicleAction(this.props.id);
-    this.props.router.push("/credit-form");
-  };
 
   // vehicleDetails(anchor) {
   //   if (anchor) {
@@ -61,7 +60,7 @@ class CarItem extends React.Component {
     // const vehicleModelUrl = `/vehicledetails/${id}?vin=${vin}&stockNum=${stockNumber}&dCity=${dealer.city}&dState=${dealer.state}&make=${make}&model=${model}&trim=${trim}`;
     const vehicleModelUrl = `/vehicledetails/${id}`;
 
-    const image = imageURLs && imageURLs.split("|")[0];
+    const image = imageURLs && imageURLs.split('|')[0];
 
     let priceCompare =
       listingPriceMktPriceCompare > cost ? style.priceGreen : style.priceRed;
@@ -98,22 +97,22 @@ class CarItem extends React.Component {
               <p className={style.textDecoration}>
                 Come see this {year} {make} today! - Exterior: {extColor}-
                 Interior: {intColor}-<br />
-                {engineDescription}- {transmissionType}-{cityMPG} MPG City -{" "}
+                {engineDescription}- {transmissionType}-{cityMPG} MPG City -{' '}
                 {highwayMPG} MPG <br />
-                Highway - OVER ${internetPrice.toLocaleString("en-us")} is
+                Highway - OVER ${internetPrice.toLocaleString('en-us')} is
                 saving!
               </p>
             </a>
           </Link>
           <footer className={style.cardfooter}>
-            <span style={{ fontWeight: "600" }}>
-              {mileage ? mileage.toLocaleString("en-us") : "-"} Miles
+            <span style={{ fontWeight: '600' }}>
+              {mileage ? mileage.toLocaleString('en-us') : '-'} Miles
             </span>
             <div className={style.price}>
               <span>
                 $
-                {(listPrice || internetPrice || cost || "-").toLocaleString(
-                  "en-us"
+                {(listPrice || internetPrice || cost || '-').toLocaleString(
+                  'en-us'
                 )}
               </span>
               <figure>
@@ -136,7 +135,7 @@ class CarItem extends React.Component {
                 {dealer.googleScore} (
                 {dealer.numberOfGoogleReviews
                   ? dealer.numberOfGoogleReviews
-                  : "-"}
+                  : '-'}
                 )
               </span>
             </div>
@@ -156,13 +155,16 @@ class CarItem extends React.Component {
                 {dealer.facebookScore} (
                 {dealer.numberOfFacebookReviews
                   ? dealer.numberOfFacebookReviews
-                  : "-"}
+                  : '-'}
                 )
               </span>
             </div>
-            <button className={style.formButton} onClick={this.formPage}>
+            <a
+              className={style.formButton}
+              href={`/credit-form/${this.props.id}`}
+            >
               GET PRE-QUALIFIED NOW
-            </button>
+            </a>
           </footer>
         </section>
       </section>
@@ -178,5 +180,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, { selectVehicleAction, setAnchor })
+  connect(mapStateToProps, { selectVehicleAction, setAnchor, setVehicleId })
 )(CarItem);

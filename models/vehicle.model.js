@@ -7,7 +7,9 @@ export default class VehicleModel {
     this.year = data.year;
     this.mileage = data.mileage || '';
     this.model = data.model;
-    this.dealer = data.dealer ? new DealerModel(data.dealer) : {};
+    this.dealer = data.dealer
+      ? new DealerModel(data.dealer)
+      : new DealerModel();
     this.series = data.series;
     this.engineDescription = data.engineDescription;
     this.extColor = data.extColor;
@@ -19,6 +21,7 @@ export default class VehicleModel {
     this.highwayMPG = data.highwayMPG;
     this.internetPrice = data.internetPrice || '';
     this.listPrice = data.listPrice || '';
+    this.autoSweetDealerId = data.autoSweetDealerId || '';
     this.trim = data.trim;
     this.condition = data.condition;
     this.drivetrain = data.drivetrain;
@@ -27,14 +30,14 @@ export default class VehicleModel {
     this.dealerWebsite = data.dealerWebsite;
     this.phoneNumber = data.phoneNumber || '';
     this.customText = data.customText;
-    this.options = data.options || '' ;
+    this.options = data.options || '';
     this.vin = data.vin;
     this.liked = data.liked;
     this.disliked = data.disliked;
     this.cost = data.cost;
     this.listingPriceMktPriceCompare = data.listingPriceMktPriceCompare;
 
-    switch (data.condition){
+    switch (data.condition) {
       case 1:
         this.conditionDescription = 'Pre-Owned';
         break;
