@@ -1,13 +1,13 @@
-import { NextPageContext } from "next";
-import { NextSeo } from "next-seo";
-import ImageGallery from "react-image-gallery";
-import SearchArea from "components/SearchArea";
-import Header from "components/shared/Header";
-import { Image } from "@chakra-ui/react";
-import style from "old_pages/styles/VehicleDetailsPage.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import useGeolocation from "react-hook-geolocation";
-import { useRouter } from "next/router";
+import { NextPageContext } from 'next';
+import { NextSeo } from 'next-seo';
+import ImageGallery from 'react-image-gallery';
+import SearchArea from 'components/SearchArea';
+import Header from 'components/shared/Header';
+import { Image } from '@chakra-ui/react';
+import style from 'old_pages/styles/VehicleDetailsPage.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import useGeolocation from 'react-hook-geolocation';
+import { useRouter } from 'next/router';
 
 import {
   changeResultPageAction,
@@ -15,35 +15,37 @@ import {
   addTag,
   removeTag,
   clearSearchAction,
-} from "redux/actions";
+  likeAction,
+  disLikeAction,
+} from 'redux/actions';
 
-import { getSearchValue, getSelectedTags } from "redux/selectors";
-import client from "utils/client";
+import { getSearchValue, getSelectedTags } from 'redux/selectors';
+import client from 'utils/client';
 
-import ImagesGallerySection from "components/ImagesGallerySection";
-import Dislike from "/public/assets/img/icons/VDP_01_Ignore_Toggle_Grey.png";
-import DislikeActive from "/public/assets/img/icons/VDP_01_Ignore_Toggle.png";
-import LikeActive from "/public/assets/img/icons/VDP_01_Save_Toggle.png";
-import CarFaxIcon from "/public/assets/img/icons/carfax-certified-pre-owned-used-car-vehicle-ryan-gosling.jpg";
-import Like from "/public/assets/img/icons/VDP_01_Save_Toggle_Grey.png";
-import FuelEconomyIcon from "/public/assets/img/icons/VDP_02_Vehicle_Info_Fuel_Economy.png";
+import ImagesGallerySection from 'components/ImagesGallerySection';
+import Dislike from '/public/assets/img/icons/VDP_01_Ignore_Toggle_Grey.png';
+import DislikeActive from '/public/assets/img/icons/VDP_01_Ignore_Toggle.png';
+import LikeActive from '/public/assets/img/icons/VDP_01_Save_Toggle.png';
+import CarFaxIcon from '/public/assets/img/icons/carfax-certified-pre-owned-used-car-vehicle-ryan-gosling.jpg';
+import Like from '/public/assets/img/icons/VDP_01_Save_Toggle_Grey.png';
+import FuelEconomyIcon from '/public/assets/img/icons/VDP_02_Vehicle_Info_Fuel_Economy.png';
 // import SellerInfo from "components/SellerInfo";
-import VehicleSellerInfo from "components/VehicleSellerInfo";
-import VehicleInformation from "components/VehicleInformation";
-import VehicleInfoIconBlock from "components/VehicleInfoIconBlock";
+import VehicleSellerInfo from 'components/VehicleSellerInfo';
+import VehicleInformation from 'components/VehicleInformation';
+import VehicleInfoIconBlock from 'components/VehicleInfoIconBlock';
 // import VehicleInformationSection from "components/VehicleInformationSection";
 // import VehicleInformationIconBlock from "components/VehicleInformationIconBlock";
 // import OptionsBlock from "components/OptionsBlock";
-import VehicleFeatures from "components/VehicleFeatures";
+import VehicleFeatures from 'components/VehicleFeatures';
 // import SellerNotesBlock from "components/SellerNotesBlock";
-import SellerNotes from "components/SellerNotes";
-import Footer from "components/Footer";
-import isStaging from "utils/isStaging";
+import SellerNotes from 'components/SellerNotes';
+import Footer from 'components/Footer';
+import isStaging from 'utils/isStaging';
 
 const getConditionDescription = (condition: 1 | 0) => {
-  if (condition === 1) return "Pre-Owned";
-  if (condition === 0) return "New";
-  return "New";
+  if (condition === 1) return 'Pre-Owned';
+  if (condition === 0) return 'New';
+  return 'New';
 };
 
 const VehicleDetails = (props: any) => {
@@ -54,19 +56,19 @@ const VehicleDetails = (props: any) => {
 
   const dispatch = useDispatch();
   const geoLocation = useGeolocation();
-  const lat = geoLocation.latitude || "";
-  const lon = geoLocation.longitude || "";
+  const lat = geoLocation.latitude || '';
+  const lon = geoLocation.longitude || '';
 
   const runSearch = (value: string) => {
     dispatch(changeResultPageAction(1));
     router.push(
-      "/search-result?q=" +
+      '/search-result?q=' +
         value +
-        "&page=1" +
-        "&tags=" +
-        "&lat=" +
+        '&page=1' +
+        '&tags=' +
+        '&lat=' +
         lat +
-        "&lon=" +
+        '&lon=' +
         lon
     );
   };
@@ -103,6 +105,12 @@ const VehicleDetails = (props: any) => {
     dealer,
   } = vehicleModel;
 
+  const handleLikeDislike = (type: string) => {
+    type === 'like'
+      ? dispatch(likeAction(vehicleModel.id))
+      : dispatch(disLikeAction(vehicleModel.id));
+  };
+
   const conditionDescription = getConditionDescription(condition);
 
   const seoTitle = `${conditionDescription} ${year}
@@ -111,12 +119,12 @@ const VehicleDetails = (props: any) => {
   const { asPath } = router;
 
   const images = imageURLs
-    .split("|")
+    .split('|')
     .filter((v: any) => !!v)
     .map((url: string) => ({
       original: url,
       thumbnail: url,
-      originalClass: "featured-slide",
+      originalClass: 'featured-slide',
     }));
 
   return (
@@ -128,17 +136,17 @@ const VehicleDetails = (props: any) => {
         nofollow={isStaging() && true}
         canonical={`https://dev-autosweet.azurewebsites.net${asPath}`}
         openGraph={{
-          type: "website",
+          type: 'website',
           url: `https://dev-autosweet.azurewebsites.net${asPath}`,
-          site_name: "Auto Sweet Autos",
-          description: "Automotive Marketing Agency for Dealerships",
+          site_name: 'Auto Sweet Autos',
+          description: 'Automotive Marketing Agency for Dealerships',
           images: [
             {
               url: imageURLs,
               width: 400,
               height: 300,
-              alt: "AutoSweet Logo",
-              type: "image/png",
+              alt: 'AutoSweet Logo',
+              type: 'image/png',
             },
           ],
         }}
@@ -162,23 +170,23 @@ const VehicleDetails = (props: any) => {
                   {conditionDescription} {year} {make} {model}
                 </div>
                 <div className={style.gray}>
-                  {mileage ? mileage.toLocaleString("en-us") : "-"} Miles
+                  {mileage ? mileage.toLocaleString('en-us') : '-'} Miles
                 </div>
               </div>
               <div>
                 <picture
-                // COMMENT OUT TEMPORARILY
-                // onClick={this.onLikeHandler}
+                  // COMMENT OUT TEMPORARILY
+                  onClick={() => handleLikeDislike('like')}
                 >
                   <Image
-                    src={liked ? LikeActive.src : Like.src}
+                    src={vehicleModel.liked ? LikeActive.src : Like.src}
                     alt="Like"
                     className={style.likeActionIcon}
                   />
                 </picture>
                 <picture
-                // COMMENT OUT TEMPORARILY
-                // onClick={this.onDisLikeHandler}
+                  // COMMENT OUT TEMPORARILY
+                  onClick={() => handleLikeDislike('dislike')}
                 >
                   <Image
                     src={disliked ? DislikeActive.src : Dislike.src}
