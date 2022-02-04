@@ -4,11 +4,16 @@ import { Row, Col } from "antd";
 import Navigation from "components/Navigation";
 // import { NavLink } from "react-router-dom";
 import Link from "next/link";
-// import style from "../styles/TermsPrivacy.module.css";
 import style from "styles/modules/TermsPrivacy.module.css";
+import { NextSeo } from "next-seo";
 
 const PrivacyPolicy = () => (
   <>
+    <NextSeo
+      title="Vehicle Trade In"
+      description="Get Your Vehicle's Trade Value with ease."
+      canonical={`https://dev-autosweet.azurewebsites.net/privacypolicy`}
+    />
     <header className={style.Header}>
       <Link href="/">
         <span className={style.logo} />

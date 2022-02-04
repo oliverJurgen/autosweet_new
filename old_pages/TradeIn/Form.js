@@ -18,7 +18,8 @@ import { selectVehicleAction } from "../../redux/actions";
 
 import http from "../../services/api";
 
-import Navigation from "../../components/Navigation";
+// import Navigation from "../../components/Navigation";
+import { NextSeo } from "next-seo";
 import style from "../styles/TradeIn.module.css";
 import FormItem from "antd/lib/form/FormItem";
 import Header from "components/shared/Header";
@@ -117,6 +118,11 @@ class TradeInForm extends Component {
     const tradeInData = this.state.submitData;
     return (
       <>
+        <NextSeo
+          title="Vehicle Trade In"
+          description="Get Your Vehicle's Trade Value with ease."
+          canonical="https://dev-autosweet.azurewebsites.net/tradein"
+        />
         <Header />
         <Row className={style.content} justify="center">
           <Col xs={24}>
