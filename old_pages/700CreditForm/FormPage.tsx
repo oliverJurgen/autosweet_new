@@ -1,48 +1,54 @@
-import Header from 'components/shared/Header';
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Button, Col, Row, Select, Form, Input, Checkbox } from 'antd';
+import { NextPageContext } from "next";
+import Header from "components/shared/Header";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Button, Col, Row, Select, Form, Input, Checkbox } from "antd";
 
-import { selectStatesAction } from 'redux/actions';
-import style from '../styles/FormPage.module.css';
-import { Poster, Poster2, Poster3, Poster4 } from 'public/assets/img/posters';
-import welcomeEn from 'public/assets/videos/welcomeEN.mp4';
-import welcomeSp from 'public/assets/videos/welcomeSP.mp4';
-import VehicleModel from 'models/vehicle.model';
-import http from 'services/api';
-import { useRouter } from 'next/router';
+import { selectStatesAction } from "redux/actions";
+import style from "../styles/FormPage.module.css";
+import { Poster, Poster2, Poster3, Poster4 } from "public/assets/img/posters";
+import welcomeEn from "public/assets/videos/welcomeEN.mp4";
+import welcomeSp from "public/assets/videos/welcomeSP.mp4";
+import VehicleModel from "models/vehicle.model";
+import { NextSeo } from "next-seo";
+import http from "services/api";
+import { useRouter } from "next/router";
 
 const posterId = Math.floor(Math.random() * 4);
 
 const initialValues = {
-  firstName: '',
-  middleName: '',
-  lastName: '',
-  suffix: '',
-  address: '',
-  zip: '',
-  city: '',
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  suffix: "",
+  address: "",
+  zip: "",
+  city: "",
   stateId: null,
-  homePhone: '',
-  cellPhone: '',
-  email: '',
-  comments: '',
+  homePhone: "",
+  cellPhone: "",
+  email: "",
+  comments: "",
   agreeWithPolicies: false,
 };
 
-const FormPage = () => {
+type Props = {
+  vehicleId?: string;
+};
+
+const FormPage = ({ vehicleId }: Props) => {
   const router = useRouter();
   const posters = [Poster, Poster2, Poster3, Poster4];
   const state: any = useSelector((state) => state);
 
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState("en");
   const [vehicle, setVehicle] = useState(new VehicleModel());
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(selectStatesAction());
-    if (window.navigator.language.includes('es')) {
-      setLanguage('es');
+    if (window.navigator.language.includes("es")) {
+      setLanguage("es");
     }
   }, []);
 
@@ -60,11 +66,11 @@ const FormPage = () => {
   const onSubmit = async (values: any) => {
     try {
       console.log(vehicle);
-      await http.post('api/credit', {
+      await http.post("api/credit", {
         ...values,
         autoSweetDealerId: vehicle?.autoSweetDealerId || 1,
       });
-      const id = router.query.id ? router.query.id : '';
+      const id = router.query.id ? router.query.id : "";
       router.push(`/thank-you/${language}/${id}`);
     } catch (e) {
       console.log(e);
@@ -73,6 +79,11 @@ const FormPage = () => {
 
   return (
     <>
+      <NextSeo
+        title="Credit Form"
+        description="Credit Form Description"
+        canonical={`https://dev-autosweet.azurewebsites.net/credit-form/${vehicleId}`}
+      />
       <Header />
       <main>
         <Row justify="center" className={style.content}>
@@ -83,8 +94,8 @@ const FormPage = () => {
                 onChange={(value) => setLanguage(value)}
               >
                 {[
-                  { value: 'en', name: 'English' },
-                  { value: 'es', name: 'Spain' },
+                  { value: "en", name: "English" },
+                  { value: "es", name: "Spain" },
                 ].map((item) => (
                   <Select.Option key={item.value} value={item.value}>
                     {item.name}
@@ -96,7 +107,7 @@ const FormPage = () => {
               <video
                 controls
                 className={style.video}
-                src={language === 'es' ? welcomeSp : welcomeEn}
+                src={language === "es" ? welcomeSp : welcomeEn}
                 autoPlay
               />
             </Row>
@@ -124,11 +135,11 @@ const FormPage = () => {
                             rules={[
                               {
                                 required: true,
-                                message: 'Please enter First Name.',
+                                message: "Please enter First Name.",
                               },
                               {
                                 pattern: /^[a-zA-Z]+$/,
-                                message: 'Should contain letters only.',
+                                message: "Should contain letters only.",
                               },
                             ]}
                           >
@@ -143,11 +154,11 @@ const FormPage = () => {
                             rules={[
                               {
                                 required: true,
-                                message: 'Please enter Last Name.',
+                                message: "Please enter Last Name.",
                               },
                               {
                                 pattern: /^[a-zA-Z]+$/,
-                                message: 'Should contain letters only.',
+                                message: "Should contain letters only.",
                               },
                             ]}
                           >
@@ -164,7 +175,7 @@ const FormPage = () => {
                             rules={[
                               {
                                 pattern: /^[a-zA-Z]+$/,
-                                message: 'Should contain letters only.',
+                                message: "Should contain letters only.",
                               },
                             ]}
                           >
@@ -179,7 +190,7 @@ const FormPage = () => {
                             rules={[
                               {
                                 pattern: /^[a-zA-Z]+$/,
-                                message: 'Should contain letters only.',
+                                message: "Should contain letters only.",
                               },
                             ]}
                           >
@@ -205,7 +216,7 @@ const FormPage = () => {
                           rules={[
                             {
                               required: true,
-                              message: 'Please enter Address.',
+                              message: "Please enter Address.",
                             },
                           ]}
                         >
@@ -221,7 +232,7 @@ const FormPage = () => {
                             rules={[
                               {
                                 required: true,
-                                message: 'Please select State!',
+                                message: "Please select State!",
                               },
                             ]}
                           >
@@ -242,12 +253,12 @@ const FormPage = () => {
                             rules={[
                               {
                                 required: true,
-                                message: 'Please enter City name.',
+                                message: "Please enter City name.",
                               },
                               {
                                 pattern:
                                   /^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/,
-                                message: 'Wrong City name.',
+                                message: "Wrong City name.",
                               },
                             ]}
                           >
@@ -262,11 +273,11 @@ const FormPage = () => {
                             rules={[
                               {
                                 pattern: /^\d{5}$/,
-                                message: 'Should contain 5-digit number.',
+                                message: "Should contain 5-digit number.",
                               },
                               {
                                 required: true,
-                                message: 'Please enter ZIP code.',
+                                message: "Please enter ZIP code.",
                               },
                             ]}
                           >
@@ -294,11 +305,11 @@ const FormPage = () => {
                             rules={[
                               {
                                 pattern: /^\d{3}-\d{3}-\d{4}$/,
-                                message: 'Format: xxx-xxx-xxxx',
+                                message: "Format: xxx-xxx-xxxx",
                               },
                               {
                                 required: true,
-                                message: 'Please enter Cell Phone!',
+                                message: "Please enter Cell Phone!",
                               },
                             ]}
                           >
@@ -313,7 +324,7 @@ const FormPage = () => {
                             rules={[
                               {
                                 pattern: /^\d{3}-\d{3}-\d{4}$/,
-                                message: 'Format: xxx-xxx-xxxx',
+                                message: "Format: xxx-xxx-xxxx",
                               },
                             ]}
                           >
@@ -334,12 +345,12 @@ const FormPage = () => {
                         label="E-mail"
                         rules={[
                           {
-                            type: 'email',
-                            message: 'The input is not valid E-mail.',
+                            type: "email",
+                            message: "The input is not valid E-mail.",
                           },
                           {
                             required: true,
-                            message: 'Please enter E-mail.',
+                            message: "Please enter E-mail.",
                           },
                         ]}
                       >
@@ -369,7 +380,7 @@ const FormPage = () => {
                   By clicking the I Agree checkbox and Submit, I consent to have
                   my credit file accessed for purposes of prequalifying for a
                   vehicle loan. This is a soft inquiry and will not impact my
-                  credit score. I agree to the{' '}
+                  credit score. I agree to the{" "}
                   <a
                     href="/privacypolicy"
                     target="_blank"
@@ -377,14 +388,14 @@ const FormPage = () => {
                   >
                     Privacy Notice
                   </a>
-                  ,{' '}
+                  ,{" "}
                   <a
                     href="/termsandconditions"
                     target="_blank"
                     className={style.bold}
                   >
                     Terms and Conditions
-                  </a>{' '}
+                  </a>{" "}
                   and I acknowledge I may be contacted by 700 XML Test Account.
                   I understand that I might not prequalify depending on the
                   prequalification criteria.
@@ -398,7 +409,7 @@ const FormPage = () => {
                         value
                           ? Promise.resolve()
                           : Promise.reject(
-                              new Error('Should accept agreement')
+                              new Error("Should accept agreement")
                             ),
                     },
                   ]}
