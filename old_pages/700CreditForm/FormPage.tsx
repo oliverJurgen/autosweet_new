@@ -68,7 +68,7 @@ const FormPage = ({ vehicleId }: Props) => {
       console.log(vehicle);
       await http.post("api/credit", {
         ...values,
-        autoSweetDealerId: vehicle?.autoSweetDealerId || 12,
+        autoSweetDealerId: vehicle?.autoSweetDealerId || 1,
       });
       const id = router.query.id ? router.query.id : "";
       router.push(`/thank-you/${language}/${id}`);
