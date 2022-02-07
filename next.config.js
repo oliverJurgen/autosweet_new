@@ -13,7 +13,5 @@ module.exports = withTm(
     images: {
       domains: ["lh3.googleusercontent.com"],
     },
-    assetPrefix:
-      "https://autosweet-conent.azureedge.net/assets",
   })
 );
