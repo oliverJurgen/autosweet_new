@@ -13,5 +13,8 @@ module.exports = withTm(
     images: {
       domains: ["lh3.googleusercontent.com"],
     },
+    assetPrefix:
+      process.env.NEXT_PUBLIC_NODE_ENV ||
+      "https://autosweetstaticcontent.blob.core.windows.net/assets",
   })
 );
