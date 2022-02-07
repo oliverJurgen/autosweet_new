@@ -1,6 +1,5 @@
-import { NextPageContext } from "next";
 import Header from "components/shared/Header";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Col, Row, Select, Form, Input, Checkbox } from "antd";
 
@@ -109,6 +108,7 @@ const FormPage = ({ vehicleId }: Props) => {
                 className={style.video}
                 src={language === "es" ? welcomeSp : welcomeEn}
                 autoPlay
+                preload="none"
               />
             </Row>
             <Row>
