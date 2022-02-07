@@ -14,7 +14,7 @@ module.exports = withTm(
       domains: ["lh3.googleusercontent.com"],
     },
     assetPrefix:
-      process.env.NEXT_PUBLIC_NODE_ENV ||
+      process.env.NEXT_PUBLIC_NODE_ENV === "production" ||
       "https://autosweet-conent.azureedge.net/assets",
   })
 );
