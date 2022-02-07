@@ -15,6 +15,6 @@ module.exports = withTm(
     },
     assetPrefix:
       process.env.NEXT_PUBLIC_NODE_ENV ||
-      "https://autosweetstaticcontent.blob.core.windows.net/assets",
+      "https://autosweet-conent.azureedge.net/assets",
   })
 );
