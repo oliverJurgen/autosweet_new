@@ -15,7 +15,7 @@ const Header = () => {
       <Link href="/">
         <c.div cursor="pointer">
           <picture>
-            <Image w="150px" src={Logo.src} alt="logo" loading="lazy" />
+            <Image w="150px" src={Logo.src} alt="logo"/>
           </picture>
         </c.div>
       </Link>
