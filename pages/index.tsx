@@ -41,7 +41,6 @@ const SearchArea = dynamic(() => import("components/SearchArea"), {
 console.log({
   env: process.env.NEXT_PUBLIC_NODE_ENV,
   nodeEnv: process.env.NODE_ENV,
-  test: "test",
 });
 
 const HomePage: NextPage = (props: any) => {
