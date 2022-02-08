@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { chakra as c, Image, Flex } from "@chakra-ui/react";
+import { chakra as c, Flex } from "@chakra-ui/react";
 import Navigation from "components/Navigation";
 import Logo from "/public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
+import Image from "next/image";
 
 const Header = () => {
   return (
@@ -11,11 +12,18 @@ const Header = () => {
       justifyContent="space-between"
       align="center"
       minH="7vh"
+      // bg="tomato"
     >
       <Link href="/">
         <c.div cursor="pointer">
           <picture>
-            <Image w="150px" src={Logo.src} alt="logo"/>
+            <Image
+              width="150px"
+              height="150px"
+              objectFit="contain"
+              src={Logo.src}
+              alt="logo"
+            />
           </picture>
         </c.div>
       </Link>

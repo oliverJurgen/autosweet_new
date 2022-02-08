@@ -19,6 +19,9 @@ import client from "utils/client";
 import dynamic from "next/dynamic";
 import Header from "components/shared/Header";
 import isStaging from "utils/isStaging";
+// import Image from "next/image";
+import { Flex, Image } from "@chakra-ui/react";
+import CarImage from "public/assets/img/imageedit_1_9231715404.png";
 
 type QuickLinkType = {
   count: number;
@@ -121,7 +124,7 @@ const HomePage: NextPage = (props: any) => {
       />
       <Header />
       <main>
-        <section className={style.searchSection}>
+        {/* <section className={style.searchSection}>
           <div>
             <SearchArea
               dark={true}
@@ -134,7 +137,33 @@ const HomePage: NextPage = (props: any) => {
               onToggleTag={toggleTag}
             />
           </div>
-        </section>
+        </section> */}
+
+        <Flex
+          justify="center"
+          className={style.searchSection}
+          bgGradient="linear(to-b, #303030, rgba(255, 255, 255, 0))"
+        >
+          <Image
+            height="58vh"
+            width="100%"
+            src={CarImage.src}
+            position="absolute"
+            zIndex={-9999}
+            loading="lazy"
+          />
+          <SearchArea
+            dark={true}
+            tags={tags}
+            selectedTags={selectedTags}
+            onSearch={runSearch}
+            searchValue={searchValue}
+            onSearchChange={searchTermChange}
+            onRemoveTag={handleRemoveTag}
+            onToggleTag={toggleTag}
+          />
+        </Flex>
+
         <section className={style.quickLinkSection}>
           <article className={style.linkArticle}>
             <header>

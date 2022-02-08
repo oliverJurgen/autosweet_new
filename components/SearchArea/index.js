@@ -2,6 +2,7 @@ import React from "react";
 import style from "./SearchArea.module.css";
 import clsx from "clsx";
 import SearchTags from "../SearchTags";
+import Image from "next/image";
 
 const MIN_SYMBOL_COUNT = 1;
 const TAGS_VISIBILITY_COUNT = 10;
@@ -63,10 +64,12 @@ class SearchArea extends React.Component {
       <div className={clsx([style.searcharea, dark && style.dark])}>
         <div className={style.search}>
           <div className={clsx([style.icon])} onClick={this.search}>
-            <img
+            <Image
               src="/assets/img/icons/Landing_Page_02_Search_icon.png"
               alt="Search"
               loading="lazy"
+              width="24px"
+              height="24px"
             />
           </div>
           <input
@@ -84,10 +87,12 @@ class SearchArea extends React.Component {
           </div>
           <div className={style.divider}></div>
           <div className={clsx([style.icon])} onClick={this.toggleTagsPanel}>
-            <img
+            <Image
               src="/assets/img/icons/SRP_02_Tag_Black.png"
               alt="Tag"
               loading="lazy"
+              width="24px"
+              height="24px"
             />
           </div>
         </div>

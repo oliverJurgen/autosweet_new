@@ -1,11 +1,19 @@
 import React from "react";
 import style from "./Footer.module.css";
 import Logotype from "public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
+import Image from "next/image";
 
 const Footer = () => {
   return (
     <footer className={style.footer}>
-      <img src={Logotype.src} alt="logotype" loading="lazy" />
+      <Image
+        src={Logotype.src}
+        alt="logotype"
+        loading="lazy"
+        objectFit="contain"
+        height="150px"
+        width="150px"
+      />
       <ul className={style.menu}>
         <li>OUR COMPANY</li>
         <li>SITE INFO</li>
