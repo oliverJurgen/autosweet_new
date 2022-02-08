@@ -16,10 +16,9 @@ import { getSearchValue, getSelectedTags } from "redux/selectors";
 import style from "styles/modules/HomePage.module.css";
 import Footer from "components/Footer";
 import client from "utils/client";
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 import Header from "components/shared/Header";
 import isStaging from "utils/isStaging";
-import SearchArea from "components/SearchArea";
 
 type QuickLinkType = {
   count: number;
@@ -35,9 +34,9 @@ const quicklinkTypes = {
   BRAND: "Brand",
 };
 
-// const SearchArea = dynamic(() => import("components/SearchArea"), {
-//   ssr: false,
-// });
+const SearchArea = dynamic(() => import("components/SearchArea"), {
+  ssr: false,
+});
 
 // console.log({
 //   env: process.env.NEXT_PUBLIC_NODE_ENV,
