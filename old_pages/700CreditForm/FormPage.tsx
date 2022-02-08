@@ -81,7 +81,11 @@ const FormPage = ({ vehicleId }: Props) => {
       <NextSeo
         title="Credit Form"
         description="Credit Form Description"
-        canonical={`https://dev-autosweet.azurewebsites.net/credit-form/${vehicleId}`}
+        canonical={
+          vehicleId
+            ? `https://dev-autosweet.azurewebsites.net/credit-form/${vehicleId}`
+            : "https://dev-autosweet.azurewebsites.net/credit-form/"
+        }
       />
       <Header />
       <main>
