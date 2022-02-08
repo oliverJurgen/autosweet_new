@@ -6,8 +6,8 @@ import { Button, Col, Row, Select, Form, Input, Checkbox } from "antd";
 import { selectStatesAction } from "redux/actions";
 import style from "../styles/FormPage.module.css";
 import { Poster, Poster2, Poster3, Poster4 } from "public/assets/img/posters";
-import welcomeEn from "public/assets/videos/welcomeEN.mp4";
-import welcomeSp from "public/assets/videos/welcomeSP.mp4";
+// import welcomeEn from "public/assets/videos/welcomeEN.mp4";
+// import welcomeSp from "public/assets/videos/welcomeSP.mp4";
 import VehicleModel from "models/vehicle.model";
 import { NextSeo } from "next-seo";
 import http from "services/api";
@@ -103,13 +103,13 @@ const FormPage = ({ vehicleId }: Props) => {
               </Select>
             </Row>
             <Row>
-              <video
+              {/* <video
                 controls
                 className={style.video}
                 src={language === "es" ? welcomeSp : welcomeEn}
                 autoPlay
                 preload="none"
-              />
+              /> */}
             </Row>
             <Row>
               <Form
