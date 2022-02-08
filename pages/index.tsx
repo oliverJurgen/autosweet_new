@@ -151,6 +151,7 @@ const HomePage: NextPage = (props: any) => {
             position="absolute"
             zIndex={-9999}
             loading="lazy"
+            objectFit="cover"
           />
           <SearchArea
             dark={true}
