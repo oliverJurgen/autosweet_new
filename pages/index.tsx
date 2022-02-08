@@ -19,7 +19,6 @@ import client from "utils/client";
 import dynamic from "next/dynamic";
 import Header from "components/shared/Header";
 import isStaging from "utils/isStaging";
-// import Image from "next/image";
 import { Flex, Image } from "@chakra-ui/react";
 import CarImage from "public/assets/img/imageedit_1_9231715404.png";
 

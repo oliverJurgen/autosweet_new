@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { chakra as c, Flex } from "@chakra-ui/react";
+import { chakra as c, Flex, Image } from "@chakra-ui/react";
 import Navigation from "components/Navigation";
 import Logo from "/public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
-import Image from "next/image";
 
 const Header = () => {
   return (

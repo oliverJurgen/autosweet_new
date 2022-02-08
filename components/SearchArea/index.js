@@ -2,7 +2,7 @@ import React from "react";
 import style from "./SearchArea.module.css";
 import clsx from "clsx";
 import SearchTags from "../SearchTags";
-import Image from "next/image";
+import { Image } from "@chakra-ui/react";
 
 const MIN_SYMBOL_COUNT = 1;
 const TAGS_VISIBILITY_COUNT = 10;

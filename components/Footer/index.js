@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Footer.module.css";
 import Logotype from "public/assets/img/icons/AutosweetAUTOS_Final-1png-03.png";
-import Image from "next/image";
+import { Image } from "@chakra-ui/react";
 
 const Footer = () => {
   return (
